@@ -1,0 +1,68 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## compatibility with Xcode 8 and earlier (Xcode 9 added new files to the scheme)
+*.xcscmblueprint
+*.xccheckout
+
+## compatibility with Xcode 3 and earlier (Xcode 4 and later store project on root)
+build/
+DerivedData/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# SPM
+.dependencies/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code Injection
+iOSInjectionProject/
+
+# macOS
+.DS_Store
+*.xcworkspace/xcuserdata/
+
+# IDEs
+.idea/
+*.swp
+*.swo
+*~
+
+# Generated files
+*.generated.swift
+
+# Local configuration
+.env
+.env.local
