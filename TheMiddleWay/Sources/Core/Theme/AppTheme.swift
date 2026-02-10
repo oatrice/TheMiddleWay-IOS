@@ -1,8 +1,12 @@
 import SwiftUI
 
 struct ThemedNavigationStack<Content: View>: View {
-    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
     private let content: Content
+
+    private var themeScheme: ColorScheme {
+        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+    }
     
     init(@ViewBuilder content: () -> Content) {
         self.content = content()
@@ -15,6 +19,6 @@ struct ThemedNavigationStack<Content: View>: View {
         }
         .toolbarBackground(AppColors.background, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
-        .toolbarColorScheme(colorScheme, for: .navigationBar)
+        .toolbarColorScheme(themeScheme, for: .navigationBar)
     }
 }

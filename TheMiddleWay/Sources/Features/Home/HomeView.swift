@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+
     var body: some View {
         ScrollView {
             VStack(spacing: 24) {
@@ -17,6 +19,16 @@ struct HomeView: View {
             .padding(.top, 16)
         }
         .background(AppColors.background)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    isDarkMode.toggle()
+                } label: {
+                    Image(systemName: ThemeConfig.toggleIconName(isDarkMode: isDarkMode))
+                }
+                .accessibilityLabel(ThemeConfig.toggleLabel(isDarkMode: isDarkMode))
+            }
+        }
     }
 }
 

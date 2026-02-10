@@ -2,7 +2,11 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
-    @Environment(\.colorScheme) private var colorScheme
+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+
+    private var themeScheme: ColorScheme {
+        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
@@ -46,7 +50,8 @@ struct ContentView: View {
         .tint(AppColors.primary)
         .toolbarBackground(AppColors.background, for: .tabBar)
         .toolbarBackground(.visible, for: .tabBar)
-        .toolbarColorScheme(colorScheme, for: .tabBar)
+        .toolbarColorScheme(themeScheme, for: .tabBar)
+        .preferredColorScheme(themeScheme)
     }
 }
 
