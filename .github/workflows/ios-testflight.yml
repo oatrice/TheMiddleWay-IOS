@@ -2,8 +2,11 @@ name: iOS TestFlight
 
 on:
   push:
+    branches: [ "main" ]
     tags:
       - 'v*'
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -28,6 +31,17 @@ jobs:
             CODE_SIGN_IDENTITY="Apple Development" \
             CODE_SIGN_STYLE="Automatic" \
             DEVELOPMENT_TEAM="${{ secrets.DEVELOPMENT_TEAM }}" || echo "Skipping code signing as secrets are not set"
+
+      - name: Build for Simulator (PR Check)
+        if: github.event_name == 'pull_request'
+        run: |
+          xcodebuild build \
+            -project TheMiddleWay.xcodeproj \
+            -scheme TheMiddleWay \
+            -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
 
       - name: Export IPA (Requires Key)
         if: ${{ secrets.EXPORT_PLIST_BASE64 != '' }}
