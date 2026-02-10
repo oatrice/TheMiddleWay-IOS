@@ -1,6 +1,8 @@
 This Pull Request implements a foundational design system, introducing a robust, dual-theme architecture with support for both light and dark modes. It establishes a consistent visual language for colors and typography, enhancing the user experience and developer workflow.
 
-Closes: https://github.com/owner/repo/issues/4
+Closes: https://github.com/oatrice/TheMiddleWay-Metadata/issues/4
+Related: https://github.com/oatrice/TheMiddleWay-Metadata/issues/13
+Related: https://github.com/oatrice/TheMiddleWay-Metadata/issues/14
 
 ### Summary
 
@@ -36,3 +38,9 @@ The primary goal of this PR is to implement the core components of our design sy
 -   **UX:** Introduces a highly-requested dark mode feature and improves visual consistency throughout the app.
 -   **Architecture:** Establishes a scalable and maintainable design system foundation.
 -   **Developer Experience:** Simplifies the application of themes through reusable components like `ThemedNavigationStack`, reducing boilerplate and potential for inconsistencies.
+
+### Screenshots
+
+| Light Mode | Dark Mode |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/oatrice/TheMiddleWay-Metadata/feat/4-design-design-system-implement/docs/features/3_issue-13_light-dark-theme/screenshots/ios_light.png" alt="iOS Light Mode" width="250"> | <img src="https://raw.githubusercontent.com/oatrice/TheMiddleWay-Metadata/feat/4-design-design-system-implement/docs/features/3_issue-13_light-dark-theme/screenshots/ios_dark.png" alt="iOS Dark Mode" width="250"> |
