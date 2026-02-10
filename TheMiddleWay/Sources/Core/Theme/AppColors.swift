@@ -1,48 +1,67 @@
 import SwiftUI
+import UIKit
 
-/// The Middle Way - Warm Modern Sanctuary Color Palette
-/// Matching the Web and Android design system
+/// The Middle Way - Adaptive Color Palette
+/// Light: Bright Sky (ฟ้าสดใส)
+/// Dark: Deep Cosmos (matching Web/Android design system)
 enum AppColors {
-    // MARK: - Primary Palette
+    // MARK: - Light Palette — Bright Sky
     
-    /// Ivory - Background color
-    /// Hex: #FCF9F6
-    static let background = Color(red: 252/255, green: 249/255, blue: 246/255)
+    enum Light {
+        static let background = Color(hex: "#EFF6FF")   // Sky White
+        static let primary = Color(hex: "#2563EB")       // Bright Blue
+        static let surface = Color(hex: "#DBEAFE")       // Sky Surface
+        static let textPrimary = Color(hex: "#1E3A5F")   // Deep Blue
+        static let textSecondary = Color(hex: "#64748B")  // Blue Gray
+        static let border = Color(hex: "#BFDBFE")         // Sky Border
+        static let success = Color(hex: "#10B981")
+        static let warning = Color(hex: "#F59E0B")
+        static let error = Color(hex: "#EF4444")
+    }
     
-    /// Sage Green - Primary accent color
-    /// Hex: #8B9D83
-    static let primary = Color(red: 139/255, green: 157/255, blue: 131/255)
+    // MARK: - Dark Palette
     
-    /// Soft Sand - Surface/Cards color
-    /// Hex: #F3F0ED
-    static let surface = Color(red: 243/255, green: 240/255, blue: 237/255)
+    enum Dark {
+        static let background = Color(hex: "#0A192F") // Navy
+        static let primary = Color(hex: "#F59E0B") // Amber
+        static let surface = Color(hex: "#1E293B") // Slate Dark
+        static let textPrimary = Color(hex: "#F8FAFC") // Ivory
+        static let textSecondary = Color(hex: "#94A3B8") // Slate Light
+        static let border = Color(hex: "#334155")
+        static let success = Color(hex: "#10B981")
+        static let warning = Color(hex: "#F59E0B")
+        static let error = Color(hex: "#EF4444")
+    }
     
-    /// Deep Slate - Primary text color
-    /// Hex: #2D3748
-    static let textPrimary = Color(red: 45/255, green: 55/255, blue: 72/255)
+    // MARK: - Dynamic Tokens
     
-    // MARK: - Extended Palette
-    
-    /// Secondary text color (lighter)
-    static let textSecondary = Color(red: 113/255, green: 128/255, blue: 150/255)
-    
-    /// Border/Divider color
-    static let border = Color(red: 226/255, green: 232/255, blue: 240/255)
-    
-    /// Success color
-    static let success = Color(red: 72/255, green: 187/255, blue: 120/255)
-    
-    /// Warning color
-    static let warning = Color(red: 237/255, green: 137/255, blue: 54/255)
-    
-    /// Error color
-    static let error = Color(red: 245/255, green: 101/255, blue: 101/255)
+    static let background = Color.dynamic(light: Light.background, dark: Dark.background)
+    static let primary = Color.dynamic(light: Light.primary, dark: Dark.primary)
+    static let surface = Color.dynamic(light: Light.surface, dark: Dark.surface)
+    static let textPrimary = Color.dynamic(light: Light.textPrimary, dark: Dark.textPrimary)
+    static let textSecondary = Color.dynamic(light: Light.textSecondary, dark: Dark.textSecondary)
+    static let border = Color.dynamic(light: Light.border, dark: Dark.border)
+    static let success = Color.dynamic(light: Light.success, dark: Dark.success)
+    static let warning = Color.dynamic(light: Light.warning, dark: Dark.warning)
+    static let error = Color.dynamic(light: Light.error, dark: Dark.error)
 }
 
-// MARK: - Color Extension for Hex Support
+// MARK: - Color Extensions
 
 extension Color {
+    static func dynamic(light: Color, dark: Color) -> Color {
+        Color(UIColor { trait in
+            trait.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+        })
+    }
+    
     init(hex: String) {
+        self.init(UIColor(hex: hex))
+    }
+}
+
+extension UIColor {
+    convenience init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0
         Scanner(string: hex).scanHexInt64(&int)
@@ -58,11 +77,10 @@ extension Color {
             (a, r, g, b) = (255, 0, 0, 0)
         }
         self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
+            red: CGFloat(r) / 255,
+            green: CGFloat(g) / 255,
+            blue: CGFloat(b) / 255,
+            alpha: CGFloat(a) / 255
         )
     }
 }

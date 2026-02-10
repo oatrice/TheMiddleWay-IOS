@@ -2,34 +2,56 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+
+    private var themeScheme: ColorScheme {
+        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+    }
     
     var body: some View {
         TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem {
-                    Label("Home", systemImage: "house.fill")
-                }
-                .tag(Tab.home)
+            ThemedNavigationStack {
+                HomeView()
+                    .navigationTitle("The Middle Way")
+                    .navigationBarTitleDisplayMode(.large)
+            }
+            .tabItem {
+                Label("Home", systemImage: "house.fill")
+            }
+            .tag(Tab.home)
             
-            LibraryView()
-                .tabItem {
-                    Label("Library", systemImage: "books.vertical.fill")
-                }
-                .tag(Tab.library)
+            ThemedNavigationStack {
+                LibraryView()
+                    .navigationTitle("Library")
+            }
+            .tabItem {
+                Label("Library", systemImage: "books.vertical.fill")
+            }
+            .tag(Tab.library)
             
-            CoursesView()
-                .tabItem {
-                    Label("Courses", systemImage: "book.fill")
-                }
-                .tag(Tab.courses)
+            ThemedNavigationStack {
+                CoursesView()
+                    .navigationTitle("Courses")
+            }
+            .tabItem {
+                Label("Courses", systemImage: "book.fill")
+            }
+            .tag(Tab.courses)
             
-            ProfileView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.fill")
-                }
-                .tag(Tab.profile)
+            ThemedNavigationStack {
+                ProfileView()
+                    .navigationTitle("Profile")
+            }
+            .tabItem {
+                Label("Profile", systemImage: "person.fill")
+            }
+            .tag(Tab.profile)
         }
         .tint(AppColors.primary)
+        .toolbarBackground(AppColors.background, for: .tabBar)
+        .toolbarBackground(.visible, for: .tabBar)
+        .toolbarColorScheme(themeScheme, for: .tabBar)
+        .preferredColorScheme(themeScheme)
     }
 }
 
@@ -44,40 +66,31 @@ enum Tab: Hashable {
 
 struct LibraryView: View {
     var body: some View {
-        NavigationStack {
-            Text("Library")
-                .font(AppTypography.heading)
-                .foregroundStyle(AppColors.textPrimary)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(AppColors.background)
-                .navigationTitle("Library")
-        }
+        Text("Library")
+            .font(AppTypography.heading)
+            .foregroundStyle(AppColors.textPrimary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppColors.background)
     }
 }
 
 struct CoursesView: View {
     var body: some View {
-        NavigationStack {
-            Text("Courses")
-                .font(AppTypography.heading)
-                .foregroundStyle(AppColors.textPrimary)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(AppColors.background)
-                .navigationTitle("Courses")
-        }
+        Text("Courses")
+            .font(AppTypography.heading)
+            .foregroundStyle(AppColors.textPrimary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppColors.background)
     }
 }
 
 struct ProfileView: View {
     var body: some View {
-        NavigationStack {
-            Text("Profile")
-                .font(AppTypography.heading)
-                .foregroundStyle(AppColors.textPrimary)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(AppColors.background)
-                .navigationTitle("Profile")
-        }
+        Text("Profile")
+            .font(AppTypography.heading)
+            .foregroundStyle(AppColors.textPrimary)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(AppColors.background)
     }
 }
 

@@ -1,32 +1,13 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-The format is based on [Keep a Changelog](https://keepachangelog.com/).
-
----
-
-## [0.1.0] - 2026-02-09
+## [0.2.0] - 2026-02-10
 
 ### Added
+- **Dark Mode Support:** Introduced "Deep Cosmos" dark theme alongside the existing "Bright Sky" light theme.
+- **Theme Persistence:** App remembers the user's theme preference using `@AppStorage`.
+- **Theme Toggle:** Sun/Moon icon in the home screen toolbar for easy switching.
+- **Dynamic Colors:** Updated `AppColors` to support adaptive colors that change based on the selected theme.
 
-- Initial iOS project scaffolding with SwiftUI
-- App entry point with SwiftUI App lifecycle
-- ContentView with TabView navigation (4 tabs)
-- AppColors with Warm Sanctuary color palette
-- AppTypography with Serif headings and Sans-Serif body
-- HomeView with Welcome Card, Quick Actions, and Recent Activity
-- Placeholder views for Library, Courses, and Profile
-- Asset catalog with AccentColor (Sage)
-
-### Technical
-
-- iOS 17.0 minimum deployment target
-- Swift 5.9+
-- Xcode 16.0 project configuration
-- Bundle ID: com.oatrice.themiddleway
-
----
-
-## [0.0.0] - 2026-02-06
-
-- Initialized repository structure.
+### Changed
+- Refactored `AppTheme.swift` to apply navigation bar modifiers correctly to the content view.
+- Updated project version to 0.2.0 to sync with Android and Web platforms.

@@ -19,7 +19,9 @@ TheMiddleWay/
 │   ├── Core/                   # Shared utilities
 │   │   ├── Theme/
 │   │   │   ├── AppColors.swift
-│   │   │   └── AppTypography.swift
+│   │   │   ├── AppTheme.swift
+│   │   │   ├── AppTypography.swift
+│   │   │   └── ThemeConfig.swift
 │   │   └── Navigation/
 │   └── Features/               # Feature modules
 │       └── Home/
@@ -30,14 +32,9 @@ TheMiddleWay/
 
 ## Design System
 
-**Warm Modern Sanctuary** palette (matching Web & Android):
+**Bright Sky blue** palette:
 
-| Token | Color | Usage |
-|-------|-------|-------|
-| Ivory | `#FCF9F6` | Background |
-| Sage | `#8B9D83` | Primary Accent |
-| Slate | `#2D3748` | Text |
-| Sand | `#F3F0ED` | Surface/Cards |
+The UI is built around a custom `AppTheme` supporting a "Bright Sky blue" light mode and a persistent dark mode.
 
 **Typography:**
 - Headings: System Serif (like Playfair Display)
