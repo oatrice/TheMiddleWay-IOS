@@ -45,7 +45,9 @@ jobs:
             CODE_SIGNING_ALLOWED=NO
 
       - name: Export IPA (Requires Key)
-        if: ${{ secrets.EXPORT_PLIST_BASE64 != '' }}
+        env:
+          EXPORT_PLIST: ${{ secrets.EXPORT_PLIST_BASE64 }}
+        if: env.EXPORT_PLIST != ''
         run: |
           # Ideally, export logic with xcodebuild -exportArchive requires a proper exportOptions.plist and secrets
           # This step is a placeholder for actual TestFlight deployment logic
