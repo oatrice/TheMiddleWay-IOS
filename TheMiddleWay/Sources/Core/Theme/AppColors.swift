@@ -2,21 +2,21 @@ import SwiftUI
 import UIKit
 
 /// The Middle Way - Adaptive Color Palette
-/// Light: Warm Modern Sanctuary
+/// Light: Bright Sky (ฟ้าสดใส)
 /// Dark: Deep Cosmos (matching Web/Android design system)
 enum AppColors {
-    // MARK: - Light Palette
+    // MARK: - Light Palette — Bright Sky
     
     enum Light {
-        static let background = Color(hex: "#FCF9F6") // Ivory
-        static let primary = Color(hex: "#8B9D83") // Sage
-        static let surface = Color(hex: "#F3F0ED") // Sand
-        static let textPrimary = Color(hex: "#2D3748") // Slate
-        static let textSecondary = Color(hex: "#718096")
-        static let border = Color(hex: "#E2E8F0")
-        static let success = Color(hex: "#48BB78")
-        static let warning = Color(hex: "#ED8936")
-        static let error = Color(hex: "#F56565")
+        static let background = Color(hex: "#EFF6FF")   // Sky White
+        static let primary = Color(hex: "#2563EB")       // Bright Blue
+        static let surface = Color(hex: "#DBEAFE")       // Sky Surface
+        static let textPrimary = Color(hex: "#1E3A5F")   // Deep Blue
+        static let textSecondary = Color(hex: "#64748B")  // Blue Gray
+        static let border = Color(hex: "#BFDBFE")         // Sky Border
+        static let success = Color(hex: "#10B981")
+        static let warning = Color(hex: "#F59E0B")
+        static let error = Color(hex: "#EF4444")
     }
     
     // MARK: - Dark Palette
