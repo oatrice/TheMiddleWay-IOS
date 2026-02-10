@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */; };
+		4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -18,13 +20,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		E1000010262F0001009A0001 /* TheMiddleWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMiddleWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
+		4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1000008262F0001009A0001 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		E100000A262F0001009A0001 /* AppTypography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTypography.swift; sourceTree = "<group>"; };
 		E100000C262F0001009A0001 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E1000010262F0001009A0001 /* TheMiddleWay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheMiddleWay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1000025262F0001009A0001 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		E1000031262F0001009A0001 /* ThemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,6 +44,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F7EA9162F3B77FA006D5BEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4F7EA9182F3B77FA006D5BEB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		E100000E262F0001009A0001 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +115,8 @@
 		E1000015262F0001009A0001 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA9162F3B77FA006D5BEB /* Models */,
+				4F7EA9182F3B77FA006D5BEB /* Services */,
 				E1000017262F0001009A0001 /* Theme */,
 				E1000018262F0001009A0001 /* Navigation */,
 			);
@@ -163,7 +185,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1600;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					E100001A262F0001009A0001 = {
 						CreatedOnToolsVersion = 16.0;
@@ -206,6 +228,8 @@
 			files = (
 				E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */,
 				E1000003262F0001009A0001 /* ContentView.swift in Sources */,
+				4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */,
+				4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
 				E1000009262F0001009A0001 /* AppTypography.swift in Sources */,
 				E100000B262F0001009A0001 /* HomeView.swift in Sources */,
@@ -275,6 +299,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -331,6 +356,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
