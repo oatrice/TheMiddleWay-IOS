@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.1] - 2026-02-11
+
+### Changed
+- Internal improvements to the continuous integration (CI) workflow for automated version tagging.
+
 ## [0.3.0] - 2026-02-11
 
 ### Added
