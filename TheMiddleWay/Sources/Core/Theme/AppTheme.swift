@@ -16,8 +16,6 @@ struct ThemedNavigationStack<Content: View>: View {
         NavigationStack {
             content
                 .background(AppColors.background)
-                .toolbarBackground(AppColors.background, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
                 .toolbarColorScheme(themeScheme, for: .navigationBar)
         }
     }
