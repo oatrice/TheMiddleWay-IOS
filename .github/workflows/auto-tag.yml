@@ -19,11 +19,30 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Extract version from project.pbxproj
+      - name: Extract and validate version from project.pbxproj
         id: version
         run: |
           PBXPROJ=$(find . -name "project.pbxproj" | head -1)
-          VERSION=$(grep 'MARKETING_VERSION' "$PBXPROJ" | head -1 | sed 's/.*= *\(.*\);/\1/' | tr -d '[:space:]')
+          if [ -z "$PBXPROJ" ]; then
+            echo "::error::project.pbxproj not found."
+            exit 1
+          fi
+
+          # Extract all marketing versions, clean them up, and find the unique ones
+          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | tr -d '[:space:]' | uniq)
+          
+          # Count the number of unique, non-empty version strings found
+          NUM_UNIQUE=$(echo "$UNIQUE_VERSIONS" | grep -c .)
+
+          if [ "$NUM_UNIQUE" -ne 1 ]; then
+            echo "::error::Error: Found multiple different MARKETING_VERSION values or no value was found."
+            echo "Please ensure all build configurations have the same version number in $PBXPROJ."
+            echo "Unique versions found:"
+            echo "$UNIQUE_VERSIONS"
+            exit 1
+          fi
+
+          VERSION=$UNIQUE_VERSIONS
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "tag=v$VERSION" >> $GITHUB_OUTPUT
           echo "📦 Detected version: $VERSION (from $PBXPROJ)"
