@@ -2,10 +2,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab: Tab = .home
-    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+    @EnvironmentObject var viewModel: MainViewModel
 
     private var themeScheme: ColorScheme {
-        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+        viewModel.userProgress.themeMode == .dark ? .dark : .light
     }
     
     var body: some View {

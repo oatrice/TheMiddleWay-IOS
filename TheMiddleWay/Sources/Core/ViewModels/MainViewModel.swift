@@ -11,30 +11,42 @@ class MainViewModel: ObservableObject {
         self.userProgress = service.loadProgress() ?? UserProgress.defaultProgress
     }
     
-    func completeLesson(_ lessonId: String) {
-        var current = userProgress
-        if !current.completedLessons.contains(lessonId) {
-            current.completedLessons.append(lessonId)
-            current.lastVisited = Date()
-            
-            if persistenceService.saveProgress(current) {
-                userProgress = current
+    private func reloadProgress() {
+        if let progress = persistenceService.loadProgress() {
+            // Ensure UI updates happen on the main thread
+            DispatchQueue.main.async {
+                self.userProgress = progress
             }
         }
     }
     
+    func completeLesson(_ lessonId: String) {
+        let updated = persistenceService.updateProgress { progress in
+            if !progress.completedLessons.contains(lessonId) {
+                progress.completedLessons.append(lessonId)
+                progress.lastVisited = Date()
+            }
+        }
+        if updated {
+            reloadProgress()
+        }
+    }
+    
     func toggleTheme(isDark: Bool) {
-        var current = userProgress
-        // Assuming userProgress has themeMode property
-        current.themeMode = isDark ? .dark : .light
-        if persistenceService.saveProgress(current) {
-            userProgress = current
+        let updated = persistenceService.updateProgress { progress in
+            progress.themeMode = isDark ? .dark : .light
+        }
+        if updated {
+            reloadProgress()
         }
     }
     
     func resetProgress() {
         if persistenceService.clearProgress() {
-            userProgress = UserProgress.defaultProgress
+            // After clearing, the new default state needs to be set
+            DispatchQueue.main.async {
+                self.userProgress = UserProgress.defaultProgress
+            }
         }
     }
 }

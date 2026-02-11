@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct ThemedNavigationStack<Content: View>: View {
-    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+    @EnvironmentObject var viewModel: MainViewModel
     private let content: Content
 
     private var themeScheme: ColorScheme {
-        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+        viewModel.userProgress.themeMode == .dark ? .dark : .light
     }
     
     init(@ViewBuilder content: () -> Content) {
