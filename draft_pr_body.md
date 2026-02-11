@@ -1,46 +1,43 @@
-This Pull Request implements a foundational design system, introducing a robust, dual-theme architecture with support for both light and dark modes. It establishes a consistent visual language for colors and typography, enhancing the user experience and developer workflow.
-
-Closes: https://github.com/oatrice/TheMiddleWay-Metadata/issues/4
-Related: https://github.com/oatrice/TheMiddleWay-Metadata/issues/13
-Related: https://github.com/oatrice/TheMiddleWay-Metadata/issues/14
+Closes https://github.com/owner/repo/issues/6
 
 ### Summary
 
-The primary goal of this PR is to implement the core components of our design system as specified in the issue. This includes:
-- A dynamic color system that adapts to light and dark modes.
-- The "Deep Cosmos" dark theme, featuring a Navy background (`#0A192F`) and Amber primary accent (`#F59E0B`).
-- An updated "Bright Sky" light theme for a fresh, modern aesthetic.
-- A persistent theme toggle, allowing users to switch between modes and have their preference saved.
-- A reusable `ThemedNavigationStack` component to ensure consistent styling across all navigation flows.
+This pull request introduces a foundational persistence layer to the application using `UserDefaults`. The primary goal is to track and store user progress, settings, and preferences locally on the device. This includes completed lessons, theme selection (light/dark mode), and other user-specific data.
+
+A centralized `MainViewModel` has been created to manage the application's state, acting as a single source of truth for user progress. This state is now propagated through the view hierarchy using SwiftUI's `EnvironmentObject`, ensuring a clean and scalable architecture.
 
 ### Key Changes
 
-1.  **Dual-Theme Color System (`AppColors.swift`)**
-    -   `AppColors` has been refactored to define separate color palettes for `Light` and `Dark` modes.
-    -   A `Color.dynamic` extension was created, leveraging `UIColor`'s dynamic provider to automatically select the correct color based on the active `userInterfaceStyle`.
-    -   This replaces the previous static color palette with a fully adaptive system.
+1.  **Persistence Service & User Progress Model**
+    *   Introduced a `PersistenceService` protocol and a `PersistenceServiceImpl` that uses `UserDefaults` with `JSONEncoder`/`JSONDecoder` for storing data. This provides a type-safe and easily extensible way to manage stored data.
+    *   Created a `Codable` `UserProgress` struct to model all persistable data, including `themeMode`, `completedLessons`, `bookmarks`, and `lastVisited` timestamp.
 
-2.  **Persistent Dark Mode Toggle**
-    -   A theme toggle button has been added to the navigation bar on the `HomeView`.
-    -   The user's theme preference is saved to `UserDefaults` via `@AppStorage`, ensuring it persists across app launches.
-    -   A new `ThemeConfig` enum centralizes constants and logic related to theming (e.g., storage key, toggle icon names).
+2.  **Centralized State Management (`MainViewModel`)**
+    *   A new `MainViewModel` class, conforming to `ObservableObject`, has been implemented to manage the `userProgress` state.
+    *   This ViewModel is injected as an `EnvironmentObject` at the root of the application (`TheMiddleWayApp.swift`), making it accessible to any view that needs it.
+    *   It handles loading progress on app launch and provides methods to update the state (e.g., `completeLesson`, `toggleTheme`, `resetProgress`), which in turn saves the changes via the `PersistenceService`.
 
-3.  **Themed UI Components (`AppTheme.swift`)**
-    -   A new reusable `ThemedNavigationStack` view has been introduced. This component encapsulates the `NavigationStack` and applies all necessary theme-related modifiers for the background and toolbar, promoting code reuse and consistency.
-    -   `ContentView` has been refactored to use `ThemedNavigationStack` for each tab, simplifying the view hierarchy.
-    -   The main `TabView` is now styled to respect the selected theme, including the tab bar background and icon/text colors.
+3.  **Theme System Refactor**
+    *   The theme system has been completely overhauled. A new dynamic `AppColors` enum and `AppTypography` system have been established to support both light and dark modes consistently.
+    *   Theme selection has been migrated from a simple `@AppStorage` boolean to being part of the `UserProgress` model. This allows the user's theme choice to be persisted along with their other data.
+    *   Views like `ContentView` and `ThemedNavigationStack` now react to theme changes published by the `MainViewModel`.
 
-4.  **Typography Integration**
-    -   The new dynamic text colors (`textPrimary`, `textSecondary`) are designed to work seamlessly with the existing `AppTypography` system, ensuring text remains legible and stylistically consistent in both light and dark modes.
+4.  **UI Integration & Demonstration**
+    *   The `ContentView` and its subviews have been refactored to consume the `MainViewModel` from the environment instead of managing their own state.
+    *   The `ProfileView` has been updated to display the user's progress (e.g., number of completed lessons) and includes new buttons to "Complete Demo Lesson" and "Reset Progress" for testing the persistence functionality.
 
 ### Impact
 
--   **UX:** Introduces a highly-requested dark mode feature and improves visual consistency throughout the app.
--   **Architecture:** Establishes a scalable and maintainable design system foundation.
--   **Developer Experience:** Simplifies the application of themes through reusable components like `ThemedNavigationStack`, reducing boilerplate and potential for inconsistencies.
+*   **User Experience:** User settings and progress are now saved across app sessions, providing a continuous and personalized experience.
+*   **Architecture:** Establishes a robust and scalable pattern for state management and data persistence, moving away from scattered `@AppStorage` properties.
+*   **Maintainability:** Centralizing state logic in the `MainViewModel` makes the codebase easier to understand, debug, and extend in the future.
 
-### Screenshots
+### How to Test
 
-| Light Mode | Dark Mode |
-| :---: | :---: |
-| <img src="https://raw.githubusercontent.com/oatrice/TheMiddleWay-Metadata/feat/4-design-design-system-implement/docs/features/3_issue-13_light-dark-theme/screenshots/ios_light.png" alt="iOS Light Mode" width="250"> | <img src="https://raw.githubusercontent.com/oatrice/TheMiddleWay-Metadata/feat/4-design-design-system-implement/docs/features/3_issue-13_light-dark-theme/screenshots/ios_dark.png" alt="iOS Dark Mode" width="250"> |
+1.  Launch the app and navigate to the **Profile** tab.
+2.  The "Completed Lessons" count should be 0.
+3.  Tap the **"Complete Demo Lesson"** button. The count should increment.
+4.  Force-quit and relaunch the app.
+5.  Navigate back to the **Profile** tab and verify that the lesson count is preserved.
+6.  Tap the **"Reset Progress"** button. The count should return to 0.
+7.  Force-quit and relaunch again to confirm the progress has been cleared.
