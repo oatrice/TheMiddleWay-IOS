@@ -28,8 +28,8 @@ jobs:
             exit 1
           fi
 
-          # Extract all marketing versions, clean them up, and find the unique ones
-          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | tr -d '[:space:]' | uniq)
+          # Extract all marketing versions, clean them up per-line, and find the unique ones
+          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sort -u)
           
           # Count the number of unique, non-empty version strings found
           NUM_UNIQUE=$(echo "$UNIQUE_VERSIONS" | grep -c .)
