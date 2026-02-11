@@ -2,608 +2,336 @@
 
 You are an AI assistant helping to create a Pull Request description.
     
-TASK: [Infrastructure] Persistence Layer: LocalStorage System for Progress Tracking
+TASK: [Data] CSV Data Ingestion & Logic: Mapping 11 Categories and 8-Week Content
 ISSUE: {
-  "title": "[Infrastructure] Persistence Layer: LocalStorage System for Progress Tracking",
-  "number": 6
+  "title": "[Data] CSV Data Ingestion & Logic: Mapping 11 Categories and 8-Week Content",
+  "number": 5
 }
 
 GIT CONTEXT:
 COMMITS:
-a126505 feat: [Infrastructure] Persistence Layer: LocalStorage S...
-afe4253 refactor: migrate theme to EnvironmentObject and improve thread safety
-0b8f969 fix(theme): remove redundant toolbar background from navigation stack
-3264dd9 feat(progress): add user progress tracking with persistence
-690e822 feat(ios): add UserProgress model and PersistenceService
-29187cd ci: update xcode version to latest-stable
-9d387a5 ci: fix secrets access in condition
-5723714 ci: add workflow_dispatch trigger
-950f59e ci: enable PR builds with simulator check
+9a61914 chore(release): bump version to 0.3.1 and update changelog
+cab2473 docs: Update code review report with auto-tag workflow analysis
+8898420 ci: improve robustness of version extraction logic
+76b2aec ci: add auto-tag workflow on version change
 
 STATS:
-.github/workflows/ios-testflight.yml               |  21 +++-
- CHANGELOG.md                                       |  11 ++
- README.md                                          |   2 +
- TheMiddleWay.xcodeproj/project.pbxproj             |  42 ++++++-
- TheMiddleWay/Sources/App/ContentView.swift         |  42 +++++--
- .../Sources/App/Core/Models/UserProgress.swift     |  23 ++++
- .../App/Core/Services/PersistenceService.swift     |  54 +++++++++
- .../Sources/App/Core/Theme/AppColors.swift         |  86 ++++++++++++++
- TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift |  24 ++++
- .../Sources/App/Core/Theme/AppTypography.swift     |  66 +++++++++++
- .../Sources/App/Core/Theme/ThemeConfig.swift       |  17 +++
- TheMiddleWay/Sources/App/TheMiddleWayApp.swift     |   3 +
- .../Sources/Core/Models/UserProgress.swift         |  23 ++++
- .../Sources/Core/Services/PersistenceService.swift |  54 +++++++++
- TheMiddleWay/Sources/Core/Theme/AppTheme.swift     |   6 +-
- .../Sources/Core/ViewModels/MainViewModel.swift    |  52 +++++++++
- code_review.md                                     | 127 +++++++++++++++++++--
- 17 files changed, 626 insertions(+), 27 deletions(-)
+.github/workflows/auto-tag.yml         |  68 +++++++++++++
+ CHANGELOG.md                           |   5 +
+ TheMiddleWay.xcodeproj/project.pbxproj |   4 +-
+ code_review.md                         | 173 ++++++++-------------------------
+ 4 files changed, 116 insertions(+), 134 deletions(-)
 
 KEY FILE DIFFS:
-diff --git a/TheMiddleWay/Sources/App/ContentView.swift b/TheMiddleWay/Sources/App/ContentView.swift
-index eb569b2..7448c39 100644
---- a/TheMiddleWay/Sources/App/ContentView.swift
-+++ b/TheMiddleWay/Sources/App/ContentView.swift
-@@ -2,10 +2,10 @@ import SwiftUI
+diff --git a/.github/workflows/auto-tag.yml b/.github/workflows/auto-tag.yml
+new file mode 100644
+index 0000000..b71e2f5
+--- /dev/null
++++ b/.github/workflows/auto-tag.yml
+@@ -0,0 +1,68 @@
++name: Auto Tag on Version Change
++
++on:
++  push:
++    branches: [main]
++    paths:
++      - '**/*.pbxproj'
++
++permissions:
++  contents: write
++
++jobs:
++  auto-tag:
++    name: Create Git Tag from MARKETING_VERSION
++    runs-on: ubuntu-latest
++
++    steps:
++      - uses: actions/checkout@v4
++        with:
++          fetch-depth: 0
++
++      - name: Extract and validate version from project.pbxproj
++        id: version
++        run: |
++          PBXPROJ=$(find . -name "project.pbxproj" | head -1)
++          if [ -z "$PBXPROJ" ]; then
++            echo "::error::project.pbxproj not found."
++            exit 1
++          fi
++
++          # Extract all marketing versions, clean them up, and find the unique ones
++          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | tr -d '[:space:]' | uniq)
++          
++          # Count the number of unique, non-empty version strings found
++          NUM_UNIQUE=$(echo "$UNIQUE_VERSIONS" | grep -c .)
++
++          if [ "$NUM_UNIQUE" -ne 1 ]; then
++            echo "::error::Error: Found multiple different MARKETING_VERSION values or no value was found."
++            echo "Please ensure all build configurations have the same version number in $PBXPROJ."
++            echo "Unique versions found:"
++            echo "$UNIQUE_VERSIONS"
++            exit 1
++          fi
++
++          VERSION=$UNIQUE_VERSIONS
++          echo "version=$VERSION" >> $GITHUB_OUTPUT
++          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
++          echo "📦 Detected version: $VERSION (from $PBXPROJ)"
++
++      - name: Check if tag already exists
++        id: check
++        run: |
++          if git rev-parse "v${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
++            echo "exists=true" >> $GITHUB_OUTPUT
++            echo "⏩ Tag v${{ steps.version.outputs.version }} already exists, skipping."
++          else
++            echo "exists=false" >> $GITHUB_OUTPUT
++            echo "🆕 Tag v${{ steps.version.outputs.version }} does not exist yet."
++          fi
++
++      - name: Create and push tag
++        if: steps.check.outputs.exists == 'false'
++        run: |
++          git config user.name "github-actions[bot]"
++          git config user.email "github-actions[bot]@users.noreply.github.com"
++          git tag -a "v${{ steps.version.outputs.version }}" -m "Release v${{ steps.version.outputs.version }}"
++          git push origin "v${{ steps.version.outputs.version }}"
++          echo "✅ Tagged v${{ steps.version.outputs.version }}"
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index f1d1cf3..93e9a94 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -1,5 +1,10 @@
+ # Changelog
  
- struct ContentView: View {
-     @State private var selectedTab: Tab = .home
--    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
-+    @EnvironmentObject var viewModel: MainViewModel
++## [0.3.1] - 2026-02-11
++
++### Changed
++- Internal improvements to the continuous integration (CI) workflow for automated version tagging.
++
+ ## [0.3.0] - 2026-02-11
  
-     private var themeScheme: ColorScheme {
--        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
-+        viewModel.userProgress.themeMode == .dark ? .dark : .light
-     }
-     
-     var body: some View {
-@@ -85,15 +85,43 @@ struct CoursesView: View {
- }
+ ### Added
+diff --git a/TheMiddleWay.xcodeproj/project.pbxproj b/TheMiddleWay.xcodeproj/project.pbxproj
+index 1e871a7..12a150e 100644
+--- a/TheMiddleWay.xcodeproj/project.pbxproj
++++ b/TheMiddleWay.xcodeproj/project.pbxproj
+@@ -394,7 +394,7 @@
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+-				MARKETING_VERSION = 0.3.0;
++				MARKETING_VERSION = 0.3.1;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.oatrice.themiddleway;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_EMIT_LOC_STRINGS = YES;
+@@ -423,7 +423,7 @@
+ 					"$(inherited)",
+ 					"@executable_path/Frameworks",
+ 				);
+-				MARKETING_VERSION = 0.3.0;
++				MARKETING_VERSION = 0.3.1;
+ 				PRODUCT_BUNDLE_IDENTIFIER = com.oatrice.themiddleway;
+ 				PRODUCT_NAME = "$(TARGET_NAME)";
+ 				SWIFT_EMIT_LOC_STRINGS = YES;
+diff --git a/code_review.md b/code_review.md
+index 62fe4aa..14aecc9 100644
+--- a/code_review.md
++++ b/code_review.md
+@@ -1,153 +1,62 @@
+ # Luma Code Review Report
  
- struct ProfileView: View {
-+    @EnvironmentObject var mainVM: MainViewModel
-+
-     var body: some View {
--        Text("Profile")
--            .font(AppTypography.heading)
--            .foregroundStyle(AppColors.textPrimary)
--            .frame(maxWidth: .infinity, maxHeight: .infinity)
--            .background(AppColors.background)
-+        VStack(spacing: 20) {
-+            Text("Profile")
-+                .font(AppTypography.heading)
-+                .foregroundStyle(AppColors.textPrimary)
-+            
-+            VStack {
-+                Text("Your Progress")
-+                    .font(AppTypography.title2)
-+                
-+                Text("Completed Lessons: \(mainVM.userProgress.completedLessons.count)")
-+                    .font(.title2)
-+                    .bold()
-+                
-+                Button("Complete Demo Lesson") {
-+                    mainVM.completeLesson("DEMO_IOS_\(Date().timeIntervalSince1970)")
-+                }
-+                .buttonStyle(.borderedProminent)
-+                .tint(AppColors.primary)
-+                
-+                Button("Reset Progress", role: .destructive) {
-+                    mainVM.resetProgress()
-+                }
-+                .buttonStyle(.bordered)
-+            }
-+            .padding()
-+            .background(Color.secondary.opacity(0.1))
-+            .cornerRadius(16)
-+        }
-+        .frame(maxWidth: .infinity, maxHeight: .infinity)
-+        .background(AppColors.background)
-     }
- }
+-**Date:** 2026-02-11 11:30:37
+-**Files Reviewed:** ['TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift', 'TheMiddleWay/Sources/App/Core/Models/UserProgress.swift', '.github/workflows/ios-testflight.yml', 'TheMiddleWay/Sources/App/TheMiddleWayApp.swift', 'TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift', 'TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift', 'TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift', 'TheMiddleWay/Sources/App/ContentView.swift', 'TheMiddleWay.xcodeproj/project.pbxproj', 'TheMiddleWay/Sources/App/Core/Theme/AppColors.swift', 'TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift', 'TheMiddleWay/Sources/Core/Models/UserProgress.swift', 'TheMiddleWay/Sources/Core/Services/PersistenceService.swift', 'TheMiddleWay/Sources/Core/Theme/AppTheme.swift']
++**Date:** 2026-02-11 15:45:25
++**Files Reviewed:** ['.github/workflows/auto-tag.yml']
  
- #Preview {
-     ContentView()
-+        .environmentObject(MainViewModel())
- }
-diff --git a/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift b/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
-new file mode 100644
-index 0000000..4486fd4
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
-@@ -0,0 +1,23 @@
-+import Foundation
-+
-+struct UserProgress: Codable, Equatable {
-+    var version: Int = 1
-+    var themeMode: ThemeMode = .light
-+    var language: Language = .thai
-+    var completedLessons: [String] = []
-+    var bookmarks: [String] = []
-+    var lastVisited: Date?
-+    
-+    // Default values
-+    static let defaultProgress = UserProgress()
-+}
-+
-+enum ThemeMode: String, Codable {
-+    case light
-+    case dark
-+}
-+
-+enum Language: String, Codable {
-+    case thai = "th"
-+    case english = "en"
-+}
-diff --git a/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift b/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
-new file mode 100644
-index 0000000..1855e5c
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
-@@ -0,0 +1,54 @@
-+import Foundation
-+
-+protocol PersistenceService {
-+    func saveProgress(_ progress: UserProgress) -> Bool
-+    func loadProgress() -> UserProgress?
-+    func clearProgress() -> Bool
-+    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool
-+}
-+
-+class PersistenceServiceImpl: PersistenceService {
-+    
-+    private let userDefaults: UserDefaults
-+    private let key = "theMiddleWay.progress"
-+    
-+    init(userDefaults: UserDefaults = .standard) {
-+        self.userDefaults = userDefaults
-+    }
-+    
-+    func saveProgress(_ progress: UserProgress) -> Bool {
-+        do {
-+            let data = try JSONEncoder().encode(progress)
-+            userDefaults.set(data, forKey: key)
-+            return true
-+        } catch {
-+            print("Error saving progress: \(error)")
-+            return false
-+        }
-+    }
-+    
-+    func loadProgress() -> UserProgress? {
-+        guard let data = userDefaults.data(forKey: key) else {
-+            return nil
-+        }
-+        
-+        do {
-+            let progress = try JSONDecoder().decode(UserProgress.self, from: data)
-+            return progress
-+        } catch {
-+            print("Error loading progress: \(error)")
-+            return nil
-+        }
-+    }
-+    
-+    func clearProgress() -> Bool {
-+        userDefaults.removeObject(forKey: key)
-+        return true
-+    }
-+    
-+    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool {
-+        var current = loadProgress() ?? UserProgress.defaultProgress
-+        update(&current)
-+        return saveProgress(current)
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift b/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
-new file mode 100644
-index 0000000..9fcf118
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
-@@ -0,0 +1,86 @@
-+import SwiftUI
-+import UIKit
-+
-+/// The Middle Way - Adaptive Color Palette
-+/// Light: Bright Sky (ฟ้าสดใส)
-+/// Dark: Deep Cosmos (matching Web/Android design system)
-+enum AppColors {
-+    // MARK: - Light Palette — Bright Sky
-+    
-+    enum Light {
-+        static let background = Color(hex: "#EFF6FF")   // Sky White
-+        static let primary = Color(hex: "#2563EB")       // Bright Blue
-+        static let surface = Color(hex: "#DBEAFE")       // Sky Surface
-+        static let textPrimary = Color(hex: "#1E3A5F")   // Deep Blue
-+        static let textSecondary = Color(hex: "#64748B")  // Blue Gray
-+        static let border = Color(hex: "#BFDBFE")         // Sky Border
-+        static let success = Color(hex: "#10B981")
-+        static let warning = Color(hex: "#F59E0B")
-+        static let error = Color(hex: "#EF4444")
-+    }
-+    
-+    // MARK: - Dark Palette
-+    
-+    enum Dark {
-+        static let background = Color(hex: "#0A192F") // Navy
-+        static let primary = Color(hex: "#F59E0B") // Amber
-+        static let surface = Color(hex: "#1E293B") // Slate Dark
-+        static let textPrimary = Color(hex: "#F8FAFC") // Ivory
-+        static let textSecondary = Color(hex: "#94A3B8") // Slate Light
-+        static let border = Color(hex: "#334155")
-+        static let success = Color(hex: "#10B981")
-+        static let warning = Color(hex: "#F59E0B")
-+        static let error = Color(hex: "#EF4444")
-+    }
-+    
-+    // MARK: - Dynamic Tokens
-+    
-+    static let background = Color.dynamic(light: Light.background, dark: Dark.background)
-+    static let primary = Color.dynamic(light: Light.primary, dark: Dark.primary)
-+    static let surface = Color.dynamic(light: Light.surface, dark: Dark.surface)
-+    static let textPrimary = Color.dynamic(light: Light.textPrimary, dark: Dark.textPrimary)
-+    static let textSecondary = Color.dynamic(light: Light.textSecondary, dark: Dark.textSecondary)
-+    static let border = Color.dynamic(light: Light.border, dark: Dark.border)
-+    static let success = Color.dynamic(light: Light.success, dark: Dark.success)
-+    static let warning = Color.dynamic(light: Light.warning, dark: Dark.warning)
-+    static let error = Color.dynamic(light: Light.error, dark: Dark.error)
-+}
-+
-+// MARK: - Color Extensions
-+
-+extension Color {
-+    static func dynamic(light: Color, dark: Color) -> Color {
-+        Color(UIColor { trait in
-+            trait.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
-+        })
-+    }
-+    
-+    init(hex: String) {
-+        self.init(UIColor(hex: hex))
-+    }
-+}
-+
-+extension UIColor {
-+    convenience init(hex: String) {
-+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-+        var int: UInt64 = 0
-+        Scanner(string: hex).scanHexInt64(&int)
-+        let a, r, g, b: UInt64
-+        switch hex.count {
-+        case 3: // RGB (12-bit)
-+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-+        case 6: // RGB (24-bit)
-+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-+        case 8: // ARGB (32-bit)
-+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-+        default:
-+            (a, r, g, b) = (255, 0, 0, 0)
-+        }
-+        self.init(
-+            red: CGFloat(r) / 255,
-+            green: CGFloat(g) / 255,
-+            blue: CGFloat(b) / 255,
-+            alpha: CGFloat(a) / 255
-+        )
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
-new file mode 100644
-index 0000000..998b891
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
-@@ -0,0 +1,24 @@
-+import SwiftUI
-+
-+struct ThemedNavigationStack<Content: View>: View {
-+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
-+    private let content: Content
-+
-+    private var themeScheme: ColorScheme {
-+        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
-+    }
-+    
-+    init(@ViewBuilder content: () -> Content) {
-+        self.content = content()
-+    }
-+    
-+    var body: some View {
-+        NavigationStack {
-+            content
-+                .background(AppColors.background)
-+                .toolbarBackground(AppColors.background, for: .navigationBar)
-+                .toolbarBackground(.visible, for: .navigationBar)
-+                .toolbarColorScheme(themeScheme, for: .navigationBar)
-+        }
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
-new file mode 100644
-index 0000000..6a72562
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
-@@ -0,0 +1,66 @@
-+import SwiftUI
-+
-+/// The Middle Way - Typography System
-+/// Matching the Web design system with Playfair Display (headings) and Inter (body)
-+enum AppTypography {
-+    // MARK: - Headings (Serif style - like Playfair Display)
-+    
-+    /// Large title - 34pt Bold Serif
-+    static let largeTitle = Font.system(size: 34, weight: .bold, design: .serif)
-+    
-+    /// Title 1 - 28pt Bold Serif
-+    static let title1 = Font.system(size: 28, weight: .bold, design: .serif)
-+    
-+    /// Title 2 - 22pt Semibold Serif
-+    static let title2 = Font.system(size: 22, weight: .semibold, design: .serif)
-+    
-+    /// Title 3 - 20pt Semibold Serif
-+    static let title3 = Font.system(size: 20, weight: .semibold, design: .serif)
-+    
-+    /// Heading - Default heading style
-+    static let heading = Font.system(size: 24, weight: .bold, design: .serif)
-+    
-+    // MARK: - Body Text (Sans-serif style - like Inter)
-+    
-+    /// Body Large - 17pt Regular
-+    static let bodyLarge = Font.system(size: 17, weight: .regular, design: .default)
-+    
-+    /// Body - Standard body text - 15pt Regular
-+    static let body = Font.system(size: 15, weight: .regular, design: .default)
-+    
-+    /// Body Small - 13pt Regular
-+    static let bodySmall = Font.system(size: 13, weight: .regular, design: .default)
-+    
-+    // MARK: - UI Elements
-+    
-+    /// Button text - 16pt Semibold
-+    static let button = Font.system(size: 16, weight: .semibold, design: .default)
-+    
-+    /// Caption - 12pt Regular
-+    static let caption = Font.system(size: 12, weight: .regular, design: .default)
-+    
-+    /// Label - 14pt Medium
-+    static let label = Font.system(size: 14, weight: .medium, design: .default)
-+}
-+
-+// MARK: - View Extension for Typography
-+
-+extension View {
-+    func headingStyle() -> some View {
-+        self
-+            .font(AppTypography.heading)
-+            .foregroundStyle(AppColors.textPrimary)
-+    }
-+    
-+    func bodyStyle() -> some View {
-+        self
-+            .font(AppTypography.body)
-+            .foregroundStyle(AppColors.textPrimary)
-+    }
-+    
-+    func captionStyle() -> some View {
-+        self
-+            .font(AppTypography.caption)
-+            .foregroundStyle(AppColors.textSecondary)
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift b/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
-new file mode 100644
-index 0000000..5fc429d
---- /dev/null
-+++ b/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
-@@ -0,0 +1,17 @@
-+import SwiftUI
-+
-+enum ThemeConfig {
-+    static let storageKey = "isDarkMode"
-+
-+    static func colorScheme(isDarkMode: Bool) -> ColorScheme {
-+        isDarkMode ? .dark : .light
-+    }
-+
-+    static func toggleIconName(isDarkMode: Bool) -> String {
-+        isDarkMode ? "sun.max.fill" : "moon.fill"
-+    }
-+
-+    static func toggleLabel(isDarkMode: Bool) -> String {
-+        isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
-index 19d4016..7467023 100644
---- a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
-+++ b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
-@@ -2,9 +2,12 @@ import SwiftUI
+ ## 📝 Reviewer Feedback
  
- @main
- struct TheMiddleWayApp: App {
-+    @StateObject private var viewModel = MainViewModel()
-+
-     var body: some Scene {
-         WindowGroup {
-             ContentView()
-+                .environmentObject(viewModel)
-         }
-     }
- }
-diff --git a/TheMiddleWay/Sources/Core/Models/UserProgress.swift b/TheMiddleWay/Sources/Core/Models/UserProgress.swift
-new file mode 100644
-index 0000000..4486fd4
---- /dev/null
-+++ b/TheMiddleWay/Sources/Core/Models/UserProgress.swift
-@@ -0,0 +1,23 @@
-+import Foundation
-+
-+struct UserProgress: Codable, Equatable {
-+    var version: Int = 1
-+    var themeMode: ThemeMode = .light
-+    var language: Language = .thai
-+    var completedLessons: [String] = []
-+    var bookmarks: [String] = []
-+    var lastVisited: Date?
-+    
-+    // Default values
-+    static let defaultProgress = UserProgress()
-+}
-+
-+enum ThemeMode: String, Codable {
-+    case light
-+    case dark
-+}
-+
-+enum Language: String, Codable {
-+    case thai = "th"
-+    case english = "en"
-+}
-diff --git a/TheMiddleWay/Sources/Core/Services/PersistenceService.swift b/TheMiddleWay/Sources/Core/Services/PersistenceService.swift
-new file mode 100644
-index 0000000..1855e5c
---- /dev/null
-+++ b/TheMiddleWay/Sources/Core/Services/PersistenceService.swift
-@@ -0,0 +1,54 @@
-+import Foundation
-+
-+protocol PersistenceService {
-+    func saveProgress(_ progress: UserProgress) -> Bool
-+    func loadProgress() -> UserProgress?
-+    func clearProgress() -> Bool
-+    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool
-+}
-+
-+class PersistenceServiceImpl: PersistenceService {
-+    
-+    private let userDefaults: UserDefaults
-+    private let key = "theMiddleWay.progress"
-+    
-+    init(userDefaults: UserDefaults = .standard) {
-+        self.userDefaults = userDefaults
-+    }
-+    
-+    func saveProgress(_ progress: UserProgress) -> Bool {
-+        do {
-+            let data = try JSONEncoder().encode(progress)
-+            userDefaults.set(data, forKey: key)
-+            return true
-+        } catch {
-+            print("Error saving progress: \(error)")
-+            return false
-+        }
-+    }
-+    
-+    func loadProgress() -> UserProgress? {
-+        guard let data = userDefaults.data(forKey: key) else {
-+            return nil
-+        }
-+        
-+        do {
-+            let progress = try JSONDecoder().decode(UserProgress.self, from: data)
-+            return progress
-+        } catch {
-+            print("Error loading progress: \(error)")
-+            return nil
-+        }
-+    }
-+    
-+    func clearProgress() -> Bool {
-+        userDefaults.removeObject(forKey: key)
-+        return true
-+    }
-+    
-+    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool {
-+        var current = loadProgress() ?? UserProgress.defaultProgress
-+        update(&current)
-+        return saveProgress(current)
-+    }
-+}
-diff --git a/TheMiddleWay/Sources/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
-index 998b891..ad65dae 100644
---- a/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
-+++ b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
-@@ -1,11 +1,11 @@
- import SwiftUI
+-There are two major logical issues in the submitted code related to state management that will lead to bugs and inconsistent application behavior.
+-
+-### Issue 1: Unsafe State Modification in `MainViewModel`
+-
+-**File:** `TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift`
+-
+-**Problem:** The methods `completeLesson`, `toggleTheme`, and `resetProgress` modify the `userProgress` state in a non-atomic way. They read the `@Published` property into a local variable, modify the local variable, and then save it. If two of these methods are called in quick succession, a race condition can occur, causing one of the updates to be lost.
+-
+-For example, if `completeLesson` is called, and then `toggleTheme` is called before `completeLesson` finishes saving, `toggleTheme` will read the *original* state (before the lesson was completed). When `toggleTheme` saves its changes, it will overwrite the changes made by `completeLesson`.
+-
+-**Fix:** Use the atomic `updateProgress` function already defined in `PersistenceService`. This function encapsulates the read-modify-write cycle, preventing race conditions. Additionally, after a successful update, the ViewModel should reload the state from the persistence layer to ensure the UI is synchronized with the stored data.
+-
+-**Example Refactor for `MainViewModel.swift`:**
+-
+-```swift
+-import SwiftUI
+-import Combine
+-
+-class MainViewModel: ObservableObject {
+-    @Published var userProgress: UserProgress
+-    private let persistenceService: PersistenceService
+-    
+-    init(service: PersistenceService = PersistenceServiceImpl()) {
+-        self.persistenceService = service
+-        self.userProgress = service.loadProgress() ?? UserProgress.defaultProgress
+-    }
+-    
+-    private func reloadProgress() {
+-        if let progress = persistenceService.loadProgress() {
+-            // Ensure UI updates happen on the main thread
+-            DispatchQueue.main.async {
+-                self.userProgress = progress
+-            }
+-        }
+-    }
+-    
+-    func completeLesson(_ lessonId: String) {
+-        let updated = persistenceService.updateProgress { progress in
+-            if !progress.completedLessons.contains(lessonId) {
+-                progress.completedLessons.append(lessonId)
+-                progress.lastVisited = Date()
+-            }
+-        }
+-        if updated {
+-            reloadProgress()
+-        }
+-    }
+-    
+-    func toggleTheme(isDark: Bool) {
+-        let updated = persistenceService.updateProgress { progress in
+-            progress.themeMode = isDark ? .dark : .light
+-        }
+-        if updated {
+-            reloadProgress()
+-        }
+-    }
+-    
+-    func resetProgress() {
+-        if persistenceService.clearProgress() {
+-            // After clearing, the new default state needs to be set
+-            DispatchQueue.main.async {
+-                self.userProgress = UserProgress.defaultProgress
+-            }
+-        }
+-    }
+-}
+-```
+-
+----
++The provided GitHub Actions workflow has a critical logic issue in its version extraction step that makes it brittle and prone to failure.
  
- struct ThemedNavigationStack<Content: View>: View {
--    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
-+    @EnvironmentObject var viewModel: MainViewModel
-     private let content: Content
+-### Issue 2: Conflicting Sources of Truth for Theme State
++**Problem:**
  
-     private var themeScheme: ColorScheme {
--        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
-+        viewModel.userProgress.themeMode == .dark ? .dark : .light
-     }
-     
-     init(@ViewBuilder content: () -> Content) {
-@@ -16,8 +16,6 @@ struct ThemedNavigationStack<Content: View>: View {
-         NavigationStack {
-             content
-                 .background(AppColors.background)
+-**Files:** `TheMiddleWay/Sources/App/ContentView.swift`, `TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift`
++The script uses a `grep | head -1 | sed` pipeline to find the version number. This approach has two main flaws:
+ 
+-**Problem:** The application has two separate and unsynchronized sources of truth for the current theme (light/dark mode):
+-1.  `@AppStorage("isDarkMode")` is used directly in `ContentView` and `ThemedNavigationStack`.
+-2.  `MainViewModel.userProgress.themeMode` is stored as part of the user's progress via `PersistenceService`.
++1.  **Picks the First Match:** An Xcode project file (`.pbxproj`) often contains multiple `MARKETING_VERSION` entries, one for each build configuration (e.g., Debug, Release). If these versions ever differ, the script will arbitrarily pick the first one it finds, which may not be the intended version for tagging.
++2.  **No Validation:** If the `grep` and `sed` commands fail to extract a version for any reason (e.g., a change in the `.pbxproj` format), the `VERSION` variable will be empty. The script does not check for this, and will proceed to create and push an invalid tag named `v`.
+ 
+-The `MainViewModel` has a `toggleTheme` method that updates `userProgress.themeMode`, but this will have no effect on the UI because the views are reading their theme state from `@AppStorage`. This leads to the UI theme being completely disconnected from the user's saved progress.
++**Fix:**
+ 
+-**Fix:** Remove the use of `@AppStorage` for theme management and establish `MainViewModel.userProgress` as the single source of truth. Views should observe the theme from the `MainViewModel` via `@EnvironmentObject`.
++The version extraction step should be made more robust. It should verify that all `MARKETING_VERSION` entries in the file are identical and fail gracefully if they are not, or if no version is found.
+ 
+-**1. Update `ContentView.swift`:**
++Replace the `Extract version from project.pbxproj` step with the following:
+ 
+-```swift
+-import SwiftUI
++```yaml
++      - name: Extract and validate version from project.pbxproj
++        id: version
++        run: |
++          PBXPROJ=$(find . -name "project.pbxproj" | head -1)
++          if [ -z "$PBXPROJ" ]; then
++            echo "::error::project.pbxproj not found."
++            exit 1
++          fi
+ 
+-struct ContentView: View {
+-    @State private var selectedTab: Tab = .home
+-    @EnvironmentObject var viewModel: MainViewModel // Use the ViewModel for state
++          # Extract all marketing versions, clean them up, and find the unique ones
++          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | tr -d '[:space:]' | uniq)
++          
++          # Count the number of unique, non-empty version strings found
++          NUM_UNIQUE=$(echo "$UNIQUE_VERSIONS" | grep -c .)
+ 
+-    private var themeScheme: ColorScheme {
+-        // Read theme from the single source of truth
+-        viewModel.userProgress.themeMode == .dark ? .dark : .light
+-    }
+-    
+-    var body: some View {
+-        TabView(selection: $selectedTab) {
+-            // ... Tab items ...
+-        }
+-        .tint(AppColors.primary)
+-        .toolbarBackground(AppColors.background, for: .tabBar)
+-        .toolbarBackground(.visible, for: .tabBar)
+-        .toolbarColorScheme(themeScheme, for: .tabBar)
+-        .preferredColorScheme(themeScheme) // Apply the theme here
+-    }
+-}
+-```
++          if [ "$NUM_UNIQUE" -ne 1 ]; then
++            echo "::error::Error: Found multiple different MARKETING_VERSION values or no value was found."
++            echo "Please ensure all build configurations have the same version number in $PBXPROJ."
++            echo "Unique versions found:"
++            echo "$UNIQUE_VERSIONS"
++            exit 1
++          fi
+ 
+-**2. Update `ThemedNavigationStack.swift`:**
+-
+-```swift
+-import SwiftUI
+-
+-struct ThemedNavigationStack<Content: View>: View {
+-    @EnvironmentObject var viewModel: MainViewModel // Use the ViewModel for state
+-    private let content: Content
+-
+-    private var themeScheme: ColorScheme {
+-        viewModel.userProgress.themeMode == .dark ? .dark : .light
+-    }
+-    
+-    init(@ViewBuilder content: () -> Content) {
+-        self.content = content()
+-    }
+-    
+-    var body: some View {
+-        NavigationStack {
+-            content
+-                .background(AppColors.background)
 -                .toolbarBackground(AppColors.background, for: .navigationBar)
 -                .toolbarBackground(.visible, for: .navigationBar)
-                 .toolbarColorScheme(themeScheme, for: .navigationBar)
-         }
-     }
-diff --git a/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift b/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift
-new file mode 100644
-index 0000000..d71058f
---- /dev/null
-+++ b/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift
-@@ -0,0 +1,52 @@
-+import SwiftUI
-+import Combine
+-                .toolbarColorScheme(themeScheme, for: .navigationBar)
+-        }
+-    }
+-}
++          VERSION=$UNIQUE_VERSIONS
++          echo "version=$VERSION" >> $GITHUB_OUTPUT
++          echo "tag=v$VERSION" >> $GITHUB_OUTPUT
++          echo "📦 Detected version: $VERSION (from $PBXPROJ)"
+ ```
+ 
+-With these changes, the entire app's theme will be driven by the `userProgress` object in the `MainViewModel`, creating a single, consistent source of truth. You would then add a UI control (e.g., a `Toggle` in `ProfileView`) to call `viewModel.toggleTheme(isDark:)` to allow the user to change the theme.
++This revised script first finds all unique version strings. It then checks if exactly one unique version was found. If not (i.e., zero or more than one), it fails the workflow with a clear error message, preventing the creation of an incorrect or empty tag.
+ 
+ ## 🧪 Test Suggestions
+ 
+-*   **First-time update on a clean install:** Verify that calling `updateProgress` when no data exists in `UserDefaults` correctly creates a new `UserProgress` object using `UserProgress.defaultProgress`, applies the update, and saves it. For example, add a bookmark, then load the progress and assert that the bookmark is present *and* all other properties (like `themeMode` and `language`) have their default values.
+-*   **Handling corrupted or mismatched data:** Manually save malformed or outdated JSON data to the `UserDefaults` key. Verify that `loadProgress()` gracefully fails by returning `nil` instead of crashing. Then, confirm that a subsequent call to `updateProgress` correctly ignores the corrupted data and proceeds as if it were a first-time update, creating a new default progress object.
+-*   **State after clearing progress:** Save a custom `UserProgress` object, then call `clearProgress()`. Immediately after, call `loadProgress()` and assert that it returns `nil`. This ensures the data is completely removed and the state is reset.
++*   **Multiple `project.pbxproj` files:** Create a repository with two or more Xcode projects (e.g., `ProjectA/ProjectA.xcodeproj` and `ProjectB/ProjectB.xcodeproj`). Modify the `MARKETING_VERSION` only in the project that does not come first alphabetically (`ProjectB`). The test should verify that the workflow incorrectly extracts the version from the first project it finds (`ProjectA`) and either creates the wrong tag or skips the process.
 +
-+class MainViewModel: ObservableObject {
-+    @Published var userProgress: UserProgress
-+    private let persistenceService: PersistenceService
-+    
-+    init(service: PersistenceService = PersistenceServiceImpl()) {
-+        self.persistenceService = service
-+        // Load existing progress or default
-+        self.userProgress = service.loadProgress() ?? UserProgress.defaultProgress
-+    }
-+    
-+    private func reloadProgress() {
-+        if let progress = persistenceService.loadProgress() {
-+            // Ensure UI updates happen on the main thread
-+            DispatchQueue.main.async {
-+                self.userProgress = progress
-+            }
-+        }
-+    }
-+    
-+    func completeLesson(_ lessonId: String) {
-+        let updated = persistenceService.updateProgress { progress in
-+            if !progress.completedLessons.contains(lessonId) {
-+                progress.completedLessons.append(lessonId)
-+                progress.lastVisited = Date()
-+            }
-+        }
-+        if updated {
-+            reloadProgress()
-+        }
-+    }
-+    
-+    func toggleTheme(isDark: Bool) {
-+        let updated = persistenceService.updateProgress { progress in
-+            progress.themeMode = isDark ? .dark : .light
-+        }
-+        if updated {
-+            reloadProgress()
-+        }
-+    }
-+    
-+    func resetProgress() {
-+        if persistenceService.clearProgress() {
-+            // After clearing, the new default state needs to be set
-+            DispatchQueue.main.async {
-+                self.userProgress = UserProgress.defaultProgress
-+            }
-+        }
-+    }
-+}
++*   **Multiple `MARKETING_VERSION` entries in one file:** Modify a `project.pbxproj` to have different `MARKETING_VERSION` values for different build configurations (e.g., `1.2.3` for Release and `1.2.4-debug` for Debug). Ensure the Debug configuration appears before the Release configuration in the file. The test should verify that the workflow incorrectly extracts the first version it finds (`1.2.4-debug`) instead of the intended release version.
++
++*   **Version string containing quotes:** Set the version in the `.pbxproj` file with explicit quotes, such as `MARKETING_VERSION = "2.0.0";`. The test should verify that the script incorrectly extracts the version as `"2.0.0"` (including the quotes) and attempts to create an invalid tag like `v"2.0.0"`.
 
 PR TEMPLATE:
 
