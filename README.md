@@ -17,6 +17,8 @@ TheMiddleWay/
 │   │   ├── TheMiddleWayApp.swift
 │   │   └── ContentView.swift
 │   ├── Core/                   # Shared utilities
+│   │   ├── Models/
+│   │   ├── Services/
 │   │   ├── Theme/
 │   │   │   ├── AppColors.swift
 │   │   │   ├── AppTheme.swift
