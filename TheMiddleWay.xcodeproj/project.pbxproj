@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */; };
 		4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */; };
+		4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 				4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		4F7EA91C2F3C2EDE006D5BEB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		E100000E262F0001009A0001 = {
@@ -115,6 +125,7 @@
 		E1000015262F0001009A0001 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA91C2F3C2EDE006D5BEB /* ViewModels */,
 				4F7EA9162F3B77FA006D5BEB /* Models */,
 				4F7EA9182F3B77FA006D5BEB /* Services */,
 				E1000017262F0001009A0001 /* Theme */,
@@ -231,6 +242,7 @@
 				4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */,
 				4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
+				4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */,
 				E1000009262F0001009A0001 /* AppTypography.swift in Sources */,
 				E100000B262F0001009A0001 /* HomeView.swift in Sources */,
 				E1000024262F0001009A0001 /* AppTheme.swift in Sources */,

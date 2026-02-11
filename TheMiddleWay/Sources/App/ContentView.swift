@@ -85,15 +85,43 @@ struct CoursesView: View {
 }
 
 struct ProfileView: View {
+    @EnvironmentObject var mainVM: MainViewModel
+
     var body: some View {
-        Text("Profile")
-            .font(AppTypography.heading)
-            .foregroundStyle(AppColors.textPrimary)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(AppColors.background)
+        VStack(spacing: 20) {
+            Text("Profile")
+                .font(AppTypography.heading)
+                .foregroundStyle(AppColors.textPrimary)
+            
+            VStack {
+                Text("Your Progress")
+                    .font(AppTypography.title2)
+                
+                Text("Completed Lessons: \(mainVM.userProgress.completedLessons.count)")
+                    .font(.title2)
+                    .bold()
+                
+                Button("Complete Demo Lesson") {
+                    mainVM.completeLesson("DEMO_IOS_\(Date().timeIntervalSince1970)")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(AppColors.primary)
+                
+                Button("Reset Progress", role: .destructive) {
+                    mainVM.resetProgress()
+                }
+                .buttonStyle(.bordered)
+            }
+            .padding()
+            .background(Color.secondary.opacity(0.1))
+            .cornerRadius(16)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(AppColors.background)
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(MainViewModel())
 }
