@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0] - 2026-02-11
+
+### Added
+- **User Progress Tracking:** The app now automatically saves your progress, allowing you to pick up where you left off in your journey.
+
+### Changed
+- Refactored the internal theme management system for improved performance and stability.
+
+### Fixed
+- Removed a redundant background from the navigation toolbar for a cleaner user interface.
+
 ## [0.2.0] - 2026-02-10
 
 ### Added

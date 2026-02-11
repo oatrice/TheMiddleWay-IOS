@@ -2,8 +2,12 @@ name: iOS TestFlight
 
 on:
   push:
+    branches: [ "main" ]
     tags:
       - 'v*'
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,7 +20,7 @@ jobs:
       - name: Set up Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '15.0'
+          xcode-version: 'latest-stable'
 
       - name: Build and Archive
         run: |
@@ -29,8 +33,21 @@ jobs:
             CODE_SIGN_STYLE="Automatic" \
             DEVELOPMENT_TEAM="${{ secrets.DEVELOPMENT_TEAM }}" || echo "Skipping code signing as secrets are not set"
 
+      - name: Build for Simulator (PR Check)
+        if: github.event_name == 'pull_request'
+        run: |
+          xcodebuild build \
+            -project TheMiddleWay.xcodeproj \
+            -scheme TheMiddleWay \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
       - name: Export IPA (Requires Key)
-        if: ${{ secrets.EXPORT_PLIST_BASE64 != '' }}
+        env:
+          EXPORT_PLIST: ${{ secrets.EXPORT_PLIST_BASE64 }}
+        if: env.EXPORT_PLIST != ''
         run: |
           # Ideally, export logic with xcodebuild -exportArchive requires a proper exportOptions.plist and secrets
           # This step is a placeholder for actual TestFlight deployment logic

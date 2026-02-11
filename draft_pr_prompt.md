@@ -2,208 +2,215 @@
 
 You are an AI assistant helping to create a Pull Request description.
     
-TASK: [Design] Design System Implementation: Colors (#0A192F, #F59E0B) and Typography
+TASK: [Infrastructure] Persistence Layer: LocalStorage System for Progress Tracking
 ISSUE: {
-  "title": "[Design] Design System Implementation: Colors (#0A192F, #F59E0B) and Typography",
-  "number": 4
+  "title": "[Infrastructure] Persistence Layer: LocalStorage System for Progress Tracking",
+  "number": 6
 }
 
 GIT CONTEXT:
 COMMITS:
-004296e docs: add v0.2.0 release notes for theme system and dark mode
-f31fa18 fix(theme): move toolbar modifiers inside NavigationStack content
-5657691 docs: add code review report documenting NavigationStack toolbar fixes
-744a684 feat(theme): update light mode palette to Bright Sky blue theme
-7dfa441 feat(theme): add persistent dark mode toggle with ThemeConfig
-f7d429d feat(ui): add AppTheme with themed navigation stack and tab bar styling
+a126505 feat: [Infrastructure] Persistence Layer: LocalStorage S...
+afe4253 refactor: migrate theme to EnvironmentObject and improve thread safety
+0b8f969 fix(theme): remove redundant toolbar background from navigation stack
+3264dd9 feat(progress): add user progress tracking with persistence
+690e822 feat(ios): add UserProgress model and PersistenceService
+29187cd ci: update xcode version to latest-stable
+9d387a5 ci: fix secrets access in condition
+5723714 ci: add workflow_dispatch trigger
+950f59e ci: enable PR builds with simulator check
 
 STATS:
-CHANGELOG.md                                      |  37 ++------
- README.md                                         |  15 ++--
- TheMiddleWay.xcodeproj/project.pbxproj            |  12 ++-
- TheMiddleWay/Sources/App/ContentView.swift        | 101 ++++++++++++----------
- TheMiddleWay/Sources/Core/Theme/AppColors.swift   |  92 ++++++++++++--------
- TheMiddleWay/Sources/Core/Theme/AppTheme.swift    |  24 +++++
- TheMiddleWay/Sources/Core/Theme/ThemeConfig.swift |  17 ++++
- TheMiddleWay/Sources/Features/Home/HomeView.swift |  46 ++++++----
- code_review.md                                    |  50 +++++++++++
- 9 files changed, 257 insertions(+), 137 deletions(-)
+.github/workflows/ios-testflight.yml               |  21 +++-
+ CHANGELOG.md                                       |  11 ++
+ README.md                                          |   2 +
+ TheMiddleWay.xcodeproj/project.pbxproj             |  42 ++++++-
+ TheMiddleWay/Sources/App/ContentView.swift         |  42 +++++--
+ .../Sources/App/Core/Models/UserProgress.swift     |  23 ++++
+ .../App/Core/Services/PersistenceService.swift     |  54 +++++++++
+ .../Sources/App/Core/Theme/AppColors.swift         |  86 ++++++++++++++
+ TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift |  24 ++++
+ .../Sources/App/Core/Theme/AppTypography.swift     |  66 +++++++++++
+ .../Sources/App/Core/Theme/ThemeConfig.swift       |  17 +++
+ TheMiddleWay/Sources/App/TheMiddleWayApp.swift     |   3 +
+ .../Sources/Core/Models/UserProgress.swift         |  23 ++++
+ .../Sources/Core/Services/PersistenceService.swift |  54 +++++++++
+ TheMiddleWay/Sources/Core/Theme/AppTheme.swift     |   6 +-
+ .../Sources/Core/ViewModels/MainViewModel.swift    |  52 +++++++++
+ code_review.md                                     | 127 +++++++++++++++++++--
+ 17 files changed, 626 insertions(+), 27 deletions(-)
 
 KEY FILE DIFFS:
 diff --git a/TheMiddleWay/Sources/App/ContentView.swift b/TheMiddleWay/Sources/App/ContentView.swift
-index 8831a55..eb569b2 100644
+index eb569b2..7448c39 100644
 --- a/TheMiddleWay/Sources/App/ContentView.swift
 +++ b/TheMiddleWay/Sources/App/ContentView.swift
-@@ -2,34 +2,56 @@ import SwiftUI
+@@ -2,10 +2,10 @@ import SwiftUI
  
  struct ContentView: View {
      @State private var selectedTab: Tab = .home
-+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
-+
-+    private var themeScheme: ColorScheme {
-+        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
-+    }
+-    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
++    @EnvironmentObject var viewModel: MainViewModel
+ 
+     private var themeScheme: ColorScheme {
+-        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
++        viewModel.userProgress.themeMode == .dark ? .dark : .light
+     }
      
      var body: some View {
-         TabView(selection: $selectedTab) {
--            HomeView()
--                .tabItem {
--                    Label("Home", systemImage: "house.fill")
--                }
--                .tag(Tab.home)
-+            ThemedNavigationStack {
-+                HomeView()
-+                    .navigationTitle("The Middle Way")
-+                    .navigationBarTitleDisplayMode(.large)
-+            }
-+            .tabItem {
-+                Label("Home", systemImage: "house.fill")
-+            }
-+            .tag(Tab.home)
-             
--            LibraryView()
--                .tabItem {
--                    Label("Library", systemImage: "books.vertical.fill")
--                }
--                .tag(Tab.library)
-+            ThemedNavigationStack {
-+                LibraryView()
-+                    .navigationTitle("Library")
-+            }
-+            .tabItem {
-+                Label("Library", systemImage: "books.vertical.fill")
-+            }
-+            .tag(Tab.library)
-             
--            CoursesView()
--                .tabItem {
--                    Label("Courses", systemImage: "book.fill")
--                }
--                .tag(Tab.courses)
-+            ThemedNavigationStack {
-+                CoursesView()
-+                    .navigationTitle("Courses")
-+            }
-+            .tabItem {
-+                Label("Courses", systemImage: "book.fill")
-+            }
-+            .tag(Tab.courses)
-             
--            ProfileView()
--                .tabItem {
--                    Label("Profile", systemImage: "person.fill")
--                }
--                .tag(Tab.profile)
-+            ThemedNavigationStack {
-+                ProfileView()
-+                    .navigationTitle("Profile")
-+            }
-+            .tabItem {
-+                Label("Profile", systemImage: "person.fill")
-+            }
-+            .tag(Tab.profile)
-         }
-         .tint(AppColors.primary)
-+        .toolbarBackground(AppColors.background, for: .tabBar)
-+        .toolbarBackground(.visible, for: .tabBar)
-+        .toolbarColorScheme(themeScheme, for: .tabBar)
-+        .preferredColorScheme(themeScheme)
-     }
- }
- 
-@@ -44,40 +66,31 @@ enum Tab: Hashable {
- 
- struct LibraryView: View {
-     var body: some View {
--        NavigationStack {
--            Text("Library")
--                .font(AppTypography.heading)
--                .foregroundStyle(AppColors.textPrimary)
--                .frame(maxWidth: .infinity, maxHeight: .infinity)
--                .background(AppColors.background)
--                .navigationTitle("Library")
--        }
-+        Text("Library")
-+            .font(AppTypography.heading)
-+            .foregroundStyle(AppColors.textPrimary)
-+            .frame(maxWidth: .infinity, maxHeight: .infinity)
-+            .background(AppColors.background)
-     }
- }
- 
- struct CoursesView: View {
-     var body: some View {
--        NavigationStack {
--            Text("Courses")
--                .font(AppTypography.heading)
--                .foregroundStyle(AppColors.textPrimary)
--                .frame(maxWidth: .infinity, maxHeight: .infinity)
--                .background(AppColors.background)
--                .navigationTitle("Courses")
--        }
-+        Text("Courses")
-+            .font(AppTypography.heading)
-+            .foregroundStyle(AppColors.textPrimary)
-+            .frame(maxWidth: .infinity, maxHeight: .infinity)
-+            .background(AppColors.background)
-     }
+@@ -85,15 +85,43 @@ struct CoursesView: View {
  }
  
  struct ProfileView: View {
++    @EnvironmentObject var mainVM: MainViewModel
++
      var body: some View {
--        NavigationStack {
--            Text("Profile")
--                .font(AppTypography.heading)
--                .foregroundStyle(AppColors.textPrimary)
--                .frame(maxWidth: .infinity, maxHeight: .infinity)
--                .background(AppColors.background)
--                .navigationTitle("Profile")
--        }
-+        Text("Profile")
-+            .font(AppTypography.heading)
-+            .foregroundStyle(AppColors.textPrimary)
-+            .frame(maxWidth: .infinity, maxHeight: .infinity)
-+            .background(AppColors.background)
+-        Text("Profile")
+-            .font(AppTypography.heading)
+-            .foregroundStyle(AppColors.textPrimary)
+-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+-            .background(AppColors.background)
++        VStack(spacing: 20) {
++            Text("Profile")
++                .font(AppTypography.heading)
++                .foregroundStyle(AppColors.textPrimary)
++            
++            VStack {
++                Text("Your Progress")
++                    .font(AppTypography.title2)
++                
++                Text("Completed Lessons: \(mainVM.userProgress.completedLessons.count)")
++                    .font(.title2)
++                    .bold()
++                
++                Button("Complete Demo Lesson") {
++                    mainVM.completeLesson("DEMO_IOS_\(Date().timeIntervalSince1970)")
++                }
++                .buttonStyle(.borderedProminent)
++                .tint(AppColors.primary)
++                
++                Button("Reset Progress", role: .destructive) {
++                    mainVM.resetProgress()
++                }
++                .buttonStyle(.bordered)
++            }
++            .padding()
++            .background(Color.secondary.opacity(0.1))
++            .cornerRadius(16)
++        }
++        .frame(maxWidth: .infinity, maxHeight: .infinity)
++        .background(AppColors.background)
      }
  }
  
-diff --git a/TheMiddleWay/Sources/Core/Theme/AppColors.swift b/TheMiddleWay/Sources/Core/Theme/AppColors.swift
-index a699f69..9fcf118 100644
---- a/TheMiddleWay/Sources/Core/Theme/AppColors.swift
-+++ b/TheMiddleWay/Sources/Core/Theme/AppColors.swift
-@@ -1,48 +1,67 @@
- import SwiftUI
+ #Preview {
+     ContentView()
++        .environmentObject(MainViewModel())
+ }
+diff --git a/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift b/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
+new file mode 100644
+index 0000000..4486fd4
+--- /dev/null
++++ b/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
+@@ -0,0 +1,23 @@
++import Foundation
++
++struct UserProgress: Codable, Equatable {
++    var version: Int = 1
++    var themeMode: ThemeMode = .light
++    var language: Language = .thai
++    var completedLessons: [String] = []
++    var bookmarks: [String] = []
++    var lastVisited: Date?
++    
++    // Default values
++    static let defaultProgress = UserProgress()
++}
++
++enum ThemeMode: String, Codable {
++    case light
++    case dark
++}
++
++enum Language: String, Codable {
++    case thai = "th"
++    case english = "en"
++}
+diff --git a/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift b/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
+new file mode 100644
+index 0000000..1855e5c
+--- /dev/null
++++ b/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
+@@ -0,0 +1,54 @@
++import Foundation
++
++protocol PersistenceService {
++    func saveProgress(_ progress: UserProgress) -> Bool
++    func loadProgress() -> UserProgress?
++    func clearProgress() -> Bool
++    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool
++}
++
++class PersistenceServiceImpl: PersistenceService {
++    
++    private let userDefaults: UserDefaults
++    private let key = "theMiddleWay.progress"
++    
++    init(userDefaults: UserDefaults = .standard) {
++        self.userDefaults = userDefaults
++    }
++    
++    func saveProgress(_ progress: UserProgress) -> Bool {
++        do {
++            let data = try JSONEncoder().encode(progress)
++            userDefaults.set(data, forKey: key)
++            return true
++        } catch {
++            print("Error saving progress: \(error)")
++            return false
++        }
++    }
++    
++    func loadProgress() -> UserProgress? {
++        guard let data = userDefaults.data(forKey: key) else {
++            return nil
++        }
++        
++        do {
++            let progress = try JSONDecoder().decode(UserProgress.self, from: data)
++            return progress
++        } catch {
++            print("Error loading progress: \(error)")
++            return nil
++        }
++    }
++    
++    func clearProgress() -> Bool {
++        userDefaults.removeObject(forKey: key)
++        return true
++    }
++    
++    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool {
++        var current = loadProgress() ?? UserProgress.defaultProgress
++        update(&current)
++        return saveProgress(current)
++    }
++}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift b/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
+new file mode 100644
+index 0000000..9fcf118
+--- /dev/null
++++ b/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
+@@ -0,0 +1,86 @@
++import SwiftUI
 +import UIKit
- 
--/// The Middle Way - Warm Modern Sanctuary Color Palette
--/// Matching the Web and Android design system
++
 +/// The Middle Way - Adaptive Color Palette
 +/// Light: Bright Sky (ฟ้าสดใส)
 +/// Dark: Deep Cosmos (matching Web/Android design system)
- enum AppColors {
--    // MARK: - Primary Palette
++enum AppColors {
 +    // MARK: - Light Palette — Bright Sky
-     
--    /// Ivory - Background color
--    /// Hex: #FCF9F6
--    static let background = Color(red: 252/255, green: 249/255, blue: 246/255)
--    
--    /// Sage Green - Primary accent color
--    /// Hex: #8B9D83
--    static let primary = Color(red: 139/255, green: 157/255, blue: 131/255)
--    
--    /// Soft Sand - Surface/Cards color
--    /// Hex: #F3F0ED
--    static let surface = Color(red: 243/255, green: 240/255, blue: 237/255)
--    
--    /// Deep Slate - Primary text color
--    /// Hex: #2D3748
--    static let textPrimary = Color(red: 45/255, green: 55/255, blue: 72/255)
--    
--    // MARK: - Extended Palette
--    
--    /// Secondary text color (lighter)
--    static let textSecondary = Color(red: 113/255, green: 128/255, blue: 150/255)
++    
 +    enum Light {
 +        static let background = Color(hex: "#EFF6FF")   // Sky White
 +        static let primary = Color(hex: "#2563EB")       // Bright Blue
@@ -215,13 +222,9 @@ index a699f69..9fcf118 100644
 +        static let warning = Color(hex: "#F59E0B")
 +        static let error = Color(hex: "#EF4444")
 +    }
-     
--    /// Border/Divider color
--    static let border = Color(red: 226/255, green: 232/255, blue: 240/255)
++    
 +    // MARK: - Dark Palette
-     
--    /// Success color
--    static let success = Color(red: 72/255, green: 187/255, blue: 120/255)
++    
 +    enum Dark {
 +        static let background = Color(hex: "#0A192F") // Navy
 +        static let primary = Color(hex: "#F59E0B") // Amber
@@ -233,13 +236,9 @@ index a699f69..9fcf118 100644
 +        static let warning = Color(hex: "#F59E0B")
 +        static let error = Color(hex: "#EF4444")
 +    }
-     
--    /// Warning color
--    static let warning = Color(red: 237/255, green: 137/255, blue: 54/255)
++    
 +    // MARK: - Dynamic Tokens
-     
--    /// Error color
--    static let error = Color(red: 245/255, green: 101/255, blue: 101/255)
++    
 +    static let background = Color.dynamic(light: Light.background, dark: Dark.background)
 +    static let primary = Color.dynamic(light: Light.primary, dark: Dark.primary)
 +    static let surface = Color.dynamic(light: Light.surface, dark: Dark.surface)
@@ -249,49 +248,51 @@ index a699f69..9fcf118 100644
 +    static let success = Color.dynamic(light: Light.success, dark: Dark.success)
 +    static let warning = Color.dynamic(light: Light.warning, dark: Dark.warning)
 +    static let error = Color.dynamic(light: Light.error, dark: Dark.error)
- }
- 
--// MARK: - Color Extension for Hex Support
++}
++
 +// MARK: - Color Extensions
- 
- extension Color {
++
++extension Color {
 +    static func dynamic(light: Color, dark: Color) -> Color {
 +        Color(UIColor { trait in
 +            trait.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
 +        })
 +    }
 +    
-     init(hex: String) {
++    init(hex: String) {
 +        self.init(UIColor(hex: hex))
 +    }
 +}
 +
 +extension UIColor {
 +    convenience init(hex: String) {
-         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-         var int: UInt64 = 0
-         Scanner(string: hex).scanHexInt64(&int)
-@@ -58,11 +77,10 @@ extension Color {
-             (a, r, g, b) = (255, 0, 0, 0)
-         }
-         self.init(
--            .sRGB,
--            red: Double(r) / 255,
--            green: Double(g) / 255,
--            blue: Double(b) / 255,
--            opacity: Double(a) / 255
++        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
++        var int: UInt64 = 0
++        Scanner(string: hex).scanHexInt64(&int)
++        let a, r, g, b: UInt64
++        switch hex.count {
++        case 3: // RGB (12-bit)
++            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
++        case 6: // RGB (24-bit)
++            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
++        case 8: // ARGB (32-bit)
++            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
++        default:
++            (a, r, g, b) = (255, 0, 0, 0)
++        }
++        self.init(
 +            red: CGFloat(r) / 255,
 +            green: CGFloat(g) / 255,
 +            blue: CGFloat(b) / 255,
 +            alpha: CGFloat(a) / 255
-         )
-     }
- }
-diff --git a/TheMiddleWay/Sources/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
++        )
++    }
++}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
 new file mode 100644
 index 0000000..998b891
 --- /dev/null
-+++ b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
++++ b/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
 @@ -0,0 +1,24 @@
 +import SwiftUI
 +
@@ -317,11 +318,83 @@ index 0000000..998b891
 +        }
 +    }
 +}
-diff --git a/TheMiddleWay/Sources/Core/Theme/ThemeConfig.swift b/TheMiddleWay/Sources/Core/Theme/ThemeConfig.swift
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
+new file mode 100644
+index 0000000..6a72562
+--- /dev/null
++++ b/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
+@@ -0,0 +1,66 @@
++import SwiftUI
++
++/// The Middle Way - Typography System
++/// Matching the Web design system with Playfair Display (headings) and Inter (body)
++enum AppTypography {
++    // MARK: - Headings (Serif style - like Playfair Display)
++    
++    /// Large title - 34pt Bold Serif
++    static let largeTitle = Font.system(size: 34, weight: .bold, design: .serif)
++    
++    /// Title 1 - 28pt Bold Serif
++    static let title1 = Font.system(size: 28, weight: .bold, design: .serif)
++    
++    /// Title 2 - 22pt Semibold Serif
++    static let title2 = Font.system(size: 22, weight: .semibold, design: .serif)
++    
++    /// Title 3 - 20pt Semibold Serif
++    static let title3 = Font.system(size: 20, weight: .semibold, design: .serif)
++    
++    /// Heading - Default heading style
++    static let heading = Font.system(size: 24, weight: .bold, design: .serif)
++    
++    // MARK: - Body Text (Sans-serif style - like Inter)
++    
++    /// Body Large - 17pt Regular
++    static let bodyLarge = Font.system(size: 17, weight: .regular, design: .default)
++    
++    /// Body - Standard body text - 15pt Regular
++    static let body = Font.system(size: 15, weight: .regular, design: .default)
++    
++    /// Body Small - 13pt Regular
++    static let bodySmall = Font.system(size: 13, weight: .regular, design: .default)
++    
++    // MARK: - UI Elements
++    
++    /// Button text - 16pt Semibold
++    static let button = Font.system(size: 16, weight: .semibold, design: .default)
++    
++    /// Caption - 12pt Regular
++    static let caption = Font.system(size: 12, weight: .regular, design: .default)
++    
++    /// Label - 14pt Medium
++    static let label = Font.system(size: 14, weight: .medium, design: .default)
++}
++
++// MARK: - View Extension for Typography
++
++extension View {
++    func headingStyle() -> some View {
++        self
++            .font(AppTypography.heading)
++            .foregroundStyle(AppColors.textPrimary)
++    }
++    
++    func bodyStyle() -> some View {
++        self
++            .font(AppTypography.body)
++            .foregroundStyle(AppColors.textPrimary)
++    }
++    
++    func captionStyle() -> some View {
++        self
++            .font(AppTypography.caption)
++            .foregroundStyle(AppColors.textSecondary)
++    }
++}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift b/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
 new file mode 100644
 index 0000000..5fc429d
 --- /dev/null
-+++ b/TheMiddleWay/Sources/Core/Theme/ThemeConfig.swift
++++ b/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
 @@ -0,0 +1,17 @@
 +import SwiftUI
 +
@@ -340,71 +413,197 @@ index 0000000..5fc429d
 +        isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
 +    }
 +}
-diff --git a/TheMiddleWay/Sources/Features/Home/HomeView.swift b/TheMiddleWay/Sources/Features/Home/HomeView.swift
-index 9e7c39a..412f8f9 100644
---- a/TheMiddleWay/Sources/Features/Home/HomeView.swift
-+++ b/TheMiddleWay/Sources/Features/Home/HomeView.swift
-@@ -1,25 +1,33 @@
- import SwiftUI
+diff --git a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
+index 19d4016..7467023 100644
+--- a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
++++ b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
+@@ -2,9 +2,12 @@ import SwiftUI
  
- struct HomeView: View {
-+    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+ @main
+ struct TheMiddleWayApp: App {
++    @StateObject private var viewModel = MainViewModel()
 +
-     var body: some View {
--        NavigationStack {
--            ScrollView {
--                VStack(spacing: 24) {
--                    // Welcome Card
--                    WelcomeCard()
--                    
--                    // Quick Actions
--                    QuickActionsSection()
--                    
--                    // Recent Activity
--                    RecentActivitySection()
-+        ScrollView {
-+            VStack(spacing: 24) {
-+                // Welcome Card
-+                WelcomeCard()
-+                
-+                // Quick Actions
-+                QuickActionsSection()
-+                
-+                // Recent Activity
-+                RecentActivitySection()
-+            }
-+            .padding(.horizontal, 16)
-+            .padding(.top, 16)
-+        }
-+        .background(AppColors.background)
-+        .toolbar {
-+            ToolbarItem(placement: .navigationBarTrailing) {
-+                Button {
-+                    isDarkMode.toggle()
-+                } label: {
-+                    Image(systemName: ThemeConfig.toggleIconName(isDarkMode: isDarkMode))
-                 }
--                .padding(.horizontal, 16)
--                .padding(.top, 16)
-+                .accessibilityLabel(ThemeConfig.toggleLabel(isDarkMode: isDarkMode))
-             }
--            .background(AppColors.background)
--            .navigationTitle("The Middle Way")
--            .navigationBarTitleDisplayMode(.large)
+     var body: some Scene {
+         WindowGroup {
+             ContentView()
++                .environmentObject(viewModel)
          }
      }
  }
-@@ -171,5 +179,9 @@ struct ActivityRow: View {
- }
- 
- #Preview {
--    HomeView()
-+    NavigationStack {
-+        HomeView()
-+            .navigationTitle("The Middle Way")
-+            .navigationBarTitleDisplayMode(.large)
+diff --git a/TheMiddleWay/Sources/Core/Models/UserProgress.swift b/TheMiddleWay/Sources/Core/Models/UserProgress.swift
+new file mode 100644
+index 0000000..4486fd4
+--- /dev/null
++++ b/TheMiddleWay/Sources/Core/Models/UserProgress.swift
+@@ -0,0 +1,23 @@
++import Foundation
++
++struct UserProgress: Codable, Equatable {
++    var version: Int = 1
++    var themeMode: ThemeMode = .light
++    var language: Language = .thai
++    var completedLessons: [String] = []
++    var bookmarks: [String] = []
++    var lastVisited: Date?
++    
++    // Default values
++    static let defaultProgress = UserProgress()
++}
++
++enum ThemeMode: String, Codable {
++    case light
++    case dark
++}
++
++enum Language: String, Codable {
++    case thai = "th"
++    case english = "en"
++}
+diff --git a/TheMiddleWay/Sources/Core/Services/PersistenceService.swift b/TheMiddleWay/Sources/Core/Services/PersistenceService.swift
+new file mode 100644
+index 0000000..1855e5c
+--- /dev/null
++++ b/TheMiddleWay/Sources/Core/Services/PersistenceService.swift
+@@ -0,0 +1,54 @@
++import Foundation
++
++protocol PersistenceService {
++    func saveProgress(_ progress: UserProgress) -> Bool
++    func loadProgress() -> UserProgress?
++    func clearProgress() -> Bool
++    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool
++}
++
++class PersistenceServiceImpl: PersistenceService {
++    
++    private let userDefaults: UserDefaults
++    private let key = "theMiddleWay.progress"
++    
++    init(userDefaults: UserDefaults = .standard) {
++        self.userDefaults = userDefaults
 +    }
- }
++    
++    func saveProgress(_ progress: UserProgress) -> Bool {
++        do {
++            let data = try JSONEncoder().encode(progress)
++            userDefaults.set(data, forKey: key)
++            return true
++        } catch {
++            print("Error saving progress: \(error)")
++            return false
++        }
++    }
++    
++    func loadProgress() -> UserProgress? {
++        guard let data = userDefaults.data(forKey: key) else {
++            return nil
++        }
++        
++        do {
++            let progress = try JSONDecoder().decode(UserProgress.self, from: data)
++            return progress
++        } catch {
++            print("Error loading progress: \(error)")
++            return nil
++        }
++    }
++    
++    func clearProgress() -> Bool {
++        userDefaults.removeObject(forKey: key)
++        return true
++    }
++    
++    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool {
++        var current = loadProgress() ?? UserProgress.defaultProgress
++        update(&current)
++        return saveProgress(current)
++    }
++}
+diff --git a/TheMiddleWay/Sources/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
+index 998b891..ad65dae 100644
+--- a/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
++++ b/TheMiddleWay/Sources/Core/Theme/AppTheme.swift
+@@ -1,11 +1,11 @@
+ import SwiftUI
+ 
+ struct ThemedNavigationStack<Content: View>: View {
+-    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
++    @EnvironmentObject var viewModel: MainViewModel
+     private let content: Content
+ 
+     private var themeScheme: ColorScheme {
+-        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
++        viewModel.userProgress.themeMode == .dark ? .dark : .light
+     }
+     
+     init(@ViewBuilder content: () -> Content) {
+@@ -16,8 +16,6 @@ struct ThemedNavigationStack<Content: View>: View {
+         NavigationStack {
+             content
+                 .background(AppColors.background)
+-                .toolbarBackground(AppColors.background, for: .navigationBar)
+-                .toolbarBackground(.visible, for: .navigationBar)
+                 .toolbarColorScheme(themeScheme, for: .navigationBar)
+         }
+     }
+diff --git a/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift b/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift
+new file mode 100644
+index 0000000..d71058f
+--- /dev/null
++++ b/TheMiddleWay/Sources/Core/ViewModels/MainViewModel.swift
+@@ -0,0 +1,52 @@
++import SwiftUI
++import Combine
++
++class MainViewModel: ObservableObject {
++    @Published var userProgress: UserProgress
++    private let persistenceService: PersistenceService
++    
++    init(service: PersistenceService = PersistenceServiceImpl()) {
++        self.persistenceService = service
++        // Load existing progress or default
++        self.userProgress = service.loadProgress() ?? UserProgress.defaultProgress
++    }
++    
++    private func reloadProgress() {
++        if let progress = persistenceService.loadProgress() {
++            // Ensure UI updates happen on the main thread
++            DispatchQueue.main.async {
++                self.userProgress = progress
++            }
++        }
++    }
++    
++    func completeLesson(_ lessonId: String) {
++        let updated = persistenceService.updateProgress { progress in
++            if !progress.completedLessons.contains(lessonId) {
++                progress.completedLessons.append(lessonId)
++                progress.lastVisited = Date()
++            }
++        }
++        if updated {
++            reloadProgress()
++        }
++    }
++    
++    func toggleTheme(isDark: Bool) {
++        let updated = persistenceService.updateProgress { progress in
++            progress.themeMode = isDark ? .dark : .light
++        }
++        if updated {
++            reloadProgress()
++        }
++    }
++    
++    func resetProgress() {
++        if persistenceService.clearProgress() {
++            // After clearing, the new default state needs to be set
++            DispatchQueue.main.async {
++                self.userProgress = UserProgress.defaultProgress
++            }
++        }
++    }
++}
 
 PR TEMPLATE:
 
