@@ -1,43 +1,35 @@
-Closes https://github.com/owner/repo/issues/6
+Closes: https://github.com/{owner}/{repo}/issues/5
 
 ### Summary
 
-This pull request introduces a foundational persistence layer to the application using `UserDefaults`. The primary goal is to track and store user progress, settings, and preferences locally on the device. This includes completed lessons, theme selection (light/dark mode), and other user-specific data.
+This pull request introduces a robust CI workflow to automate the creation of Git tags whenever the application's version is updated in the Xcode project file. This change streamlines the release process and eliminates manual tagging errors. As part of this work, the app version has been bumped to `0.3.1` to trigger the new workflow and formally release these CI improvements.
 
-A centralized `MainViewModel` has been created to manage the application's state, acting as a single source of truth for user progress. This state is now propagated through the view hierarchy using SwiftUI's `EnvironmentObject`, ensuring a clean and scalable architecture.
+**Note:** The linked issue title, "[Data] CSV Data Ingestion...", does not appear to align with the changes in this pull request, which are focused on CI automation for release tagging.
 
-### Key Changes
+### Problem
 
-1.  **Persistence Service & User Progress Model**
-    *   Introduced a `PersistenceService` protocol and a `PersistenceServiceImpl` that uses `UserDefaults` with `JSONEncoder`/`JSONDecoder` for storing data. This provides a type-safe and easily extensible way to manage stored data.
-    *   Created a `Codable` `UserProgress` struct to model all persistable data, including `themeMode`, `completedLessons`, `bookmarks`, and `lastVisited` timestamp.
+Manually creating and pushing Git tags for each release is a repetitive and error-prone task. It's easy to forget, mistype the version, or create a tag that doesn't match the `MARKETING_VERSION` in the `.pbxproj` file. This leads to inconsistencies between the codebase and its release markers.
 
-2.  **Centralized State Management (`MainViewModel`)**
-    *   A new `MainViewModel` class, conforming to `ObservableObject`, has been implemented to manage the `userProgress` state.
-    *   This ViewModel is injected as an `EnvironmentObject` at the root of the application (`TheMiddleWayApp.swift`), making it accessible to any view that needs it.
-    *   It handles loading progress on app launch and provides methods to update the state (e.g., `completeLesson`, `toggleTheme`, `resetProgress`), which in turn saves the changes via the `PersistenceService`.
+### Solution
 
-3.  **Theme System Refactor**
-    *   The theme system has been completely overhauled. A new dynamic `AppColors` enum and `AppTypography` system have been established to support both light and dark modes consistently.
-    *   Theme selection has been migrated from a simple `@AppStorage` boolean to being part of the `UserProgress` model. This allows the user's theme choice to be persisted along with their other data.
-    *   Views like `ContentView` and `ThemedNavigationStack` now react to theme changes published by the `MainViewModel`.
+An automated GitHub Actions workflow (`auto-tag.yml`) has been implemented to handle this process securely and reliably.
 
-4.  **UI Integration & Demonstration**
-    *   The `ContentView` and its subviews have been refactored to consume the `MainViewModel` from the environment instead of managing their own state.
-    *   The `ProfileView` has been updated to display the user's progress (e.g., number of completed lessons) and includes new buttons to "Complete Demo Lesson" and "Reset Progress" for testing the persistence functionality.
+**Key Features of the New Workflow:**
+
+*   **Automatic Trigger:** The workflow runs automatically on any push to the `main` branch that modifies a `*.pbxproj` file.
+*   **Robust Version Extraction:** The script extracts *all* `MARKETING_VERSION` values from the project file and verifies that there is exactly one unique version across all build configurations. This prevents accidentally tagging a release with a debug or mismatched version number. If inconsistencies are found, the workflow fails with a clear error message.
+*   **Idempotency:** Before creating a tag, the workflow checks if one for the extracted version (e.g., `v0.3.1`) already exists. If it does, the process is skipped gracefully, preventing errors on re-runs.
+*   **Automated Tagging:** If the tag is new, the workflow creates and pushes a new annotated Git tag using a bot identity.
+
+### Changes Included
+
+*   **CI (`.github/workflows/auto-tag.yml`):** Added the new workflow for automated version tagging.
+*   **Version Bump (`TheMiddleWay.xcodeproj/project.pbxproj`):** Incremented the app version from `0.3.0` to `0.3.1`.
+*   **Changelog (`CHANGELOG.md`):** Updated with an entry for `v0.3.1` to document the CI improvements.
+*   **Documentation (`code_review.md`):** Updated the code review report to analyze the logic and robustness of the new auto-tagging workflow.
 
 ### Impact
 
-*   **User Experience:** User settings and progress are now saved across app sessions, providing a continuous and personalized experience.
-*   **Architecture:** Establishes a robust and scalable pattern for state management and data persistence, moving away from scattered `@AppStorage` properties.
-*   **Maintainability:** Centralizing state logic in the `MainViewModel` makes the codebase easier to understand, debug, and extend in the future.
-
-### How to Test
-
-1.  Launch the app and navigate to the **Profile** tab.
-2.  The "Completed Lessons" count should be 0.
-3.  Tap the **"Complete Demo Lesson"** button. The count should increment.
-4.  Force-quit and relaunch the app.
-5.  Navigate back to the **Profile** tab and verify that the lesson count is preserved.
-6.  Tap the **"Reset Progress"** button. The count should return to 0.
-7.  Force-quit and relaunch again to confirm the progress has been cleared.
+*   **Streamlined Releases:** The release process is now more efficient and less manual.
+*   **Improved Consistency:** Guarantees that Git tags are always synchronized with the version specified in the Xcode project.
+*   **Reduced Human Error:** Eliminates the possibility of manual mistakes during the tagging process.
