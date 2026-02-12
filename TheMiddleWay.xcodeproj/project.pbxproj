@@ -19,6 +19,8 @@
 		4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */; };
 		4F7EA9332F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */; };
 		4F7EA9352F3DCE73006D5BEB /* WeeklyPracticesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9342F3DCE73006D5BEB /* WeeklyPracticesView.swift */; };
+		4F7EA93D2F3DFD71006D5BEB /* OnboardingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA93A2F3DFD71006D5BEB /* OnboardingService.swift */; };
+		4F7EA9442F3E0288006D5BEB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9422F3E0288006D5BEB /* OnboardingView.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -42,6 +44,8 @@
 		4F7EA9282F3D8536006D5BEB /* WisdomGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenView.swift; sourceTree = "<group>"; };
 		4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWisdomGardenRepository.swift; sourceTree = "<group>"; };
 		4F7EA9342F3DCE73006D5BEB /* WeeklyPracticesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyPracticesView.swift; sourceTree = "<group>"; };
+		4F7EA93A2F3DFD71006D5BEB /* OnboardingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingService.swift; sourceTree = "<group>"; };
+		4F7EA9422F3E0288006D5BEB /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +79,7 @@
 		4F7EA9182F3B77FA006D5BEB /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA93A2F3DFD71006D5BEB /* OnboardingService.swift */,
 				4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */,
 			);
 			path = Services;
@@ -144,6 +149,14 @@
 			path = WisdomGarden;
 			sourceTree = "<group>";
 		};
+		4F7EA9432F3E0288006D5BEB /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9422F3E0288006D5BEB /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		E100000E262F0001009A0001 = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +224,7 @@
 		E1000016262F0001009A0001 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA9432F3E0288006D5BEB /* Onboarding */,
 				4F7EA92A2F3D8536006D5BEB /* WisdomGarden */,
 				E1000019262F0001009A0001 /* Home */,
 			);
@@ -323,6 +337,7 @@
 				4F7EA92F2F3D8536006D5BEB /* WisdomGardenData.swift in Sources */,
 				4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */,
 				4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */,
+				4F7EA93D2F3DFD71006D5BEB /* OnboardingService.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
 				4F7EA9332F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift in Sources */,
 				4F7EA9352F3DCE73006D5BEB /* WeeklyPracticesView.swift in Sources */,
@@ -331,6 +346,7 @@
 				E100000B262F0001009A0001 /* HomeView.swift in Sources */,
 				E1000024262F0001009A0001 /* AppTheme.swift in Sources */,
 				E1000030262F0001009A0001 /* ThemeConfig.swift in Sources */,
+				4F7EA9442F3E0288006D5BEB /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,11 +3,17 @@ import SwiftUI
 @main
 struct TheMiddleWayApp: App {
     @StateObject private var viewModel = MainViewModel()
+    @StateObject private var onboardingService = OnboardingService()
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(viewModel)
+            if onboardingService.isOnboardingCompleted {
+                ContentView()
+                    .environmentObject(viewModel)
+            } else {
+                OnboardingView()
+                    .environmentObject(onboardingService)
+            }
         }
     }
 }
