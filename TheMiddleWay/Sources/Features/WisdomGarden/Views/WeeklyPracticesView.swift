@@ -8,17 +8,20 @@ struct WeeklyPracticesView: View {
         ScrollView {
             VStack(spacing: 24) {
                 // Header/Title context
-                VStack(spacing: 8) {
-                    Text("Week \(viewModel.selectedWeek)")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(AppColors.primary)
-                        .padding(.top)
+                // Week Selector & Score
+                VStack(spacing: 16) {
+                    WeekSelectorView(selectedWeek: $viewModel.selectedWeek)
+                        .onChange(of: viewModel.selectedWeek) { newWeek in
+                            Task {
+                                await viewModel.loadWeeklyData(for: newWeek)
+                            }
+                        }
                     
                     if let data = viewModel.currentWeekData {
                          Text("\(data.currentScore) / \(data.maxScore) Points")
                              .font(.title2)
                              .bold()
+                             .foregroundColor(AppColors.primary)
                     }
                 }
                 
