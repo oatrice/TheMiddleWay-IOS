@@ -33,7 +33,12 @@ class WisdomGardenViewModel: ObservableObject {
     }
     
     @MainActor
-    func loadWeeklyData(for week: Int) async {
+    func loadWeeklyData(for week: Int, forceRefresh: Bool = false) async {
+        // Return if data for the selected week is already cached and we're not forcing a refresh.
+        if !forceRefresh && weeklyDataMap[week] != nil {
+            return
+        }
+
         do {
             let data = try await repository.getWeeklyData(week: week)
             weeklyDataMap[week] = data
@@ -79,7 +84,7 @@ class WisdomGardenViewModel: ObservableObject {
                     } catch {
                         print("Error toggling item: \(error)")
                         // Revert on failure (reload data)
-                        await loadWeeklyData(for: selectedWeek)
+                        await loadWeeklyData(for: selectedWeek, forceRefresh: true)
                     }
                 }
                 return 
