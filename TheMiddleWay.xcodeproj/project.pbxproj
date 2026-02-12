@@ -17,6 +17,7 @@
 		4F7EA92F2F3D8536006D5BEB /* WisdomGardenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */; };
 		4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9202F3D8536006D5BEB /* WisdomGardenModels.swift */; };
 		4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */; };
+		4F7EA9332F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 		4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSelectorView.swift; sourceTree = "<group>"; };
 		4F7EA9262F3D8536006D5BEB /* WisdomTreeVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomTreeVisualizationView.swift; sourceTree = "<group>"; };
 		4F7EA9282F3D8536006D5BEB /* WisdomGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenView.swift; sourceTree = "<group>"; };
+		4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWisdomGardenRepository.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		4F7EA91F2F3D8536006D5BEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */,
 				4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */,
 			);
 			path = Data;
@@ -318,6 +321,7 @@
 				4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */,
 				4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
+				4F7EA9332F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift in Sources */,
 				4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */,
 				E1000009262F0001009A0001 /* AppTypography.swift in Sources */,
 				E100000B262F0001009A0001 /* HomeView.swift in Sources */,

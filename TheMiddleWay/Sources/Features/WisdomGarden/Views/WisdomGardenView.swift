@@ -15,8 +15,10 @@ struct WisdomGardenView: View {
                     WeekSelectorView(selectedWeek: $viewModel.selectedWeek)
                         .padding(.top, 8)
                         .onChange(of: viewModel.selectedWeek) { newWeek in
-                            // Logic handles reactive update via currentWeekData
-                            print("Week switched to: \(newWeek)")
+                            // Trigger data reload when week changes
+                            Task {
+                                await viewModel.loadWeeklyData(for: newWeek)
+                            }
                         }
                     
                     if let data = viewModel.currentWeekData {
