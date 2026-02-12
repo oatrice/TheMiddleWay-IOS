@@ -10,6 +10,13 @@
 		4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */; };
 		4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */; };
 		4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */; };
+		4F7EA92B2F3D8536006D5BEB /* WisdomGardenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9222F3D8536006D5BEB /* WisdomGardenViewModel.swift */; };
+		4F7EA92C2F3D8536006D5BEB /* WisdomTreeVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9262F3D8536006D5BEB /* WisdomTreeVisualizationView.swift */; };
+		4F7EA92D2F3D8536006D5BEB /* WisdomGardenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9282F3D8536006D5BEB /* WisdomGardenView.swift */; };
+		4F7EA92E2F3D8536006D5BEB /* PracticeChecklistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9242F3D8536006D5BEB /* PracticeChecklistView.swift */; };
+		4F7EA92F2F3D8536006D5BEB /* WisdomGardenData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */; };
+		4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9202F3D8536006D5BEB /* WisdomGardenModels.swift */; };
+		4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -24,6 +31,13 @@
 		4F7EA9152F3B77FA006D5BEB /* UserProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProgress.swift; sourceTree = "<group>"; };
 		4F7EA9172F3B77FA006D5BEB /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
 		4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenData.swift; sourceTree = "<group>"; };
+		4F7EA9202F3D8536006D5BEB /* WisdomGardenModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenModels.swift; sourceTree = "<group>"; };
+		4F7EA9222F3D8536006D5BEB /* WisdomGardenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenViewModel.swift; sourceTree = "<group>"; };
+		4F7EA9242F3D8536006D5BEB /* PracticeChecklistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracticeChecklistView.swift; sourceTree = "<group>"; };
+		4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSelectorView.swift; sourceTree = "<group>"; };
+		4F7EA9262F3D8536006D5BEB /* WisdomTreeVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomTreeVisualizationView.swift; sourceTree = "<group>"; };
+		4F7EA9282F3D8536006D5BEB /* WisdomGardenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenView.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +82,60 @@
 				4F7EA91B2F3C2EDE006D5BEB /* MainViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F7EA91F2F3D8536006D5BEB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4F7EA9212F3D8536006D5BEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9202F3D8536006D5BEB /* WisdomGardenModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4F7EA9232F3D8536006D5BEB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9222F3D8536006D5BEB /* WisdomGardenViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F7EA9272F3D8536006D5BEB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9242F3D8536006D5BEB /* PracticeChecklistView.swift */,
+				4F7EA9252F3D8536006D5BEB /* WeekSelectorView.swift */,
+				4F7EA9262F3D8536006D5BEB /* WisdomTreeVisualizationView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		4F7EA9292F3D8536006D5BEB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA9272F3D8536006D5BEB /* Components */,
+				4F7EA9282F3D8536006D5BEB /* WisdomGardenView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F7EA92A2F3D8536006D5BEB /* WisdomGarden */ = {
+			isa = PBXGroup;
+			children = (
+				4F7EA91F2F3D8536006D5BEB /* Data */,
+				4F7EA9212F3D8536006D5BEB /* Models */,
+				4F7EA9232F3D8536006D5BEB /* ViewModels */,
+				4F7EA9292F3D8536006D5BEB /* Views */,
+			);
+			path = WisdomGarden;
 			sourceTree = "<group>";
 		};
 		E100000E262F0001009A0001 = {
@@ -137,6 +205,7 @@
 		E1000016262F0001009A0001 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4F7EA92A2F3D8536006D5BEB /* WisdomGarden */,
 				E1000019262F0001009A0001 /* Home */,
 			);
 			path = Features;
@@ -241,6 +310,13 @@
 				E1000003262F0001009A0001 /* ContentView.swift in Sources */,
 				4F7EA9192F3B77FA006D5BEB /* PersistenceService.swift in Sources */,
 				4F7EA91A2F3B77FA006D5BEB /* UserProgress.swift in Sources */,
+				4F7EA92B2F3D8536006D5BEB /* WisdomGardenViewModel.swift in Sources */,
+				4F7EA92C2F3D8536006D5BEB /* WisdomTreeVisualizationView.swift in Sources */,
+				4F7EA92D2F3D8536006D5BEB /* WisdomGardenView.swift in Sources */,
+				4F7EA92E2F3D8536006D5BEB /* PracticeChecklistView.swift in Sources */,
+				4F7EA92F2F3D8536006D5BEB /* WisdomGardenData.swift in Sources */,
+				4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */,
+				4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
 				4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */,
 				E1000009262F0001009A0001 /* AppTypography.swift in Sources */,
@@ -394,7 +470,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oatrice.themiddleway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -423,7 +499,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.oatrice.themiddleway;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

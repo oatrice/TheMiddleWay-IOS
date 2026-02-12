@@ -1,35 +1,58 @@
-Closes: https://github.com/{owner}/{repo}/issues/5
+Closes https://github.com/owner/repo/issues/1
 
 ### Summary
 
-This pull request introduces a robust CI workflow to automate the creation of Git tags whenever the application's version is updated in the Xcode project file. This change streamlines the release process and eliminates manual tagging errors. As part of this work, the app version has been bumped to `0.3.1` to trigger the new workflow and formally release these CI improvements.
+This pull request introduces the **"Wisdom Garden"** feature, a new core dashboard for the application. It replaces the previous `HomeView` and serves as the primary landing screen for users, accessible via the main "Garden" tab.
 
-**Note:** The linked issue title, "[Data] CSV Data Ingestion...", does not appear to align with the changes in this pull request, which are focused on CI automation for release tagging.
+The Wisdom Garden is designed to provide a serene and motivating space for users to track their progress in Dhamma practice. It visualizes their efforts as a growing "Wisdom Tree" and provides a clear, interactive checklist of practices for each week. This implementation is built using SwiftUI and follows the MVVM pattern for a clean and scalable architecture.
 
-### Problem
+### What's Changed?
 
-Manually creating and pushing Git tags for each release is a repetitive and error-prone task. It's easy to forget, mistype the version, or create a tag that doesn't match the `MARKETING_VERSION` in the `.pbxproj` file. This leads to inconsistencies between the codebase and its release markers.
+-   **🌿 New Feature: Wisdom Garden Dashboard (`WisdomGardenView`)**
+    -   A new, self-contained feature module has been created under `Features/WisdomGarden`.
+    -   This view assembles all the new components into a cohesive dashboard experience.
 
-### Solution
+-   **🌳 Wisdom Tree Visualization (`WisdomTreeVisualizationView`)**
+    -   A central component that displays the user's progress for the selected week.
+    -   Features a circular progress bar that fills as tasks are completed.
+    -   An SF Symbol in the center dynamically changes from a seed (`leaf`) to a full tree (`tree.fill`) based on the completion percentage, providing a tangible sense of growth.
 
-An automated GitHub Actions workflow (`auto-tag.yml`) has been implemented to handle this process securely and reliably.
+-   **✅ Interactive Practice Checklist (`PracticeChecklistView`)**
+    -   Displays a list of practice items grouped by category (e.g., Giving, Morality).
+    -   Users can tap items to mark them as complete. This action triggers:
+        -   A satisfying haptic feedback (`UIImpactFeedbackGenerator`).
+        -   A smooth animation on the checkbox.
+        -   An immediate update to the score and the Wisdom Tree visualization.
 
-**Key Features of the New Workflow:**
+-   **📅 Week Selector (`WeekSelectorView`)**
+    -   A horizontal, scrollable selector that allows users to navigate between the 8 weeks of the program.
+    -   The selected week's data is dynamically loaded into the dashboard.
 
-*   **Automatic Trigger:** The workflow runs automatically on any push to the `main` branch that modifies a `*.pbxproj` file.
-*   **Robust Version Extraction:** The script extracts *all* `MARKETING_VERSION` values from the project file and verifies that there is exactly one unique version across all build configurations. This prevents accidentally tagging a release with a debug or mismatched version number. If inconsistencies are found, the workflow fails with a clear error message.
-*   **Idempotency:** Before creating a tag, the workflow checks if one for the extracted version (e.g., `v0.3.1`) already exists. If it does, the process is skipped gracefully, preventing errors on re-runs.
-*   **Automated Tagging:** If the tag is new, the workflow creates and pushes a new annotated Git tag using a bot identity.
+-   **🧠 State Management & Data (`WisdomGardenViewModel`, `WisdomGardenData`)**
+    -   A new `WisdomGardenViewModel` manages the state, including the currently selected week and the completion status of all practice items.
+    -   The entire feature is powered by mock data defined in `WisdomGardenData.swift`, fulfilling the initial requirement to build the UI without a live backend.
 
-### Changes Included
+-   **🏠 App Integration (`ContentView`)**
+    -   The main `TabView` has been updated to replace the old `HomeView` with the new `WisdomGardenView`.
+    -   The tab bar item has been updated to a `leaf.fill` icon and a "Garden" label, reflecting the new feature.
 
-*   **CI (`.github/workflows/auto-tag.yml`):** Added the new workflow for automated version tagging.
-*   **Version Bump (`TheMiddleWay.xcodeproj/project.pbxproj`):** Incremented the app version from `0.3.0` to `0.3.1`.
-*   **Changelog (`CHANGELOG.md`):** Updated with an entry for `v0.3.1` to document the CI improvements.
-*   **Documentation (`code_review.md`):** Updated the code review report to analyze the logic and robustness of the new auto-tagging workflow.
+### How to Test
 
-### Impact
+1.  Launch the app.
+2.  Confirm that the new "Garden" screen is the default view.
+3.  Use the **Week Selector** at the top to switch between Week 1 through 8. Verify that the checklist content updates accordingly.
+4.  Tap on any checklist item.
+5.  **Verify the following:**
+    -   The item is checked and struck through.
+    -   The score (`X / Y`) and the circular progress bar update instantly.
+    -   The icon in the center of the progress circle changes as you complete more items.
+    -   You feel a haptic "tap" on interaction.
+6.  Un-check an item and confirm the score and progress bar revert correctly.
 
-*   **Streamlined Releases:** The release process is now more efficient and less manual.
-*   **Improved Consistency:** Guarantees that Git tags are always synchronized with the version specified in the Xcode project.
-*   **Reduced Human Error:** Eliminates the possibility of manual mistakes during the tagging process.
+### Screenshot
+
+*(A screen recording demonstrating the interactive checklist and the growing tree visualization would be ideal here.)*
+
+| Before | After |
+| :--- | :--- |
+|  ![Old Home Screen](https://via.placeholder.com/300x650/f0f0f0/000000?text=Old+HomeView)  |  ![New Wisdom Garden](https://via.placeholder.com/300x650/e0f0ff/000000?text=New+Wisdom+Garden)  |
