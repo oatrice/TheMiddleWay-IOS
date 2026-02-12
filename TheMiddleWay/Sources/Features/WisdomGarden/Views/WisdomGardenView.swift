@@ -33,13 +33,30 @@ struct WisdomGardenView: View {
                         Divider()
                             .padding(.horizontal)
                         
-                        // FR-3: Checklist
+                        // FR-3: Checklist (Read-Only Dashboard)
                         PracticeChecklistView(
                             categories: data.categories,
-                            onCheckItem: { id in
-                                viewModel.toggleItem(itemId: id)
+                            onCheckItem: { _ in }, // No-op in read-only
+                            readOnly: true,
+                            onWarnReadOnly: {
+                                // Simple tactile feedback or toast could go here
+                                // For MVP, the button below is the clear CTA
                             }
                         )
+                        .opacity(0.8) // Visual cue
+                        
+                        // Navigation to Practice Room
+                        NavigationLink(destination: WeeklyPracticesView(viewModel: viewModel)) {
+                            Text("Go to Practice Room")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(AppColors.primary)
+                                .cornerRadius(12)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 24)
                     } else {
                         // Fallback/Loading state
                         ProgressView("Loading Garden...")
@@ -53,10 +70,6 @@ struct WisdomGardenView: View {
             .navigationBarTitleDisplayMode(.large)
             // .toolbar { ... Language Toggle, Settings, etc ... }
             .background(AppColors.background) // Use custom theme background
-            .overlay(alignment: .bottom) {
-                // Floating Action Button or subtle gradient could go here
-                // For now, keep clean.
-            }
         }
     }
 }
@@ -64,3 +77,5 @@ struct WisdomGardenView: View {
 #Preview {
     WisdomGardenView()
 }
+
+
