@@ -2,451 +2,584 @@
 
 You are an AI assistant helping to create a Pull Request description.
     
-TASK: 📝 [Feature] สร้างหน้า "ห้องปฏิบัติธรรม" (Weekly Practices & Checklist)
+TASK: [Feature] Onboarding: Welcome Screen & "Authentic Wisdom" Introduction
 ISSUE: {
-  "title": "\ud83d\udcdd [Feature] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 \"\u0e2b\u0e49\u0e2d\u0e07\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21\" (Weekly Practices & Checklist)",
-  "number": 2,
-  "body": "**\u0e2a\u0e23\u0e38\u0e1b\u0e20\u0e32\u0e1e\u0e23\u0e27\u0e21 (Summary):**\n\n\u0e2b\u0e25\u0e31\u0e07\u0e08\u0e32\u0e01\u0e17\u0e35\u0e48\u0e40\u0e23\u0e32\u0e21\u0e35\u0e2b\u0e19\u0e49\u0e32 \"\u0e2a\u0e27\u0e19\u0e41\u0e2b\u0e48\u0e07\u0e1b\u0e31\u0e0d\u0e0d\u0e32\" (Dashboard) \u0e44\u0e27\u0e49\u0e14\u0e39\u0e1c\u0e25\u0e25\u0e31\u0e1e\u0e18\u0e4c\u0e41\u0e25\u0e49\u0e27 Issue \u0e19\u0e35\u0e49\u0e04\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a **\"\u0e01\u0e32\u0e23\u0e25\u0e07\u0e21\u0e37\u0e2d\u0e17\u0e33\"** \u0e42\u0e14\u0e22\u0e40\u0e09\u0e1e\u0e32\u0e30 \u0e40\u0e1b\u0e23\u0e35\u0e22\u0e1a\u0e40\u0e2a\u0e21\u0e37\u0e2d\u0e19 \"\u0e2b\u0e49\u0e2d\u0e07\u0e40\u0e23\u0e35\u0e22\u0e19\" \u0e2b\u0e23\u0e37\u0e2d \"\u0e25\u0e32\u0e19\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21\" \u0e17\u0e35\u0e48\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e08\u0e30\u0e40\u0e02\u0e49\u0e32\u0e21\u0e32\u0e14\u0e39\u0e27\u0e48\u0e32 **\"\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c\u0e19\u0e35\u0e49\u0e15\u0e49\u0e2d\u0e07\u0e17\u0e33\u0e2d\u0e30\u0e44\u0e23\u0e1a\u0e49\u0e32\u0e07?\"** \u0e41\u0e25\u0e30\u0e01\u0e14\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e17\u0e33\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\n\n**\u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22 (Objective):**\n\n\u0e41\u0e22\u0e01\u0e2a\u0e48\u0e27\u0e19 \"\u0e01\u0e32\u0e23\u0e15\u0e34\u0e4a\u0e01\u0e07\u0e32\u0e19\" \u0e2d\u0e2d\u0e01\u0e21\u0e32\u0e08\u0e32\u0e01\u0e2b\u0e19\u0e49\u0e32 Dashboard \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e2b\u0e19\u0e49\u0e32\u0e19\u0e35\u0e49\u0e40\u0e19\u0e49\u0e19\u0e04\u0e27\u0e32\u0e21\u0e0a\u0e31\u0e14\u0e40\u0e08\u0e19 (Focus) \u0e2d\u0e48\u0e32\u0e19\u0e07\u0e48\u0e32\u0e22 \u0e44\u0e21\u0e48\u0e23\u0e01 \u0e41\u0e25\u0e30\u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21\u0e08\u0e33\u0e19\u0e27\u0e19\u0e21\u0e32\u0e01\u0e43\u0e19\u0e41\u0e15\u0e48\u0e25\u0e30\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c\u0e44\u0e14\u0e49\u0e14\u0e35\u0e01\u0e27\u0e48\u0e32\n\n---\n\n### \u0e2a\u0e34\u0e48\u0e07\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e17\u0e33 (Scope of Work)\n\n#### 1. \u0e2a\u0e48\u0e27\u0e19\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c (Week Selector)\n\n- [ ] **\u0e41\u0e16\u0e1a\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c:** \u0e41\u0e16\u0e1a\u0e14\u0e49\u0e32\u0e19\u0e1a\u0e19\u0e43\u0e2b\u0e49\u0e01\u0e14\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e44\u0e14\u0e49\u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48 Week 1 \u0e16\u0e36\u0e07 Week 8 (\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e01\u0e14\u0e40\u0e25\u0e37\u0e2d\u0e01 \u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e14\u0e49\u0e32\u0e19\u0e25\u0e48\u0e32\u0e07\u0e15\u0e49\u0e2d\u0e07\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e15\u0e32\u0e21\u0e40\u0e19\u0e37\u0e49\u0e2d\u0e2b\u0e32\u0e02\u0e2d\u0e07\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c\u0e19\u0e31\u0e49\u0e19\u0e46)\n- [ ] **\u0e01\u0e32\u0e23\u0e25\u0e47\u0e2d\u0e04\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c (Optional):** *\u0e04\u0e38\u0e22\u0e01\u0e31\u0e1a\u0e17\u0e35\u0e21 Dev:* \u0e43\u0e19\u0e40\u0e1f\u0e2a\u0e41\u0e23\u0e01\u0e2d\u0e32\u0e08\u0e08\u0e30\u0e40\u0e1b\u0e34\u0e14\u0e43\u0e2b\u0e49\u0e01\u0e14\u0e14\u0e39\u0e44\u0e14\u0e49\u0e17\u0e38\u0e01\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c\u0e01\u0e48\u0e2d\u0e19 \u0e2b\u0e23\u0e37\u0e2d\u0e08\u0e30\u0e25\u0e47\u0e2d\u0e04\u0e44\u0e27\u0e49\u0e43\u0e2b\u0e49\u0e17\u0e33\u0e17\u0e35\u0e25\u0e30\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c (\u0e15\u0e01\u0e25\u0e07\u0e01\u0e31\u0e19\u0e2d\u0e35\u0e01\u0e17\u0e35)\n\n#### 2. \u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e40\u0e0a\u0e47\u0e04\u0e25\u0e34\u0e2a\u0e15\u0e4c (The Checklist)\n\n- [ ] **\u0e01\u0e32\u0e23\u0e41\u0e2a\u0e14\u0e07\u0e1c\u0e25\u0e40\u0e1b\u0e47\u0e19\u0e2b\u0e21\u0e27\u0e14\u0e2b\u0e21\u0e39\u0e48:** \u0e14\u0e36\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e08\u0e32\u0e01\u0e44\u0e1f\u0e25\u0e4c CSV \u0e21\u0e32\u0e41\u0e2a\u0e14\u0e07 \u0e42\u0e14\u0e22\u0e15\u0e49\u0e2d\u0e07\u0e21\u0e35 \"\u0e1b\u0e49\u0e32\u0e22\u0e01\u0e33\u0e01\u0e31\u0e1a\" (Badge) \u0e1a\u0e2d\u0e01\u0e2b\u0e21\u0e27\u0e14\u0e2b\u0e21\u0e39\u0e48\u0e0a\u0e31\u0e14\u0e40\u0e08\u0e19 \u0e40\u0e0a\u0e48\u0e19 \ud83c\udf81 Giving (\u0e17\u0e32\u0e19), \ud83d\udee1\ufe0f Ethics (\u0e28\u0e35\u0e25)\n- [ ] **Interaction (\u0e01\u0e32\u0e23\u0e15\u0e2d\u0e1a\u0e2a\u0e19\u0e2d\u0e07):**\n  - \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e01\u0e14\u0e15\u0e34\u0e4a\u0e01\u0e16\u0e39\u0e01 \u2705 \u0e43\u0e2b\u0e49\u0e21\u0e35\u0e40\u0e2a\u0e35\u0e22\u0e07 Effect \u0e40\u0e1a\u0e32\u0e46 \u0e2b\u0e23\u0e37\u0e2d\u0e01\u0e32\u0e23\u0e2a\u0e31\u0e48\u0e19 (Haptic) \u0e1a\u0e19\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e23\u0e39\u0e49\u0e2a\u0e36\u0e01\u0e16\u0e36\u0e07\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\n  - \u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e2d\u0e32\u0e08\u0e08\u0e30\u0e08\u0e32\u0e07\u0e25\u0e07 (Dim) \u0e2b\u0e23\u0e37\u0e2d\u0e21\u0e35\u0e02\u0e35\u0e14\u0e06\u0e48\u0e32\u0e40\u0e25\u0e47\u0e01\u0e19\u0e49\u0e2d\u0e22 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e23\u0e39\u0e49\u0e27\u0e48\u0e32\u0e17\u0e33\u0e40\u0e2a\u0e23\u0e47\u0e08\u0e41\u0e25\u0e49\u0e27\n- [ ] **\u0e01\u0e32\u0e23\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 (Save):** \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e01\u0e14\u0e41\u0e25\u0e49\u0e27 \u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e15\u0e49\u0e2d\u0e07\u0e16\u0e39\u0e01\u0e08\u0e33\u0e44\u0e27\u0e49 (Save to LocalStorage) \u0e41\u0e21\u0e49\u0e1b\u0e34\u0e14\u0e41\u0e2d\u0e1b\u0e41\u0e25\u0e49\u0e27\u0e40\u0e1b\u0e34\u0e14\u0e43\u0e2b\u0e21\u0e48 \u0e15\u0e34\u0e4a\u0e01\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e22\u0e31\u0e07\u0e2d\u0e22\u0e39\u0e48\n\n#### 3. \u0e41\u0e16\u0e1a\u0e2a\u0e23\u0e38\u0e1b\u0e1c\u0e25\u0e23\u0e32\u0e22\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c (Mini Progress)\n\n- [ ] **Progress Bar:** \u0e14\u0e49\u0e32\u0e19\u0e1a\u0e19\u0e2a\u0e38\u0e14\u0e02\u0e2d\u0e07\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23 \u0e04\u0e27\u0e23\u0e21\u0e35\u0e2b\u0e25\u0e2d\u0e14\u0e1e\u0e25\u0e31\u0e07\u0e07\u0e32\u0e19\u0e40\u0e25\u0e47\u0e01\u0e46 \u0e1a\u0e2d\u0e01\u0e27\u0e48\u0e32 \"\u0e2a\u0e31\u0e1b\u0e14\u0e32\u0e2b\u0e4c\u0e19\u0e35\u0e49\u0e17\u0e33\u0e44\u0e1b\u0e41\u0e25\u0e49\u0e27 8/10 \u0e02\u0e49\u0e2d\" \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e47\u0e19\u0e01\u0e33\u0e25\u0e31\u0e07\u0e43\u0e08\u0e23\u0e30\u0e22\u0e30\u0e2a\u0e31\u0e49\u0e19\n\n---\n\n### \u0e20\u0e32\u0e1e\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e17\u0e35\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 (Reference Designs)\n\n*\u0e2d\u0e49\u0e32\u0e07\u0e2d\u0e34\u0e07\u0e08\u0e32\u0e01 Screenshot \u0e17\u0e35\u0e48 3 (Weekly Practices):*\n\n- **Mood:** \u0e2a\u0e30\u0e2d\u0e32\u0e14\u0e15\u0e32 (Clean), \u0e2d\u0e48\u0e32\u0e19\u0e07\u0e48\u0e32\u0e22, \u0e1b\u0e38\u0e48\u0e21\u0e15\u0e34\u0e4a\u0e01\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e14\u0e07\u0e48\u0e32\u0e22 (Finger-friendly targets)\n- **Elements:**\n  - \u0e1b\u0e49\u0e32\u0e22 Tag \u0e2a\u0e35\u0e15\u0e48\u0e32\u0e07\u0e46 \u0e41\u0e1a\u0e48\u0e07\u0e15\u0e32\u0e21\u0e2b\u0e21\u0e27\u0e14\u0e2b\u0e21\u0e39\u0e48 (\u0e40\u0e0a\u0e48\u0e19 \u0e2a\u0e35\u0e2a\u0e49\u0e21\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Giving, \u0e2a\u0e35\u0e40\u0e02\u0e35\u0e22\u0e27\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Ethics)\n  - Card \u0e41\u0e22\u0e01\u0e41\u0e15\u0e48\u0e25\u0e30\u0e02\u0e49\u0e2d\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e44\u0e21\u0e48\u0e43\u0e2b\u0e49\u0e25\u0e32\u0e22\u0e15\u0e32\n\n---\n\n### \u0e2b\u0e21\u0e32\u0e22\u0e40\u0e2b\u0e15\u0e38\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Developer (Technical Notes)\n\n- **Logic:** \u0e2b\u0e19\u0e49\u0e32\u0e19\u0e35\u0e49\u0e04\u0e37\u0e2d \"Writer\" (\u0e08\u0e38\u0e14\u0e41\u0e01\u0e49\u0e44\u0e02\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25) \u0e2a\u0e48\u0e27\u0e19\u0e2b\u0e19\u0e49\u0e32 Dashboard \u0e04\u0e37\u0e2d \"Reader\" (\u0e08\u0e38\u0e14\u0e41\u0e2a\u0e14\u0e07\u0e1c\u0e25\u0e23\u0e27\u0e21) \u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e15\u0e49\u0e2d\u0e07 Link \u0e16\u0e36\u0e07\u0e01\u0e31\u0e19 (Global State)\n- **Performance:** \u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e2d\u0e32\u0e08\u0e08\u0e30\u0e21\u0e35\u0e40\u0e22\u0e2d\u0e30 (List rendering) \u0e15\u0e49\u0e2d\u0e07\u0e23\u0e30\u0e27\u0e31\u0e07\u0e40\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e04\u0e27\u0e32\u0e21\u0e2b\u0e19\u0e48\u0e27\u0e07\u0e40\u0e27\u0e25\u0e32\u0e40\u0e25\u0e37\u0e48\u0e2d\u0e19\u0e2b\u0e19\u0e49\u0e32\u0e08\u0e2d\n- **Data Source:** \u0e43\u0e0a\u0e49\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e08\u0e32\u0e01 `Week 1-8 CSV` \u0e15\u0e32\u0e21\u0e17\u0e35\u0e48\u0e23\u0e30\u0e1a\u0e38\u0e43\u0e19 Master Prompt\n\n---\n\n### \u0e40\u0e01\u0e13\u0e11\u0e4c\u0e01\u0e32\u0e23\u0e15\u0e23\u0e27\u0e08\u0e23\u0e31\u0e1a\u0e07\u0e32\u0e19 (Acceptance Criteria)\n\n1. \u2705 \u0e01\u0e14\u0e40\u0e25\u0e37\u0e2d\u0e01 Week 1, 2, 3 \u0e41\u0e25\u0e49\u0e27\u0e23\u0e32\u0e22\u0e01\u0e32\u0e23\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e44\u0e1b\u0e15\u0e32\u0e21\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e08\u0e23\u0e34\u0e07\n2. \u2705 \u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e01\u0e14\u0e15\u0e34\u0e4a\u0e01\u0e16\u0e39\u0e01 \u0e41\u0e25\u0e30\u0e01\u0e14\u0e0b\u0e49\u0e33\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e44\u0e14\u0e49 (Toggle)\n3. \u2705 \u0e21\u0e35\u0e1b\u0e49\u0e32\u0e22\u0e01\u0e33\u0e01\u0e31\u0e1a (Tag) \u0e1a\u0e2d\u0e01\u0e2b\u0e21\u0e27\u0e14\u0e2b\u0e21\u0e39\u0e48\u0e16\u0e39\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e15\u0e32\u0e21\u0e44\u0e1f\u0e25\u0e4c Excel\n4. \u2705 \u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e2b\u0e19\u0e49\u0e32\u0e44\u0e1b Dashboard \u0e41\u0e25\u0e49\u0e27\u0e01\u0e25\u0e31\u0e1a\u0e21\u0e32 \u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e17\u0e35\u0e48\u0e15\u0e34\u0e4a\u0e01\u0e44\u0e27\u0e49\u0e15\u0e49\u0e2d\u0e07\u0e44\u0e21\u0e48\u0e2b\u0e32\u0e22\n\n---\n\n### \ud83d\udca1 Tip \u0e01\u0e32\u0e23\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\n\nIssue \u0e19\u0e35\u0e49\u0e08\u0e30\u0e0a\u0e48\u0e27\u0e22\u0e1a\u0e2d\u0e01\u0e2b\u0e25\u0e27\u0e07\u0e1e\u0e35\u0e48\u0e27\u0e48\u0e32 **\"\u0e40\u0e23\u0e32\u0e01\u0e33\u0e25\u0e31\u0e07\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2a\u0e21\u0e38\u0e14\u0e01\u0e32\u0e23\u0e1a\u0e49\u0e32\u0e19\u0e14\u0e34\u0e08\u0e34\u0e17\u0e31\u0e25\"** \u0e43\u0e2b\u0e49\u0e42\u0e22\u0e21\u0e04\u0e23\u0e31\u0e1a \u0e2a\u0e48\u0e27\u0e19 Dashboard \u0e04\u0e37\u0e2d **\"\u0e1a\u0e2d\u0e23\u0e4c\u0e14\u0e1b\u0e23\u0e30\u0e01\u0e32\u0e28\u0e1c\u0e25\u0e2a\u0e2d\u0e1a/\u0e1c\u0e25\u0e1a\u0e38\u0e0d\"** \u0e01\u0e32\u0e23\u0e41\u0e22\u0e01 2 \u0e2b\u0e19\u0e49\u0e32\u0e19\u0e35\u0e49\u0e08\u0e30\u0e17\u0e33\u0e43\u0e2b\u0e49\u0e41\u0e2d\u0e1b\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e07\u0e48\u0e32\u0e22\u0e02\u0e36\u0e49\u0e19\u0e21\u0e32\u0e01\u0e04\u0e23\u0e31\u0e1a\u0e1a\u0e19\u0e21\u0e37\u0e2d\u0e16\u0e37\u0e2d\n```\n\n---\n\n**\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a Issue Title \u0e43\u0e2b\u0e49\u0e43\u0e2a\u0e48\u0e41\u0e22\u0e01\u0e15\u0e2d\u0e19\u0e2a\u0e23\u0e49\u0e32\u0e07 Issue:**\n```\n\ud83d\udcdd [Feature] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 \"\u0e2b\u0e49\u0e2d\u0e07\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21\" (Weekly Practices & Checklist)"
+  "title": "[Feature] Onboarding: Welcome Screen & \"Authentic Wisdom\" Introduction",
+  "number": 11,
+  "body": ""
 }
 
 GIT CONTEXT:
 COMMITS:
-a39ee62 ✨ feat(wisdom-garden): Implement interactive week navigation and read-only view
-9c73690 feat(iOS): Add interactive week selector to WeeklyPracticesView
-8c7569a refactor(wisdom-garden): move practice room CTA above checklist
-2b8441d feat(wisdom-garden): add read-only mode to PracticeChecklistView
-118ef3f feat(wisdom-garden): add network repository and scoring fields
+9ba6a38 chore(release): bump version to 0.6.0 and update changelog
+79a4146 ✨ feat(repository): Introduce dependency injection for URLSession
+010653b feat(wisdom-garden): add read-only toast notification support
+2c24233 feat: add onboarding service and view components
 
 STATS:
-CHANGELOG.md                                       | 10 +++
- README.md                                          |  6 +-
- TheMiddleWay.xcodeproj/project.pbxproj             | 12 +++-
- .../Data/NetworkWisdomGardenRepository.swift       | 74 ++++++++++++++++++++++
- .../WisdomGarden/Data/WisdomGardenData.swift       | 16 ++---
- .../WisdomGarden/Models/WisdomGardenModels.swift   | 12 ++--
- .../ViewModels/WisdomGardenViewModel.swift         | 58 +++++++++++++----
- .../Views/Components/PracticeChecklistView.swift   | 34 +++++++---
- .../WisdomGarden/Views/WeeklyPracticesView.swift   | 54 ++++++++++++++++
- .../WisdomGarden/Views/WisdomGardenView.swift      | 41 +++++++++---
- code_review.md                                     | 56 ++++++++++++++--
- 11 files changed, 319 insertions(+), 54 deletions(-)
+CHANGELOG.md                                       |  12 ++
+ README.md                                          |   2 +
+ TheMiddleWay.xcodeproj/project.pbxproj             |  20 ++-
+ .../onboarding_path.imageset/Contents.json         |  21 ++++
+ .../onboarding_path.imageset/image.png             | Bin 0 -> 31889 bytes
+ .../onboarding_practice.imageset/Contents.json     |  21 ++++
+ .../onboarding_practice.imageset/image.png         | Bin 0 -> 82036 bytes
+ .../onboarding_welcome.imageset/Contents.json      |  21 ++++
+ .../onboarding_welcome.imageset/image.png          | Bin 0 -> 20545 bytes
+ .../onboarding_wisdom.imageset/Contents.json       |  21 ++++
+ .../onboarding_wisdom.imageset/image.png           | Bin 0 -> 36364 bytes
+ .../Sources/App/Core/Models/UserProgress.swift     |  23 ----
+ .../App/Core/Services/PersistenceService.swift     |  54 --------
+ .../Sources/App/Core/Theme/AppColors.swift         |  86 -------------
+ TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift |  24 ----
+ .../Sources/App/Core/Theme/AppTypography.swift     |  66 ----------
+ .../Sources/App/Core/Theme/ThemeConfig.swift       |  17 ---
+ TheMiddleWay/Sources/App/TheMiddleWayApp.swift     |  10 +-
+ .../Sources/Core/Services/OnboardingService.swift  |  18 +++
+ .../Features/Onboarding/OnboardingView.swift       |  93 ++++++++++++++
+ .../Data/NetworkWisdomGardenRepository.swift       |  78 +++++++++---
+ .../WisdomGarden/Views/WisdomGardenView.swift      | 136 ++++++++++++---------
+ .../WisdomGardenRepositoryTests.swift              | 108 ++++++++++++++++
+ code_review.md                                     |  54 +-------
+ 24 files changed, 491 insertions(+), 394 deletions(-)
 
 KEY FILE DIFFS:
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift
+diff --git a/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift b/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
+deleted file mode 100644
+index 4486fd4..0000000
+--- a/TheMiddleWay/Sources/App/Core/Models/UserProgress.swift
++++ /dev/null
+@@ -1,23 +0,0 @@
+-import Foundation
+-
+-struct UserProgress: Codable, Equatable {
+-    var version: Int = 1
+-    var themeMode: ThemeMode = .light
+-    var language: Language = .thai
+-    var completedLessons: [String] = []
+-    var bookmarks: [String] = []
+-    var lastVisited: Date?
+-    
+-    // Default values
+-    static let defaultProgress = UserProgress()
+-}
+-
+-enum ThemeMode: String, Codable {
+-    case light
+-    case dark
+-}
+-
+-enum Language: String, Codable {
+-    case thai = "th"
+-    case english = "en"
+-}
+diff --git a/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift b/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
+deleted file mode 100644
+index 1855e5c..0000000
+--- a/TheMiddleWay/Sources/App/Core/Services/PersistenceService.swift
++++ /dev/null
+@@ -1,54 +0,0 @@
+-import Foundation
+-
+-protocol PersistenceService {
+-    func saveProgress(_ progress: UserProgress) -> Bool
+-    func loadProgress() -> UserProgress?
+-    func clearProgress() -> Bool
+-    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool
+-}
+-
+-class PersistenceServiceImpl: PersistenceService {
+-    
+-    private let userDefaults: UserDefaults
+-    private let key = "theMiddleWay.progress"
+-    
+-    init(userDefaults: UserDefaults = .standard) {
+-        self.userDefaults = userDefaults
+-    }
+-    
+-    func saveProgress(_ progress: UserProgress) -> Bool {
+-        do {
+-            let data = try JSONEncoder().encode(progress)
+-            userDefaults.set(data, forKey: key)
+-            return true
+-        } catch {
+-            print("Error saving progress: \(error)")
+-            return false
+-        }
+-    }
+-    
+-    func loadProgress() -> UserProgress? {
+-        guard let data = userDefaults.data(forKey: key) else {
+-            return nil
+-        }
+-        
+-        do {
+-            let progress = try JSONDecoder().decode(UserProgress.self, from: data)
+-            return progress
+-        } catch {
+-            print("Error loading progress: \(error)")
+-            return nil
+-        }
+-    }
+-    
+-    func clearProgress() -> Bool {
+-        userDefaults.removeObject(forKey: key)
+-        return true
+-    }
+-    
+-    func updateProgress(_ update: (inout UserProgress) -> Void) -> Bool {
+-        var current = loadProgress() ?? UserProgress.defaultProgress
+-        update(&current)
+-        return saveProgress(current)
+-    }
+-}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift b/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
+deleted file mode 100644
+index 9fcf118..0000000
+--- a/TheMiddleWay/Sources/App/Core/Theme/AppColors.swift
++++ /dev/null
+@@ -1,86 +0,0 @@
+-import SwiftUI
+-import UIKit
+-
+-/// The Middle Way - Adaptive Color Palette
+-/// Light: Bright Sky (ฟ้าสดใส)
+-/// Dark: Deep Cosmos (matching Web/Android design system)
+-enum AppColors {
+-    // MARK: - Light Palette — Bright Sky
+-    
+-    enum Light {
+-        static let background = Color(hex: "#EFF6FF")   // Sky White
+-        static let primary = Color(hex: "#2563EB")       // Bright Blue
+-        static let surface = Color(hex: "#DBEAFE")       // Sky Surface
+-        static let textPrimary = Color(hex: "#1E3A5F")   // Deep Blue
+-        static let textSecondary = Color(hex: "#64748B")  // Blue Gray
+-        static let border = Color(hex: "#BFDBFE")         // Sky Border
+-        static let success = Color(hex: "#10B981")
+-        static let warning = Color(hex: "#F59E0B")
+-        static let error = Color(hex: "#EF4444")
+-    }
+-    
+-    // MARK: - Dark Palette
+-    
+-    enum Dark {
+-        static let background = Color(hex: "#0A192F") // Navy
+-        static let primary = Color(hex: "#F59E0B") // Amber
+-        static let surface = Color(hex: "#1E293B") // Slate Dark
+-        static let textPrimary = Color(hex: "#F8FAFC") // Ivory
+-        static let textSecondary = Color(hex: "#94A3B8") // Slate Light
+-        static let border = Color(hex: "#334155")
+-        static let success = Color(hex: "#10B981")
+-        static let warning = Color(hex: "#F59E0B")
+-        static let error = Color(hex: "#EF4444")
+-    }
+-    
+-    // MARK: - Dynamic Tokens
+-    
+-    static let background = Color.dynamic(light: Light.background, dark: Dark.background)
+-    static let primary = Color.dynamic(light: Light.primary, dark: Dark.primary)
+-    static let surface = Color.dynamic(light: Light.surface, dark: Dark.surface)
+-    static let textPrimary = Color.dynamic(light: Light.textPrimary, dark: Dark.textPrimary)
+-    static let textSecondary = Color.dynamic(light: Light.textSecondary, dark: Dark.textSecondary)
+-    static let border = Color.dynamic(light: Light.border, dark: Dark.border)
+-    static let success = Color.dynamic(light: Light.success, dark: Dark.success)
+-    static let warning = Color.dynamic(light: Light.warning, dark: Dark.warning)
+-    static let error = Color.dynamic(light: Light.error, dark: Dark.error)
+-}
+-
+-// MARK: - Color Extensions
+-
+-extension Color {
+-    static func dynamic(light: Color, dark: Color) -> Color {
+-        Color(UIColor { trait in
+-            trait.userInterfaceStyle == .dark ? UIColor(dark) : UIColor(light)
+-        })
+-    }
+-    
+-    init(hex: String) {
+-        self.init(UIColor(hex: hex))
+-    }
+-}
+-
+-extension UIColor {
+-    convenience init(hex: String) {
+-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+-        var int: UInt64 = 0
+-        Scanner(string: hex).scanHexInt64(&int)
+-        let a, r, g, b: UInt64
+-        switch hex.count {
+-        case 3: // RGB (12-bit)
+-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+-        case 6: // RGB (24-bit)
+-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+-        case 8: // ARGB (32-bit)
+-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+-        default:
+-            (a, r, g, b) = (255, 0, 0, 0)
+-        }
+-        self.init(
+-            red: CGFloat(r) / 255,
+-            green: CGFloat(g) / 255,
+-            blue: CGFloat(b) / 255,
+-            alpha: CGFloat(a) / 255
+-        )
+-    }
+-}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
+deleted file mode 100644
+index 998b891..0000000
+--- a/TheMiddleWay/Sources/App/Core/Theme/AppTheme.swift
++++ /dev/null
+@@ -1,24 +0,0 @@
+-import SwiftUI
+-
+-struct ThemedNavigationStack<Content: View>: View {
+-    @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+-    private let content: Content
+-
+-    private var themeScheme: ColorScheme {
+-        ThemeConfig.colorScheme(isDarkMode: isDarkMode)
+-    }
+-    
+-    init(@ViewBuilder content: () -> Content) {
+-        self.content = content()
+-    }
+-    
+-    var body: some View {
+-        NavigationStack {
+-            content
+-                .background(AppColors.background)
+-                .toolbarBackground(AppColors.background, for: .navigationBar)
+-                .toolbarBackground(.visible, for: .navigationBar)
+-                .toolbarColorScheme(themeScheme, for: .navigationBar)
+-        }
+-    }
+-}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift b/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
+deleted file mode 100644
+index 6a72562..0000000
+--- a/TheMiddleWay/Sources/App/Core/Theme/AppTypography.swift
++++ /dev/null
+@@ -1,66 +0,0 @@
+-import SwiftUI
+-
+-/// The Middle Way - Typography System
+-/// Matching the Web design system with Playfair Display (headings) and Inter (body)
+-enum AppTypography {
+-    // MARK: - Headings (Serif style - like Playfair Display)
+-    
+-    /// Large title - 34pt Bold Serif
+-    static let largeTitle = Font.system(size: 34, weight: .bold, design: .serif)
+-    
+-    /// Title 1 - 28pt Bold Serif
+-    static let title1 = Font.system(size: 28, weight: .bold, design: .serif)
+-    
+-    /// Title 2 - 22pt Semibold Serif
+-    static let title2 = Font.system(size: 22, weight: .semibold, design: .serif)
+-    
+-    /// Title 3 - 20pt Semibold Serif
+-    static let title3 = Font.system(size: 20, weight: .semibold, design: .serif)
+-    
+-    /// Heading - Default heading style
+-    static let heading = Font.system(size: 24, weight: .bold, design: .serif)
+-    
+-    // MARK: - Body Text (Sans-serif style - like Inter)
+-    
+-    /// Body Large - 17pt Regular
+-    static let bodyLarge = Font.system(size: 17, weight: .regular, design: .default)
+-    
+-    /// Body - Standard body text - 15pt Regular
+-    static let body = Font.system(size: 15, weight: .regular, design: .default)
+-    
+-    /// Body Small - 13pt Regular
+-    static let bodySmall = Font.system(size: 13, weight: .regular, design: .default)
+-    
+-    // MARK: - UI Elements
+-    
+-    /// Button text - 16pt Semibold
+-    static let button = Font.system(size: 16, weight: .semibold, design: .default)
+-    
+-    /// Caption - 12pt Regular
+-    static let caption = Font.system(size: 12, weight: .regular, design: .default)
+-    
+-    /// Label - 14pt Medium
+-    static let label = Font.system(size: 14, weight: .medium, design: .default)
+-}
+-
+-// MARK: - View Extension for Typography
+-
+-extension View {
+-    func headingStyle() -> some View {
+-        self
+-            .font(AppTypography.heading)
+-            .foregroundStyle(AppColors.textPrimary)
+-    }
+-    
+-    func bodyStyle() -> some View {
+-        self
+-            .font(AppTypography.body)
+-            .foregroundStyle(AppColors.textPrimary)
+-    }
+-    
+-    func captionStyle() -> some View {
+-        self
+-            .font(AppTypography.caption)
+-            .foregroundStyle(AppColors.textSecondary)
+-    }
+-}
+diff --git a/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift b/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
+deleted file mode 100644
+index 5fc429d..0000000
+--- a/TheMiddleWay/Sources/App/Core/Theme/ThemeConfig.swift
++++ /dev/null
+@@ -1,17 +0,0 @@
+-import SwiftUI
+-
+-enum ThemeConfig {
+-    static let storageKey = "isDarkMode"
+-
+-    static func colorScheme(isDarkMode: Bool) -> ColorScheme {
+-        isDarkMode ? .dark : .light
+-    }
+-
+-    static func toggleIconName(isDarkMode: Bool) -> String {
+-        isDarkMode ? "sun.max.fill" : "moon.fill"
+-    }
+-
+-    static func toggleLabel(isDarkMode: Bool) -> String {
+-        isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"
+-    }
+-}
+diff --git a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
+index 7467023..7d467b1 100644
+--- a/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
++++ b/TheMiddleWay/Sources/App/TheMiddleWayApp.swift
+@@ -3,11 +3,17 @@ import SwiftUI
+ @main
+ struct TheMiddleWayApp: App {
+     @StateObject private var viewModel = MainViewModel()
++    @StateObject private var onboardingService = OnboardingService()
+ 
+     var body: some Scene {
+         WindowGroup {
+-            ContentView()
+-                .environmentObject(viewModel)
++            if onboardingService.isOnboardingCompleted {
++                ContentView()
++                    .environmentObject(viewModel)
++            } else {
++                OnboardingView()
++                    .environmentObject(onboardingService)
++            }
+         }
+     }
+ }
+diff --git a/TheMiddleWay/Sources/Core/Services/OnboardingService.swift b/TheMiddleWay/Sources/Core/Services/OnboardingService.swift
 new file mode 100644
-index 0000000..88726b1
+index 0000000..55af77a
 --- /dev/null
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift
-@@ -0,0 +1,74 @@
-+
-+import Foundation
++++ b/TheMiddleWay/Sources/Core/Services/OnboardingService.swift
+@@ -0,0 +1,18 @@
++import SwiftUI
 +import Combine
 +
-+protocol WisdomGardenRepository {
-+    func getWeeklyData(week: Int) async throws -> WeeklyData
-+    func togglePractice(id: String, isCompleted: Bool) async throws
-+}
-+
-+class NetworkWisdomGardenRepository: WisdomGardenRepository {
-+    // For Simulator, localhost works. For device, need IP.
-+    // Ensure "App Transport Security Settings" allows Arbitrary Loads or configure localhost.
-+    private let baseURL = "http://localhost:8080/api/v1/wisdom-garden"
++class OnboardingService: ObservableObject {
++    @AppStorage("onboarding_completed") var isOnboardingCompleted: Bool = false
 +    
-+    func getWeeklyData(week: Int) async throws -> WeeklyData {
-+        guard let url = URL(string: "\(baseURL)/weeks/\(week)") else {
-+            throw URLError(.badURL)
++    func completeOnboarding() {
++        withAnimation {
++            isOnboardingCompleted = true
 +        }
-+        
-+        print("🌐 [Net] Fetching Week: \(week) -> \(url.absoluteString)")
-+        
-+        var request = URLRequest(url: url)
-+        request.httpMethod = "GET"
-+        
-+        let (data, response) = try await URLSession.shared.data(for: request)
-+        
-+        guard let httpResponse = response as? HTTPURLResponse else {
-+             print("❌ [Net] Fetch Week: Invalid Response")
-+             throw URLError(.badServerResponse)
-+        }
-+        
-+        print("✅ [Net] Fetch Week: Status \(httpResponse.statusCode)")
-+        
-+        if httpResponse.statusCode != 200 {
-+             print("❌ [Net] Fetch Week: Error \(httpResponse.statusCode)")
-+             throw URLError(.badServerResponse)
-+        }
-+        
-+        let decoder = JSONDecoder()
-+        // decoder.keyDecodingStrategy = .convertFromSnakeCase // Backend uses camelCase for most, except created_at
-+        
-+        let result = try decoder.decode(WeeklyData.self, from: data)
-+        print("✅ [Net] Fetch Week: Success (Decoded items: \(result.categories.count) categories)")
-+        return result
 +    }
 +    
-+    func togglePractice(id: String, isCompleted: Bool) async throws {
-+        guard let url = URL(string: "\(baseURL)/practices/\(id)/toggle") else {
-+            throw URLError(.badURL)
-+        }
-+        
-+        print("🌐 [Net] Toggle Item: \(id) (isCompleted: \(isCompleted)) -> \(url.absoluteString)")
-+        
-+        var request = URLRequest(url: url)
-+        request.httpMethod = "POST"
-+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-+        
-+        let body: [String: Bool] = ["isCompleted": isCompleted]
-+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
-+        
-+        let (_, response) = try await URLSession.shared.data(for: request)
-+        
-+        guard let httpResponse = response as? HTTPURLResponse else {
-+             print("❌ [Net] Toggle: Invalid Response")
-+             throw URLError(.badServerResponse)
-+        }
-+        
-+        print("✅ [Net] Toggle: Status \(httpResponse.statusCode)")
-+        
-+        if httpResponse.statusCode != 200 {
-+            throw URLError(.badServerResponse)
++    func resetOnboarding() {
++         withAnimation {
++            isOnboardingCompleted = false
 +        }
 +    }
 +}
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Data/WisdomGardenData.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Data/WisdomGardenData.swift
-index 8683262..a347f5f 100644
---- a/TheMiddleWay/Sources/Features/WisdomGarden/Data/WisdomGardenData.swift
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Data/WisdomGardenData.swift
-@@ -17,7 +17,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w1_i3", title: "Spoke kind words", points: 10, isCompleted: false),
-                 PracticeItem(id: "w1_i4", title: "Practiced forgiveness", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 2: Morality (Sila)
-         WeeklyData(weekNumber: 2, categories: [
-             PracticeCategory(id: "cat_sila", title: "Morality (Sila)", items: [
-@@ -26,7 +26,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w2_i3", title: "Refrained from sexual misconduct", points: 10, isCompleted: false),
-                 PracticeItem(id: "w2_i4", title: "Refrained from false speech", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 3: Renunciation (Nekkhamma)
-         WeeklyData(weekNumber: 3, categories: [
-             PracticeCategory(id: "cat_nekk", title: "Renunciation", items: [
-@@ -35,7 +35,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w3_i3", title: "Reduced unnecessary consumption", points: 10, isCompleted: false),
-                 PracticeItem(id: "w3_i4", title: "Spent time in quiet reflection", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 4: Wisdom (Panna)
-         WeeklyData(weekNumber: 4, categories: [
-             PracticeCategory(id: "cat_panna", title: "Wisdom", items: [
-@@ -44,7 +44,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w4_i3", title: "Observed cause and effect in daily life", points: 10, isCompleted: false),
-                 PracticeItem(id: "w4_i4", title: "Discussed Dhamma with others", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 5: Energy (Viriya)
-         WeeklyData(weekNumber: 5, categories: [
-             PracticeCategory(id: "cat_viriya", title: "Energy", items: [
-@@ -53,7 +53,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w5_i3", title: "Developed wholesome states", points: 10, isCompleted: false),
-                 PracticeItem(id: "w5_i4", title: "Maintained wholesome states", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 6: Patience (Khanti)
-         WeeklyData(weekNumber: 6, categories: [
-             PracticeCategory(id: "cat_khanti", title: "Patience", items: [
-@@ -62,7 +62,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w6_i3", title: "Waited calmly when delayed", points: 10, isCompleted: false),
-                 PracticeItem(id: "w6_i4", title: "Forgave myself for shortcomings", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 7: Truthfulness (Sacca)
-         WeeklyData(weekNumber: 7, categories: [
-             PracticeCategory(id: "cat_sacca", title: "Truthfulness", items: [
-@@ -71,7 +71,7 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w7_i3", title: "Was honest about my feelings and intentions", points: 10, isCompleted: false),
-                 PracticeItem(id: "w7_i4", title: "Admitted mistakes openly", points: 10, isCompleted: false)
-             ])
--        ]),
-+        ], maxScore: 40, currentScore: 0),
-         // Week 8: Determination (Adhitthana)
-         WeeklyData(weekNumber: 8, categories: [
-             PracticeCategory(id: "cat_adhit", title: "Determination", items: [
-@@ -80,6 +80,6 @@ struct WisdomGardenData {
-                 PracticeItem(id: "w8_i3", title: "Reniewed commitment to the path", points: 10, isCompleted: false),
-                 PracticeItem(id: "w8_i4", title: "Overcame an obstacle with resolve", points: 10, isCompleted: false)
-             ])
--        ])
-+        ], maxScore: 40, currentScore: 0)
-     ]
- }
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Models/WisdomGardenModels.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Models/WisdomGardenModels.swift
-index 5445b7e..7cd64b4 100644
---- a/TheMiddleWay/Sources/Features/WisdomGarden/Models/WisdomGardenModels.swift
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Models/WisdomGardenModels.swift
-@@ -24,13 +24,11 @@ struct WeeklyData: Identifiable, Codable {
-     let weekNumber: Int
-     var categories: [PracticeCategory]
-     
--    // Computed max score
--    var maxScore: Int {
--        categories.flatMap { $0.items }.reduce(0) { $0 + $1.points }
--    }
-+    // Computed max score (can be updated from server or computed locally)
-+    var maxScore: Int
-     
-     // Computed current score
--    var currentScore: Int {
--        categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
--    }
-+    var currentScore: Int
-+    
-+    // CodingKeys if needed, but names match JSON
- }
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/ViewModels/WisdomGardenViewModel.swift b/TheMiddleWay/Sources/Features/WisdomGarden/ViewModels/WisdomGardenViewModel.swift
-index f450b77..479b81c 100644
---- a/TheMiddleWay/Sources/Features/WisdomGarden/ViewModels/WisdomGardenViewModel.swift
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/ViewModels/WisdomGardenViewModel.swift
-@@ -20,15 +20,30 @@ class WisdomGardenViewModel: ObservableObject {
-         currentWeekData?.maxScore ?? 1
-     }
-     
-+    private let repository: WisdomGardenRepository
-+    
-     // MARK: - Initialization
--    init() {
--        loadInitialData()
-+    init(repository: WisdomGardenRepository = NetworkWisdomGardenRepository()) {
-+        self.repository = repository
-+        
-+        // Load initial data
-+        Task {
-+            await loadWeeklyData(for: selectedWeek)
-+        }
-     }
-     
--    private func loadInitialData() {
--        // Load mock data into the map
--        for data in WisdomGardenData.weeklyData {
--            weeklyDataMap[data.weekNumber] = data
-+    @MainActor
-+    func loadWeeklyData(for week: Int, forceRefresh: Bool = false) async {
-+        // Return if data for the selected week is already cached and we're not forcing a refresh.
-+        if !forceRefresh && weeklyDataMap[week] != nil {
-+            return
-+        }
-+
-+        do {
-+            let data = try await repository.getWeeklyData(week: week)
-+            weeklyDataMap[week] = data
-+        } catch {
-+            print("❌ [VM] Error fetching data for week \(week): \(error)")
-         }
-     }
-     
-@@ -37,21 +52,42 @@ class WisdomGardenViewModel: ObservableObject {
-     func selectWeek(_ week: Int) {
-         guard week >= 1 && week <= 8 else { return }
-         selectedWeek = week
-+        
-+        Task {
-+            await loadWeeklyData(for: week)
-+        }
-     }
-     
-     func toggleItem(itemId: String) {
-         guard var currentData = weeklyDataMap[selectedWeek] else { return }
-         
--        // Find and toggle the item
--        // Note: Using nested loops for simplicity in MVP, could be optimized with flat map or ID lookup
-+        // Optimistic Update
-         for (catIndex, category) in currentData.categories.enumerated() {
-             if let itemIndex = category.items.firstIndex(where: { $0.id == itemId }) {
-                 // Toggle completion
--                currentData.categories[catIndex].items[itemIndex].isCompleted.toggle()
-+                var item = currentData.categories[catIndex].items[itemIndex]
-+                item.isCompleted.toggle()
-+                currentData.categories[catIndex].items[itemIndex] = item
-                 
--                // Update the source of truth
-+                // Recalculate score locally for UI
-+                let newScore = currentData.categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
-+                currentData.currentScore = newScore
-+                
-+                // Update the source of truth locally
-                 weeklyDataMap[selectedWeek] = currentData
--                return // Found and updated
-+                
-+                // Network Call
-+                Task {
-+                    do {
-+                        try await repository.togglePractice(id: itemId, isCompleted: item.isCompleted)
-+                        // Success: Keep optimistic state
-+                    } catch {
-+                        print("Error toggling item: \(error)")
-+                        // Revert on failure (reload data)
-+                        await loadWeeklyData(for: selectedWeek, forceRefresh: true)
-+                    }
-+                }
-+                return 
-             }
-         }
-     }
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Views/Components/PracticeChecklistView.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Views/Components/PracticeChecklistView.swift
-index 3e9aaeb..9e78160 100644
---- a/TheMiddleWay/Sources/Features/WisdomGarden/Views/Components/PracticeChecklistView.swift
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Views/Components/PracticeChecklistView.swift
-@@ -4,6 +4,8 @@ import SwiftUI
- struct PracticeChecklistView: View {
-     let categories: [PracticeCategory]
-     let onCheckItem: (String) -> Void
-+    var readOnly: Bool = false
-+    var onWarnReadOnly: () -> Void = {}
-     
-     // NFR-3: User Experience - Smooth, interactive checklist
-     
-@@ -18,12 +20,16 @@ struct PracticeChecklistView: View {
-                     
-                     ForEach(category.items) { item in
-                         Button(action: {
--                            // Haptic Feedback for good UX
--                            let generator = UIImpactFeedbackGenerator(style: .medium)
--                            generator.impactOccurred()
--                            
--                            withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
--                                onCheckItem(item.id)
-+                            if readOnly {
-+                                onWarnReadOnly()
-+                            } else {
-+                                // Haptic Feedback for good UX
-+                                let generator = UIImpactFeedbackGenerator(style: .medium)
-+                                generator.impactOccurred()
-+                                
-+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
-+                                    onCheckItem(item.id)
-+                                }
-                             }
-                         }) {
-                             HStack(alignment: .top, spacing: 12) {
-@@ -31,7 +37,7 @@ struct PracticeChecklistView: View {
-                                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
-                                     .resizable()
-                                     .frame(width: 24, height: 24)
--                                    .foregroundColor(item.isCompleted ? AppColors.primary : AppColors.textSecondary)
-+                                    .foregroundColor(item.isCompleted ? (readOnly ? AppColors.primary.opacity(0.6) : AppColors.primary) : AppColors.textSecondary)
-                                     .scaleEffect(item.isCompleted ? 1.1 : 1.0)
-                                     .animation(.bouncy, value: item.isCompleted)
-                                 
-@@ -41,19 +47,29 @@ struct PracticeChecklistView: View {
-                                         .foregroundColor(item.isCompleted ? AppColors.textSecondary : AppColors.textPrimary)
-                                         .strikethrough(item.isCompleted) // Visual feedback for completion
-                                         .multilineTextAlignment(.leading)
-+                                        .opacity(readOnly ? 0.8 : 1.0)
-                                     
-                                     Text("+ \(item.points) pts")
-                                         .font(.caption)
--                                        .foregroundColor(item.isCompleted ? AppColors.primary : AppColors.textSecondary)
-+                                        .foregroundColor(item.isCompleted ? (readOnly ? AppColors.primary.opacity(0.6) : AppColors.primary) : AppColors.textSecondary)
-                                 }
-                                 
-                                 Spacer()
-+                                
-+                                if item.isCompleted {
-+                                    // Optional checkmark indicator on the right for extra clarity
-+                                }
-                             }
-                             .padding()
--                            .background(AppColors.surface) // Use consistent card background
-+                            .background(AppColors.surface.opacity(readOnly ? 0.6 : 1.0)) // Slightly dimmed if read-only
-                             .cornerRadius(12)
-+                            .overlay(
-+                                RoundedRectangle(cornerRadius: 12)
-+                                    .stroke(AppColors.textSecondary.opacity(0.1), lineWidth: 1)
-+                            )
-                         }
-                         .buttonStyle(PlainButtonStyle()) // Remove default button highlighting for cleaner look
-+                        .disabled(false) // Always enabled to capture tap for warning
-                     }
-                 }
-             }
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Views/WeeklyPracticesView.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Views/WeeklyPracticesView.swift
+diff --git a/TheMiddleWay/Sources/Features/Onboarding/OnboardingView.swift b/TheMiddleWay/Sources/Features/Onboarding/OnboardingView.swift
 new file mode 100644
-index 0000000..c10bc4e
+index 0000000..7bf2547
 --- /dev/null
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Views/WeeklyPracticesView.swift
-@@ -0,0 +1,54 @@
-+
++++ b/TheMiddleWay/Sources/Features/Onboarding/OnboardingView.swift
+@@ -0,0 +1,93 @@
 +import SwiftUI
 +
-+struct WeeklyPracticesView: View {
-+    @ObservedObject var viewModel: WisdomGardenViewModel
++struct OnboardingSlide: Identifiable {
++    let id = UUID()
++    let title: String
++    let description: String
++    let imageName: String
++}
++
++struct OnboardingView: View {
++    @EnvironmentObject var onboardingService: OnboardingService
++    @State private var currentPage = 0
++    
++    let slides = [
++        OnboardingSlide(title: "Welcome to The Middle Way", description: "Find balance and harmony in your daily life.", imageName: "onboarding_welcome"),
++        OnboardingSlide(title: "Authentic Wisdom", description: "It's more than just quotes. It's timeless knowledge, verified and applied to modern life.", imageName: "onboarding_wisdom"),
++        OnboardingSlide(title: "Discover Your Path", description: "Explore curated insights from philosophy, science, and art to find clarity.", imageName: "onboarding_path"),
++         OnboardingSlide(title: "A Daily Practice", description: "Engage with one profound idea each day to build a more meaningful life.", imageName: "onboarding_practice")
++    ]
 +    
 +    var body: some View {
-+        ScrollView {
-+            VStack(spacing: 24) {
-+                // Header/Title context
-+                // Week Selector & Score
-+                VStack(spacing: 16) {
-+                    WeekSelectorView(selectedWeek: $viewModel.selectedWeek)
-+                        .onChange(of: viewModel.selectedWeek) { newWeek in
-+                            Task {
-+                                await viewModel.loadWeeklyData(for: newWeek)
-+                            }
-+                        }
-+                    
-+                    if let data = viewModel.currentWeekData {
-+                         Text("\(data.currentScore) / \(data.maxScore) Points")
-+                             .font(.title2)
-+                             .bold()
-+                             .foregroundColor(AppColors.primary)
++        VStack {
++            HStack {
++                Spacer()
++                if currentPage < slides.count - 1 {
++                    Button("Skip") {
++                        onboardingService.completeOnboarding()
 +                    }
-+                }
-+                
-+                Divider()
-+                    .padding(.horizontal)
-+                
-+                if let data = viewModel.currentWeekData {
-+                    PracticeChecklistView(
-+                        categories: data.categories,
-+                        onCheckItem: { id in
-+                            viewModel.toggleItem(itemId: id)
-+                        },
-+                        readOnly: false // Interactive!
-+                    )
++                    .foregroundColor(.secondary)
 +                } else {
-+                    ProgressView()
++                     // Keep layout stable
++                     Text("").frame(height: 20)
 +                }
-+                
-+                Spacer(minLength: 40)
 +            }
++            .padding()
++            
++            TabView(selection: $currentPage) {
++                ForEach(0..<slides.count, id: \.self) { index in
++                    OnboardingPageView(slide: slides[index])
++                        .tag(index)
++                }
++            }
++            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
++            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
++            
++            Button(action: {
++                if currentPage < slides.count - 1 {
++                    withAnimation {
++                        currentPage += 1
++                    }
++                } else {
++                    onboardingService.completeOnboarding()
++                }
++            }) {
++                Text(currentPage == slides.count - 1 ? "Begin Journey" : "Next")
++                    .font(.headline)
++                    .frame(maxWidth: .infinity)
++                    .padding()
++                    .background(Color.accentColor)
++                    .foregroundColor(.white)
++                    .cornerRadius(12)
++            }
++            .padding()
 +        }
-+        .navigationTitle("Practice Room")
-+        .navigationBarTitleDisplayMode(.inline)
-+        .background(AppColors.background)
++        .background(Color(UIColor.systemBackground))
 +    }
 +}
 +
-+#Preview {
-+    WeeklyPracticesView(viewModel: WisdomGardenViewModel()) // Mock VM
++struct OnboardingPageView: View {
++    let slide: OnboardingSlide
++    
++    var body: some View {
++        VStack(spacing: 20) {
++            Image(slide.imageName)
++                .resizable()
++                .scaledToFit()
++                .frame(maxHeight: 300)
++                .padding()
++                
++            Text(slide.title)
++                .font(.title)
++                .fontWeight(.bold)
++                .multilineTextAlignment(.center)
++                
++            Text(slide.description)
++                .font(.body)
++                .multilineTextAlignment(.center)
++                .foregroundColor(.secondary)
++                .padding(.horizontal)
++        }
++        .padding()
++    }
 +}
-diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Views/WisdomGardenView.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Views/WisdomGardenView.swift
-index 56236ab..80bd59c 100644
---- a/TheMiddleWay/Sources/Features/WisdomGarden/Views/WisdomGardenView.swift
-+++ b/TheMiddleWay/Sources/Features/WisdomGarden/Views/WisdomGardenView.swift
-@@ -15,8 +15,10 @@ struct WisdomGardenView: View {
-                     WeekSelectorView(selectedWeek: $viewModel.selectedWeek)
-                         .padding(.top, 8)
-                         .onChange(of: viewModel.selectedWeek) { newWeek in
--                            // Logic handles reactive update via currentWeekData
--                            print("Wee
+diff --git a/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift b/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift
+index 88726b1..446b8ca 100644
+--- a/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift
++++ b/TheMiddleWay/Sources/Features/WisdomGarden/Data/NetworkWisdomGardenRepository.swift
+@@ -11,6 +11,11 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
+     // For Simulator, localhost works. For device, need IP.
+     // Ensure "App Transport Security Settings" allows Arbitrary Loads or configure localhost.
+     private let baseURL = "http://localhost:8080/api/v1/wisdom-garden"
++    private let session: URLSession
++    
++    init(session: URLSession = .shared) {
++        self.session = session
++    }
+     
+     func getWeeklyData(week: Int) async throws -> WeeklyData {
+         guard let url = URL(string: "\(baseURL)/weeks/\(week)") else {
+@@ -22,26 +27,65 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
+         var request = URLRequest(url: url)
+         request.httpMethod = "GET"
+         
+-        let (data, response) = try await URLSession.shared.data(for: request)
+-        
+-        guard let httpResponse = response as? HTTPURLResponse else {
+-             print("❌ [Net] Fetch Week: Invalid Response")
+-             throw URLError(.badServerResponse)
++        do {
++            let (data, response) = try await session.data(for: request)
++            
++            guard let httpResponse = response as? HTTPURLResponse else {
++                 print("❌ [Net] Fetch Week: Invalid Response")
++                 throw URLError(.badServerResponse)
++            }
++            
++            print("✅ [Net] Fetch Week: Status \(httpResponse.statusCode)")
++            
++            if httpResponse.statusCode != 200 {
++                 print("❌ [Net] Fetch Week: Error \(httpResponse.statusCode)")
++                 throw URLError(.badServerResponse)
++            }
++            
++            let decoder = JSONDecoder()
++            // decoder.keyDecodingStrategy = .convertFromSnakeCase // Backend uses camelCase for most, except created_at
++            
++            let result = try decoder.decode(WeeklyData.self, from: data)
++            print("✅ [Net] Fetch Week: Success (Decoded items: \(result.categories.count) categories)")
++            return result
++        } catch {
++            print("⚠️ [Net] Fetch Week Failed: \(error). Using Fallback Data.")
++            return getFallbackData(week: week)
+         }
++    }
++    
++    private func getFallbackData(week: Int) -> WeeklyData {
++        let categories = [
++             PracticeCategory(
++                id: "mindfulness",
++                title: "Practicing Mindfulness",
++                items: [
++                    PracticeItem(id: "m1", title: "Morning Meditation (15 mins)", points: 10, isCompleted: false),
++                    PracticeItem(id: "m2", title: "Mindful Eating", points: 5, isCompleted: false),
++                    PracticeItem(id: "m3", title: "Evening Reflection", points: 5, isCompleted: false)
++                ]
++            ),
++             PracticeCategory(
++                id: "precepts",
++                title: "Keeping Precepts",
++                items: [
++                    PracticeItem(id: "p1", title: "Refrain from killing", points: 5, isCompleted: false),
++                    PracticeItem(id: "p2", title: "Refrain from stealing", points: 5, isCompleted: false),
++                    PracticeItem(id: "p3", title: "Refrain from lying", points: 5, isCompleted: false)
++                ]
++            )
++        ]
+         
+-        print("✅ [Net] Fetch Week: Status \(httpResponse.statusCode)")
+-        
+-        if httpResponse.statusCode != 200 {
+-             print("❌ [Net] Fetch Week: Error \(httpResponse.statusCode)")
+-             throw URLError(.badServerResponse)
++        let calculatedMaxScore = categories.reduce(0) { catSum, cat in
++            catSum + cat.items.reduce(0) { itemSum, item in itemSum + item
 ... (Diff truncated for size) ...
+
 
 PR TEMPLATE:
 
