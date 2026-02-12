@@ -11,6 +11,11 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
     // For Simulator, localhost works. For device, need IP.
     // Ensure "App Transport Security Settings" allows Arbitrary Loads or configure localhost.
     private let baseURL = "http://localhost:8080/api/v1/wisdom-garden"
+    private let session: URLSession
+    
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
     
     func getWeeklyData(week: Int) async throws -> WeeklyData {
         guard let url = URL(string: "\(baseURL)/weeks/\(week)") else {
@@ -23,7 +28,7 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         request.httpMethod = "GET"
         
         do {
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await session.data(for: request)
             
             guard let httpResponse = response as? HTTPURLResponse else {
                  print("❌ [Net] Fetch Week: Invalid Response")
@@ -97,7 +102,7 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         let body: [String: Bool] = ["isCompleted": isCompleted]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         
-        let (_, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await session.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
              print("❌ [Net] Toggle: Invalid Response")
