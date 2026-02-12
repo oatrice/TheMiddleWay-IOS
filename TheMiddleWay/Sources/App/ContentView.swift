@@ -11,12 +11,11 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             ThemedNavigationStack {
-                HomeView()
-                    .navigationTitle("The Middle Way")
-                    .navigationBarTitleDisplayMode(.large)
+                WisdomGardenView()
+                    // .navigationTitle handling matches WisdomGardenView's internal setting
             }
             .tabItem {
-                Label("Home", systemImage: "house.fill")
+                Label("Garden", systemImage: "leaf.fill")
             }
             .tag(Tab.home)
             

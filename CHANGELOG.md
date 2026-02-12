@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.4.0] - 2026-02-12
+
+### Added
+- **Wisdom Garden Feature (Codebase):** Implemented the core components for the Wisdom Garden Dashboard.
+  - **Models:** defined `PracticeItem`, `PracticeCategory`, and `WeeklyData` structures.
+  - **Data:** Created `WisdomGardenData` with 8 weeks of initial mock data.
+  - **ViewModel:** Implemented `WisdomGardenViewModel` logic for week selection and practice tracking.
+  - **Views:** Built `WisdomGardenView` along with `WeekSelectorView`, `WisdomTreeVisualizationView`, and `PracticeChecklistView`.
+  *(Note: Files are created in `Sources/Features/WisdomGarden` but require manual addition to the Xcode project references).*
+
+### Fixed
+- **CI/CD Workflow:** Enhanced `auto-tag.yml` to correctly strip double quotes from `MARKETING_VERSION` and strictly validate project file uniqueness.
+
+### Changed
+- Internal improvements to the continuous integration (CI) workflow for more reliable automated version tagging.
+
 ## [0.3.1] - 2026-02-11
 
 ### Changed
