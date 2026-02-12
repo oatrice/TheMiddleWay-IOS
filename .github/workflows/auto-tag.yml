@@ -22,14 +22,26 @@ jobs:
       - name: Extract and validate version from project.pbxproj
         id: version
         run: |
-          PBXPROJ=$(find . -name "project.pbxproj" | head -1)
-          if [ -z "$PBXPROJ" ]; then
+          # Check for multiple project files to avoid ambiguity
+          PROJECT_FILES=$(find . -name "project.pbxproj")
+          FILE_COUNT=$(echo "$PROJECT_FILES" | wc -l | tr -d '[:space:]')
+          
+          if [ "$FILE_COUNT" -gt 1 ]; then
+             echo "::error::Found multiple 'project.pbxproj' files. This is ambiguous."
+             echo "$PROJECT_FILES"
+             exit 1
+          fi
+          
+          if [ -z "$PROJECT_FILES" ]; then
             echo "::error::project.pbxproj not found."
             exit 1
           fi
 
-          # Extract all marketing versions, clean them up per-line, and find the unique ones
-          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sort -u)
+          PBXPROJ="$PROJECT_FILES"
+          echo "Using project file: $PBXPROJ"
+
+          # Extract MARKETING_VERSION, clean whitespace, remove semicolons, and remove double quotes
+          UNIQUE_VERSIONS=$(grep 'MARKETING_VERSION' "$PBXPROJ" | sed 's/.*= *\(.*\);/\1/' | tr -d '"' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | sort -u)
           
           # Count the number of unique, non-empty version strings found
           NUM_UNIQUE=$(echo "$UNIQUE_VERSIONS" | grep -c .)
