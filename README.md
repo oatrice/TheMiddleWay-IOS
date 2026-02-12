@@ -26,8 +26,10 @@ TheMiddleWay/
 │   │   │   └── ThemeConfig.swift
 │   │   └── Navigation/
 │   └── Features/               # Feature modules
-│       └── Home/
-│           └── HomeView.swift
+│       ├── Home/
+│       │   └── HomeView.swift
+│       └── WisdomGarden/
+│           └── WisdomGardenView.swift
 └── Resources/
     └── Assets.xcassets/
 ```

@@ -24,13 +24,11 @@ struct WeeklyData: Identifiable, Codable {
     let weekNumber: Int
     var categories: [PracticeCategory]
     
-    // Computed max score
-    var maxScore: Int {
-        categories.flatMap { $0.items }.reduce(0) { $0 + $1.points }
-    }
+    // Computed max score (can be updated from server or computed locally)
+    var maxScore: Int
     
     // Computed current score
-    var currentScore: Int {
-        categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
-    }
+    var currentScore: Int
+    
+    // CodingKeys if needed, but names match JSON
 }

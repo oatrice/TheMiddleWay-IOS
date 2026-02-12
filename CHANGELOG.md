@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.5.0] - 2026-02-12
+
+### Added
+- **Interactive Week Navigation:** You can now tap on the week selector in the Wisdom Garden to easily navigate and view practices from different weeks.
+- **Read-Only Practice View:** Past and future weeks' practice checklists are now displayed in a read-only mode, preventing accidental changes while allowing you to review your journey.
+- **Scoring & Network Foundation:** Added the underlying data structures for practice scoring and a network repository to prepare for future server-side integration.
+
+### Changed
+- **Improved Layout:** The "Enter Practice Room" button in the Wisdom Garden has been moved above the checklist for better visibility and easier access.
+
 ## [0.4.0] - 2026-02-12
 
 ### Added

@@ -15,8 +15,10 @@ struct WisdomGardenView: View {
                     WeekSelectorView(selectedWeek: $viewModel.selectedWeek)
                         .padding(.top, 8)
                         .onChange(of: viewModel.selectedWeek) { newWeek in
-                            // Logic handles reactive update via currentWeekData
-                            print("Week switched to: \(newWeek)")
+                            // Trigger data reload when week changes
+                            Task {
+                                await viewModel.loadWeeklyData(for: newWeek)
+                            }
                         }
                     
                     if let data = viewModel.currentWeekData {
@@ -30,14 +32,37 @@ struct WisdomGardenView: View {
                         // Divider for visual separation
                         Divider()
                             .padding(.horizontal)
+                            .padding(.bottom, 8)
+
+                        // Navigation to Practice Room (Moved up to match Android/Web)
+                        NavigationLink(destination: WeeklyPracticesView(viewModel: viewModel)) {
+                            HStack {
+                                Text("Go to Practice Room")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                Image(systemName: "arrow.right")
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(AppColors.primary)
+                            .cornerRadius(12)
+                            .shadow(radius: 2)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 16)
                         
-                        // FR-3: Checklist
+                        // FR-3: Checklist (Read-Only Dashboard)
                         PracticeChecklistView(
                             categories: data.categories,
-                            onCheckItem: { id in
-                                viewModel.toggleItem(itemId: id)
+                            onCheckItem: { _ in }, // No-op in read-only
+                            readOnly: true,
+                            onWarnReadOnly: {
+                                // Simple tactile feedback or toast could go here
+                                // For MVP, the button above is the clear CTA
                             }
                         )
+                        .opacity(0.8) // Visual cue
                     } else {
                         // Fallback/Loading state
                         ProgressView("Loading Garden...")
@@ -51,10 +76,6 @@ struct WisdomGardenView: View {
             .navigationBarTitleDisplayMode(.large)
             // .toolbar { ... Language Toggle, Settings, etc ... }
             .background(AppColors.background) // Use custom theme background
-            .overlay(alignment: .bottom) {
-                // Floating Action Button or subtle gradient could go here
-                // For now, keep clean.
-            }
         }
     }
 }
@@ -62,3 +83,5 @@ struct WisdomGardenView: View {
 #Preview {
     WisdomGardenView()
 }
+
+
