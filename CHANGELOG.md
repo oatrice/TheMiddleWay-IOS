@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.6.0] - 2026-02-12
+
+### Added
+- **New User Onboarding:** A brand new, multi-screen onboarding flow has been introduced to welcome users. It guides you through the core concepts of the app: Welcome, Wisdom, Practice, and The Path.
+- **Read-Only Interaction Feedback:** When trying to interact with a locked practice in the Wisdom Garden, a helpful toast notification now appears to explain that it's in read-only mode.
+
+### Changed
+- **Improved Network Layer:** The underlying networking code has been refactored for better testability and stability, ensuring a more reliable data-fetching experience.
+
+### Removed
+- **Legacy Code:** Removed several unused theme, color, and persistence service files to streamline the codebase.
+
 ## [0.5.0] - 2026-02-12
 
 ### Added

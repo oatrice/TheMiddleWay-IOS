@@ -26,6 +26,8 @@ TheMiddleWay/
 │   │   │   └── ThemeConfig.swift
 │   │   └── Navigation/
 │   └── Features/               # Feature modules
+│       ├── Onboarding/
+│       │   └── OnboardingView.swift
 │       ├── Home/
 │       │   └── HomeView.swift
 │       └── WisdomGarden/
