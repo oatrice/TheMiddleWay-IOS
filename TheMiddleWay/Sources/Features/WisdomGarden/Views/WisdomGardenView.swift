@@ -32,6 +32,25 @@ struct WisdomGardenView: View {
                         // Divider for visual separation
                         Divider()
                             .padding(.horizontal)
+                            .padding(.bottom, 8)
+
+                        // Navigation to Practice Room (Moved up to match Android/Web)
+                        NavigationLink(destination: WeeklyPracticesView(viewModel: viewModel)) {
+                            HStack {
+                                Text("Go to Practice Room")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                Image(systemName: "arrow.right")
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(AppColors.primary)
+                            .cornerRadius(12)
+                            .shadow(radius: 2)
+                        }
+                        .padding(.horizontal)
+                        .padding(.bottom, 16)
                         
                         // FR-3: Checklist (Read-Only Dashboard)
                         PracticeChecklistView(
@@ -40,23 +59,10 @@ struct WisdomGardenView: View {
                             readOnly: true,
                             onWarnReadOnly: {
                                 // Simple tactile feedback or toast could go here
-                                // For MVP, the button below is the clear CTA
+                                // For MVP, the button above is the clear CTA
                             }
                         )
                         .opacity(0.8) // Visual cue
-                        
-                        // Navigation to Practice Room
-                        NavigationLink(destination: WeeklyPracticesView(viewModel: viewModel)) {
-                            Text("Go to Practice Room")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(AppColors.primary)
-                                .cornerRadius(12)
-                        }
-                        .padding(.horizontal)
-                        .padding(.bottom, 24)
                     } else {
                         // Fallback/Loading state
                         ProgressView("Loading Garden...")
