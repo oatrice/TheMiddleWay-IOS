@@ -50,7 +50,7 @@ struct WisdomGardenView: View {
             .navigationTitle("Wisdom Garden")
             .navigationBarTitleDisplayMode(.large)
             // .toolbar { ... Language Toggle, Settings, etc ... }
-            .background(Color(.systemGroupedBackground)) // Subtle gray background for "App" feel
+            .background(AppColors.background) // Use custom theme background
             .overlay(alignment: .bottom) {
                 // Floating Action Button or subtle gradient could go here
                 // For now, keep clean.

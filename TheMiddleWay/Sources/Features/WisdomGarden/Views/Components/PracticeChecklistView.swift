@@ -13,7 +13,7 @@ struct PracticeChecklistView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text(category.title)
                         .font(.headline)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(AppColors.textSecondary)
                         .padding(.vertical, 8)
                     
                     ForEach(category.items) { item in
@@ -31,26 +31,26 @@ struct PracticeChecklistView: View {
                                 Image(systemName: item.isCompleted ? "checkmark.circle.fill" : "circle")
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                    .foregroundColor(item.isCompleted ? .green : .gray)
+                                    .foregroundColor(item.isCompleted ? AppColors.primary : AppColors.textSecondary)
                                     .scaleEffect(item.isCompleted ? 1.1 : 1.0)
                                     .animation(.bouncy, value: item.isCompleted)
                                 
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(item.title)
                                         .font(.body)
-                                        .foregroundColor(item.isCompleted ? .secondary : .primary)
+                                        .foregroundColor(item.isCompleted ? AppColors.textSecondary : AppColors.textPrimary)
                                         .strikethrough(item.isCompleted) // Visual feedback for completion
                                         .multilineTextAlignment(.leading)
                                     
                                     Text("+ \(item.points) pts")
                                         .font(.caption)
-                                        .foregroundColor(item.isCompleted ? .green : .gray)
+                                        .foregroundColor(item.isCompleted ? AppColors.primary : AppColors.textSecondary)
                                 }
                                 
                                 Spacer()
                             }
                             .padding()
-                            .background(Color(.systemGray6)) // Subtle background for card
+                            .background(AppColors.surface) // Use consistent card background
                             .cornerRadius(12)
                         }
                         .buttonStyle(PlainButtonStyle()) // Remove default button highlighting for cleaner look

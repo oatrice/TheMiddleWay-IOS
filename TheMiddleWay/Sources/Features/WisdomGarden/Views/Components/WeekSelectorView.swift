@@ -5,11 +5,11 @@ struct WeekSelectorView: View {
     @Binding var selectedWeek: Int
     
     // NFR-1 design palette from Android/Web
-    // Week Button Colors based on mockups
-    private let activeColor = Color.orange // "Saffron Orange" equivalent
-    private let inactiveColor = Color.gray.opacity(0.2)
-    private let activeTextColor = Color.white
-    private let inactiveTextColor = Color.primary
+    // Week Button Colors based on AppColors
+    private var activeColor: Color { AppColors.primary }
+    private var inactiveColor: Color { AppColors.surface }
+    private var activeTextColor: Color { .white } // Blue/Amber contrast is okay with white
+    private var inactiveTextColor: Color { AppColors.textPrimary }
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {

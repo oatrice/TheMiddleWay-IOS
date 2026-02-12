@@ -22,9 +22,8 @@ struct WisdomTreeVisualizationView: View {
     }
     
     private var treeColor: Color {
-        // "Deep Zen Blue" to "Sage Green" transition logic could go here
-        // For MVP: Green/Teal based on progress
-        return progress > 0.8 ? Color.green : Color.teal
+        // Match Android behavior: Always use Primary color (Blue/Amber) for the tree progress visualization
+        return AppColors.primary
     }
     
     var body: some View {
@@ -37,7 +36,7 @@ struct WisdomTreeVisualizationView: View {
                 Circle()
                     .trim(from: 0, to: CGFloat(progress))
                     .stroke(
-                        AngularGradient(colors: [.teal, .green], center: .center),
+                        AppColors.primary,
                         style: StrokeStyle(lineWidth: 20, lineCap: .round)
                     )
                     .frame(width: 200, height: 200)
@@ -58,12 +57,12 @@ struct WisdomTreeVisualizationView: View {
             Text("\(currentScore) / \(maxScore)")
                 .font(.title2)
                 .fontWeight(.bold)
-                .foregroundColor(.primary)
+                .foregroundColor(AppColors.textPrimary)
                 .contentTransition(.numericText()) // iOS 17 numeric transition
         }
         .padding(.vertical, 24)
         .frame(maxWidth: .infinity)
-        .background(Color(.systemBackground)) // Adapts to Light/Dark mode
+        .background(AppColors.surface) // Adapts to Light/Dark (Sky Surface / Slate Dark)
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
     }
