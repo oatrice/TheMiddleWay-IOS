@@ -2,10 +2,7 @@
 import Foundation
 import Combine
 
-protocol WisdomGardenRepository {
-    func getWeeklyData(week: Int) async throws -> WeeklyData
-    func togglePractice(id: String, isCompleted: Bool) async throws
-}
+
 
 class NetworkWisdomGardenRepository: WisdomGardenRepository {
     // For Simulator, localhost works. For device, need IP.

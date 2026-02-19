@@ -122,6 +122,19 @@ struct ProfileView: View {
                 .background(AppColors.surface)
                 .cornerRadius(16)
                 
+                // MARK: - Dev Settings
+                NavigationLink(destination: DevSettingsView()) {
+                    HStack {
+                        Image(systemName: "gearshape.2.fill")
+                        Text("Developer Settings")
+                    }
+                    .foregroundColor(.secondary)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color(UIColor.secondarySystemBackground))
+                    .cornerRadius(12)
+                }
+                
                 Spacer()
             }
             .padding()

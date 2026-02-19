@@ -1,6 +1,6 @@
-
 import Foundation
 import SwiftUI
+import Combine
 
 class WisdomGardenViewModel: ObservableObject {
     // MARK: - Published State
@@ -20,15 +20,39 @@ class WisdomGardenViewModel: ObservableObject {
         currentWeekData?.maxScore ?? 1
     }
     
-    private let repository: WisdomGardenRepository
+    private var repository: WisdomGardenRepository
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
-    init(repository: WisdomGardenRepository = NetworkWisdomGardenRepository()) {
-        self.repository = repository
+    init() {
+        // Default to current setting
+        let useApi = DevSettingsViewModel.shared.useApiMode
+        self.repository = useApi ? NetworkWisdomGardenRepository() : FirestoreWisdomGardenRepository()
         
+        // Subscribe to setting changes
+        DevSettingsViewModel.shared.objectWillChange
+            .sink { [weak self] _ in
+                // Delay slightly to let AppStorage update? Or just read it?
+                // Better to just assume if Settings changed, we refresh.
+                // But AppStorage update might happen after objectWillChange.
+                DispatchQueue.main.async {
+                    self?.updateRepository()
+                }
+            }
+            .store(in: &cancellables)
+            
         // Load initial data
         Task {
             await loadWeeklyData(for: selectedWeek)
+        }
+    }
+    
+    private func updateRepository() {
+        let useApi = DevSettingsViewModel.shared.useApiMode
+        print("🔄 [VM] Switching Repository. API Mode: \(useApi)")
+        self.repository = useApi ? NetworkWisdomGardenRepository() : FirestoreWisdomGardenRepository()
+        Task {
+            await loadWeeklyData(for: selectedWeek, forceRefresh: true)
         }
     }
     

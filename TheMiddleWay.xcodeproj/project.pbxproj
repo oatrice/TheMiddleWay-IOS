@@ -29,6 +29,10 @@
 		4FD5A7992F46EF6500F86594 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A7962F46EF6500F86594 /* ProfileView.swift */; };
 		4FD5A79C2F46EFDB00F86594 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 4FD5A79B2F46EFDB00F86594 /* GoogleSignIn */; };
 		4FD5A79E2F46EFDB00F86594 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4FD5A79D2F46EFDB00F86594 /* GoogleSignInSwift */; };
+		4FD5A7A12F4705A000F86594 /* WisdomGardenRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A7A02F4705A000F86594 /* WisdomGardenRepositoryProtocol.swift */; };
+		4FD5A7A22F4705A000F86594 /* FirestoreWisdomGardenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A79F2F4705A000F86594 /* FirestoreWisdomGardenRepository.swift */; };
+		4FD5A7A72F4705CC00F86594 /* DevSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A7A32F4705CC00F86594 /* DevSettingsView.swift */; };
+		4FD5A7A82F4705CC00F86594 /* DevSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FD5A7A52F4705CC00F86594 /* DevSettingsViewModel.swift */; };
 		E1000001262F0001009A0001 /* TheMiddleWayApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000002262F0001009A0001 /* TheMiddleWayApp.swift */; };
 		E1000003262F0001009A0001 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1000004262F0001009A0001 /* ContentView.swift */; };
 		E1000005262F0001009A0001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1000006262F0001009A0001 /* Assets.xcassets */; };
@@ -58,6 +62,10 @@
 		4FD5A7922F46EA4000F86594 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4FD5A7942F46EE4000F86594 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4FD5A7962F46EF6500F86594 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		4FD5A79F2F4705A000F86594 /* FirestoreWisdomGardenRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreWisdomGardenRepository.swift; sourceTree = "<group>"; };
+		4FD5A7A02F4705A000F86594 /* WisdomGardenRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WisdomGardenRepositoryProtocol.swift; sourceTree = "<group>"; };
+		4FD5A7A32F4705CC00F86594 /* DevSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSettingsView.swift; sourceTree = "<group>"; };
+		4FD5A7A52F4705CC00F86594 /* DevSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevSettingsViewModel.swift; sourceTree = "<group>"; };
 		E1000002262F0001009A0001 /* TheMiddleWayApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheMiddleWayApp.swift; sourceTree = "<group>"; };
 		E1000004262F0001009A0001 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E1000006262F0001009A0001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +121,8 @@
 		4F7EA91F2F3D8536006D5BEB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				4FD5A79F2F4705A000F86594 /* FirestoreWisdomGardenRepository.swift */,
+				4FD5A7A02F4705A000F86594 /* WisdomGardenRepositoryProtocol.swift */,
 				4F7EA9322F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift */,
 				4F7EA91E2F3D8536006D5BEB /* WisdomGardenData.swift */,
 			);
@@ -206,6 +216,23 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		4FD5A7A42F4705CC00F86594 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4FD5A7A32F4705CC00F86594 /* DevSettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4FD5A7A62F4705CC00F86594 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4FD5A7A42F4705CC00F86594 /* Views */,
+				4FD5A7A52F4705CC00F86594 /* DevSettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		E100000E262F0001009A0001 = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +303,7 @@
 		E1000016262F0001009A0001 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				4FD5A7A62F4705CC00F86594 /* Settings */,
 				4FD5A7982F46EF6500F86594 /* Profile */,
 				4F7EA9432F3E0288006D5BEB /* Onboarding */,
 				4F7EA92A2F3D8536006D5BEB /* WisdomGarden */,
@@ -396,10 +424,14 @@
 				4F7EA92F2F3D8536006D5BEB /* WisdomGardenData.swift in Sources */,
 				4F7EA9302F3D8536006D5BEB /* WisdomGardenModels.swift in Sources */,
 				4F7EA9312F3D8536006D5BEB /* WeekSelectorView.swift in Sources */,
+				4FD5A7A12F4705A000F86594 /* WisdomGardenRepositoryProtocol.swift in Sources */,
+				4FD5A7A22F4705A000F86594 /* FirestoreWisdomGardenRepository.swift in Sources */,
 				4F7EA93D2F3DFD71006D5BEB /* OnboardingService.swift in Sources */,
 				E1000007262F0001009A0001 /* AppColors.swift in Sources */,
 				4F7EA9332F3DCACC006D5BEB /* NetworkWisdomGardenRepository.swift in Sources */,
 				4F7EA9352F3DCE73006D5BEB /* WeeklyPracticesView.swift in Sources */,
+				4FD5A7A72F4705CC00F86594 /* DevSettingsView.swift in Sources */,
+				4FD5A7A82F4705CC00F86594 /* DevSettingsViewModel.swift in Sources */,
 				4F7EA91D2F3C2EDE006D5BEB /* MainViewModel.swift in Sources */,
 				4FD5A7992F46EF6500F86594 /* ProfileView.swift in Sources */,
 				E1000009262F0001009A0001 /* AppTypography.swift in Sources */,
