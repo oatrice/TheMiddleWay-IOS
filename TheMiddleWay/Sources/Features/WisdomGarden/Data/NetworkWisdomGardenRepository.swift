@@ -82,15 +82,9 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
             )
         ]
         
-        let calculatedMaxScore = categories.reduce(0) { catSum, cat in
-            catSum + cat.items.reduce(0) { itemSum, item in itemSum + item.points }
-        }
-        
         return WeeklyData(
             weekNumber: week,
-            categories: categories,
-            maxScore: calculatedMaxScore,
-            currentScore: 0
+            categories: categories
         )
     }
     

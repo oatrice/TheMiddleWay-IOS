@@ -5,7 +5,7 @@ import FirebaseAuth
 struct ProfileView: View {
     @EnvironmentObject var authService: AuthService
     @EnvironmentObject var viewModel: MainViewModel
-    @Environment(\.dismiss) var dismiss
+
     
     var body: some View {
         ScrollView {
@@ -141,12 +141,5 @@ struct ProfileView: View {
         }
         .background(AppColors.background)
         .navigationTitle("Profile")
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Done") {
-                    dismiss()
-                }
-            }
-        }
     }
 }

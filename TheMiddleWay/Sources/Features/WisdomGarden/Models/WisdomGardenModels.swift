@@ -24,11 +24,19 @@ struct WeeklyData: Identifiable, Codable {
     var weekNumber: Int
     var categories: [PracticeCategory]
     
-    // Computed max score (can be updated from server or computed locally)
-    var maxScore: Int
+    // Computed max score
+    var maxScore: Int {
+        categories.reduce(0) { catSum, cat in
+            catSum + cat.items.reduce(0) { itemSum, item in itemSum + item.points }
+        }
+    }
     
     // Computed current score
-    var currentScore: Int
+    var currentScore: Int {
+        categories.reduce(0) { catSum, cat in
+            catSum + cat.items.filter { $0.isCompleted }.reduce(0) { itemSum, item in itemSum + item.points }
+        }
+    }
     
     // CodingKeys if needed, but names match JSON
 }

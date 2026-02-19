@@ -93,9 +93,9 @@ class WisdomGardenViewModel: ObservableObject {
                 item.isCompleted.toggle()
                 currentData.categories[catIndex].items[itemIndex] = item
                 
-                // Recalculate score locally for UI
-                let newScore = currentData.categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
-                currentData.currentScore = newScore
+                // Recalculate score locally for UI (handled by computed property in Model)
+                // let newScore = currentData.categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
+                // currentData.currentScore = newScore
                 
                 // Update the source of truth locally
                 weeklyDataMap[selectedWeek] = currentData
