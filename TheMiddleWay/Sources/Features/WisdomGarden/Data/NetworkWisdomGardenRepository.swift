@@ -12,9 +12,11 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
     // Ensure "App Transport Security Settings" allows Arbitrary Loads or configure localhost.
     private let baseURL = "http://localhost:8080/api/v1/wisdom-garden"
     private let session: URLSession
+    private let authService: AuthService
     
-    init(session: URLSession = .shared) {
+    init(session: URLSession = .shared, authService: AuthService = .shared) {
         self.session = session
+        self.authService = authService
     }
     
     func getWeeklyData(week: Int) async throws -> WeeklyData {
@@ -26,6 +28,13 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        
+        // Add Auth Token
+        if let token = try? await authService.getIDToken() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        } else {
+             print("⚠️ [Net] Warning: No Auth Token available for request")
+        }
         
         do {
             let (data, response) = try await session.data(for: request)
@@ -89,15 +98,21 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
     }
     
     func togglePractice(id: String, isCompleted: Bool) async throws {
-        guard let url = URL(string: "\(baseURL)/practices/\(id)/toggle") else {
+        guard let encodedID = id.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+              let url = URL(string: "\(baseURL)/practices/\(encodedID)/toggle") else {
             throw URLError(.badURL)
         }
         
         print("🌐 [Net] Toggle Item: \(id) (isCompleted: \(isCompleted)) -> \(url.absoluteString)")
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Add Auth Token
+        if let token = try? await authService.getIDToken() {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
         
         let body: [String: Bool] = ["isCompleted": isCompleted]
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
