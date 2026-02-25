@@ -55,37 +55,9 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
             print("✅ [Net] Fetch Week: Success (Decoded items: \(result.categories.count) categories)")
             return result
         } catch {
-            print("⚠️ [Net] Fetch Week Failed: \(error). Using Fallback Data.")
-            return getFallbackData(week: week)
+            print("❌ [Net] Fetch Week Failed: \(error).")
+            throw error
         }
-    }
-    
-    private func getFallbackData(week: Int) -> WeeklyData {
-        let categories = [
-             PracticeCategory(
-                id: "mindfulness",
-                title: "Practicing Mindfulness",
-                items: [
-                    PracticeItem(id: "m1", title: "Morning Meditation (15 mins)", points: 10, isCompleted: false),
-                    PracticeItem(id: "m2", title: "Mindful Eating", points: 5, isCompleted: false),
-                    PracticeItem(id: "m3", title: "Evening Reflection", points: 5, isCompleted: false)
-                ]
-            ),
-             PracticeCategory(
-                id: "precepts",
-                title: "Keeping Precepts",
-                items: [
-                    PracticeItem(id: "p1", title: "Refrain from killing", points: 5, isCompleted: false),
-                    PracticeItem(id: "p2", title: "Refrain from stealing", points: 5, isCompleted: false),
-                    PracticeItem(id: "p3", title: "Refrain from lying", points: 5, isCompleted: false)
-                ]
-            )
-        ]
-        
-        return WeeklyData(
-            weekNumber: week,
-            categories: categories
-        )
     }
     
     func togglePractice(id: String, isCompleted: Bool) async throws {

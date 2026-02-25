@@ -63,11 +63,11 @@ class FirestoreWisdomGardenRepository: WisdomGardenRepository {
         
         var newCategories: [PracticeCategory] = []
         for var cat in masterData.categories {
-            cat.id = "u-\(userId)-\(cat.id)" // unique cat id
+            cat.id = "u-\(userId)-w-\(week)-\(cat.id)" // unique cat id
             
             var newItems: [PracticeItem] = []
             for var item in cat.items {
-                item.id = "u-\(userId)-\(item.id)" // unique item id
+                item.id = "u-\(userId)-w-\(week)-\(item.id)" // unique item id
                 item.isCompleted = false
                 newItems.append(item)
             }
