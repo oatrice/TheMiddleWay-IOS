@@ -25,16 +25,11 @@ class WisdomGardenViewModel: ObservableObject {
     
     // MARK: - Initialization
     init() {
-        // Default to current setting
-        let useApi = DevSettingsViewModel.shared.useApiMode
-        self.repository = useApi ? NetworkWisdomGardenRepository() : FirestoreWisdomGardenRepository()
+        self.repository = NetworkWisdomGardenRepository()
         
         // Subscribe to setting changes
         DevSettingsViewModel.shared.objectWillChange
             .sink { [weak self] _ in
-                // Delay slightly to let AppStorage update? Or just read it?
-                // Better to just assume if Settings changed, we refresh.
-                // But AppStorage update might happen after objectWillChange.
                 DispatchQueue.main.async {
                     self?.updateRepository()
                 }
@@ -48,9 +43,8 @@ class WisdomGardenViewModel: ObservableObject {
     }
     
     private func updateRepository() {
-        let useApi = DevSettingsViewModel.shared.useApiMode
-        print("🔄 [VM] Switching Repository. API Mode: \(useApi)")
-        self.repository = useApi ? NetworkWisdomGardenRepository() : FirestoreWisdomGardenRepository()
+        print("🔄 [VM] Env changed. Base URL: \(DevSettingsViewModel.shared.getBaseUrl())")
+        // Just reload data, repository already reads dynamic url
         Task {
             await loadWeeklyData(for: selectedWeek, forceRefresh: true)
         }
@@ -92,10 +86,6 @@ class WisdomGardenViewModel: ObservableObject {
                 var item = currentData.categories[catIndex].items[itemIndex]
                 item.isCompleted.toggle()
                 currentData.categories[catIndex].items[itemIndex] = item
-                
-                // Recalculate score locally for UI (handled by computed property in Model)
-                // let newScore = currentData.categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
-                // currentData.currentScore = newScore
                 
                 // Update the source of truth locally
                 weeklyDataMap[selectedWeek] = currentData

@@ -5,18 +5,24 @@ struct DevSettingsView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Data Source")) {
-                Toggle("Use API Mode (Go Backend)", isOn: $viewModel.useApiMode)
-                
-                if viewModel.useApiMode {
-                    Text("Using REST API: https://themiddleway-backend-djw7.onrender.com")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                } else {
-                    Text("Using Firestore Direct Mode")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+            Section(header: Text("Network Environment")) {
+                Picker("Environment", selection: $viewModel.apiEnvironment) {
+                    Text("Render (PROD)").tag(ApiEnvironment.render)
+                    Text("Localhost (DEV)").tag(ApiEnvironment.local)
+                    Text("Custom URL").tag(ApiEnvironment.custom)
                 }
+                .pickerStyle(.inline)
+                
+                if viewModel.apiEnvironment == .custom {
+                    TextField("https://...", text: $viewModel.customApiUrl)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .keyboardType(.URL)
+                }
+                
+                Text("Current Base URL:\n\(viewModel.getBaseUrl())")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
             }
             
             Section(header: Text("Debug Info")) {

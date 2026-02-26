@@ -1,12 +1,12 @@
-
 import Foundation
 import Combine
 
 
-
 class NetworkWisdomGardenRepository: WisdomGardenRepository {
-    // Use Render API
-    private let baseURL = "https://themiddleway-backend-djw7.onrender.com/api/v1/wisdom-garden"
+    private var baseURL: String {
+        DevSettingsViewModel.shared.getBaseUrl()
+    }
+    
     private let session: URLSession
     private let authService: AuthService
     
