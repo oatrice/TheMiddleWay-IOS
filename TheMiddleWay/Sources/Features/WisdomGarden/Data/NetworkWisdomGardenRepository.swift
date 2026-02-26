@@ -5,9 +5,8 @@ import Combine
 
 
 class NetworkWisdomGardenRepository: WisdomGardenRepository {
-    // For Simulator, localhost works. For device, need IP.
-    // Ensure "App Transport Security Settings" allows Arbitrary Loads or configure localhost.
-    private let baseURL = "http://localhost:8080/api/v1/wisdom-garden"
+    // Use Render API
+    private let baseURL = "https://themiddleway-backend-djw7.onrender.com/api/v1/wisdom-garden"
     private let session: URLSession
     private let authService: AuthService
     

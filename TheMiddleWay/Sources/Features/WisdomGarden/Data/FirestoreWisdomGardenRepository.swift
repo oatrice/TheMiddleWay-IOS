@@ -23,7 +23,7 @@ class FirestoreWisdomGardenRepository: WisdomGardenRepository {
         let userDocRef = db.collection(usersCollection)
             .document(user.uid)
             .collection(weeklyPracticesCollection)
-            .document("week-\(week)")
+            .document("\(week)")
             
         do {
             let document = try await userDocRef.getDocument()
@@ -80,7 +80,7 @@ class FirestoreWisdomGardenRepository: WisdomGardenRepository {
         let userDocRef = db.collection(usersCollection)
             .document(userId)
             .collection(weeklyPracticesCollection)
-            .document("week-\(week)")
+            .document("\(week)")
             
         try userDocRef.setData(from: masterData)
         print("🔥 [Firestore] Created User Data for Week \(week)")
@@ -108,7 +108,7 @@ class FirestoreWisdomGardenRepository: WisdomGardenRepository {
         let userDocPath = db.collection(usersCollection)
             .document(user.uid)
             .collection(weeklyPracticesCollection)
-            .document("week-\(weekNumber)")
+            .document("\(weekNumber)")
             
         // We need to update a nested object in the array.
         // Firestore doesn't support updating an array element by ID easily without reading the whole doc or using elaborate paths if stored as map.
