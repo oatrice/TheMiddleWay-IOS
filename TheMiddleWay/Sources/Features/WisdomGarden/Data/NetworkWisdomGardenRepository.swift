@@ -15,7 +15,7 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         self.authService = authService
     }
     
-    private let apiKey = "5cab538c42e5c5f8bafec058b6c51475d99699ec330befe5099c28a2ed50cb65"
+    private let apiKey = AppSecrets.apiKey
     
     func getWeeklyData(week: Int) async throws -> WeeklyData {
         // Determine endpoint based on auth state
