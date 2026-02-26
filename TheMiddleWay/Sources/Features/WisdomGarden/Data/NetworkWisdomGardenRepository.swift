@@ -15,8 +15,21 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         self.authService = authService
     }
     
+    private let apiKey = "5cab538c42e5c5f8bafec058b6c51475d99699ec330befe5099c28a2ed50cb65"
+    
     func getWeeklyData(week: Int) async throws -> WeeklyData {
-        guard let url = URL(string: "\(baseURL)/weeks/\(week)") else {
+        // Determine endpoint based on auth state
+        let token = try? await authService.getIDToken()
+        let endpoint: String
+        if token != nil {
+            endpoint = "\(baseURL)/weeks/\(week)"
+        } else {
+            // Not logged in → use public master endpoint
+            endpoint = "\(baseURL)/master/weeks/\(week)"
+            print("⚠️ [Net] User not logged in, using master endpoint")
+        }
+        
+        guard let url = URL(string: endpoint) else {
             throw URLError(.badURL)
         }
         
@@ -24,12 +37,11 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
         
-        // Add Auth Token
-        if let token = try? await authService.getIDToken() {
+        // Add Auth Token if available
+        if let token = token {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        } else {
-             print("⚠️ [Net] Warning: No Auth Token available for request")
         }
         
         do {
@@ -48,8 +60,6 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
             }
             
             let decoder = JSONDecoder()
-            // decoder.keyDecodingStrategy = .convertFromSnakeCase // Backend uses camelCase for most, except created_at
-            
             let result = try decoder.decode(WeeklyData.self, from: data)
             print("✅ [Net] Fetch Week: Success (Decoded items: \(result.categories.count) categories)")
             return result
@@ -70,6 +80,7 @@ class NetworkWisdomGardenRepository: WisdomGardenRepository {
         var request = URLRequest(url: url)
         request.httpMethod = "PATCH"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(apiKey, forHTTPHeaderField: "X-API-Key")
         
         // Add Auth Token
         if let token = try? await authService.getIDToken() {
