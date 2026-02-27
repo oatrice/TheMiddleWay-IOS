@@ -5,6 +5,8 @@ import FirebaseAuth
 struct ProfileView: View {
     @EnvironmentObject var authService: AuthService
     @EnvironmentObject var viewModel: MainViewModel
+    
+    @State private var showingLogoutAlert = false
 
     
     var body: some View {
@@ -54,7 +56,7 @@ struct ProfileView: View {
                             .foregroundColor(.secondary)
                         
                         Button(action: {
-                            authService.signOut()
+                            showingLogoutAlert = true
                         }) {
                             Text("Sign Out")
                                 .font(.headline)
@@ -68,6 +70,14 @@ struct ProfileView: View {
                     .padding()
                     .background(AppColors.surface)
                     .cornerRadius(16)
+                    .alert("Sign Out", isPresented: $showingLogoutAlert) {
+                        Button("Cancel", role: .cancel) { }
+                        Button("Sign Out", role: .destructive) {
+                            authService.signOut()
+                        }
+                    } message: {
+                        Text("Are you sure you want to sign out?")
+                    }
                     
                 } else {
                     // Guest State
