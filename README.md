@@ -48,9 +48,10 @@ The UI is built around a custom `AppTheme` supporting a "Bright Sky blue" light 
 
 ## Getting Started
 
-1. Open `TheMiddleWay.xcodeproj` in Xcode
-2. Select a simulator or device
-3. Press `Cmd + R` to build and run
+1. Create a `Secrets.swift` file from the `Secrets-example.swift` template and add the necessary API key.
+2. Open `TheMiddleWay.xcodeproj` in Xcode
+3. Select a simulator or device
+4. Press `Cmd + R` to build and run
 
 ## Architecture
 

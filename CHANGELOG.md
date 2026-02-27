@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.7.0] - 2026-02-27
+
+### Added
+- **User Authentication:** You can now create an account and sign in using your Google account. This lays the foundation for personalized progress tracking.
+- **Sign-Out Confirmation:** A confirmation prompt now appears before signing out to prevent accidental logouts.
+- **Improved Feedback:** A loading indicator is now shown during the sign-in process, and better error messages are displayed in the Wisdom Garden if data fails to load.
+- **Developer Settings:** (Internal) Added a new developer settings screen with an API environment selector for easier testing.
+
+### Changed
+- **Backend Connection:** The app is now connected to the live production server, moving away from local test data.
+
+### Fixed
+- **Wisdom Garden Data:** Corrected an issue that caused errors when parsing weekly practice data.
+
+### Removed
+- **Local Score Tracking:** Removed the temporary, on-device score tracking system to make way for a future server-synchronized version.
+
 ## [0.6.0] - 2026-02-12
 
 ### Added
