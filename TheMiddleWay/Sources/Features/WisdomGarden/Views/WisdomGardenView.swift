@@ -73,6 +73,17 @@ struct WisdomGardenView: View {
                                 }
                             )
                             .opacity(0.8) // Visual cue
+                        } else if let errorMessage = viewModel.errorMessage {
+                            VStack(spacing: 12) {
+                                Image(systemName: "exclamationmark.triangle")
+                                    .font(.system(size: 40))
+                                    .foregroundColor(.red)
+                                Text(errorMessage)
+                                    .font(.subheadline)
+                                    .foregroundColor(.red)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .padding()
                         } else {
                             // Fallback/Loading state
                             ProgressView("Loading Garden...")

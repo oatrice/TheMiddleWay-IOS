@@ -6,6 +6,7 @@ class WisdomGardenViewModel: ObservableObject {
     // MARK: - Published State
     @Published var selectedWeek: Int = 1
     @Published var weeklyDataMap: [Int: WeeklyData] = [:] // Map for easy access/updates
+    @Published var errorMessage: String?
     
     // MARK: - Computed Properties
     var currentWeekData: WeeklyData? {
@@ -57,11 +58,14 @@ class WisdomGardenViewModel: ObservableObject {
             return
         }
 
+        errorMessage = nil
+
         do {
             let data = try await repository.getWeeklyData(week: week)
             weeklyDataMap[week] = data
         } catch {
             print("❌ [VM] Error fetching data for week \(week): \(error)")
+            errorMessage = "Failed to load practices. Please check your connection and try again."
         }
     }
     

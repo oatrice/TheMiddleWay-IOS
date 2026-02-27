@@ -68,3 +68,4 @@ iOSInjectionProject/
 .env.local
 Secrets.xcconfig
 **/Config/Secrets.swift
+GoogleService-Info.plist
