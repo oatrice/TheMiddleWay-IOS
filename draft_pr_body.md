@@ -1,62 +1,52 @@
-Closes https://github.com/owner/repo/issues/11
+This PR implements the foundational user authentication system using Firebase and Google Sign-In, addressing the core requirements of the user membership and data synchronization feature. It allows users to sign in to their accounts, paving the way for cloud-based progress tracking and cross-device sync.
 
-### Summary
+Closes [https://github.com/owner/repo/issues/14](https://github.com/owner/repo/issues/14)
 
-This pull request introduces a crucial feature for new users: a multi-page onboarding flow. This experience is designed to welcome users to "The Middle Way," set clear expectations about the app's purpose, and introduce the core concept of "Authentic Wisdom."
+---
 
-In addition to the new feature, this PR includes a significant refactoring to simplify the codebase by removing a premature custom theme and persistence system. The networking layer has also been made more resilient and testable.
+### 📝 Summary
 
-### Key Changes
+This PR introduces a complete authentication flow for the iOS application. Users can now sign in using their Google account. A new, dynamic Profile screen has been created to manage user sessions, displaying user information when logged in and providing a clear call-to-action for guests.
 
-**1. Onboarding Experience**
-*   **`OnboardingView.swift`**: A new SwiftUI view that presents a swipeable, multi-page introduction using a `TabView`.
-*   **`OnboardingService.swift`**: A new observable object that manages the onboarding state. It uses `@AppStorage` to persist completion, ensuring users only see the flow once.
-*   **Conditional App Entry**: The main app entry point (`TheMiddleWayApp.swift`) now checks the onboarding status and presents either the `OnboardingView` or the main `ContentView` accordingly.
-*   **Onboarding Content**: The flow consists of four distinct slides with new imagery and text:
-    1.  **Welcome**: A general welcome to the app.
-    2.  **Authentic Wisdom**: Explains the app's focus on verified, applicable knowledge.
-    3.  **Discover Your Path**: Highlights the curated nature of the content.
-    4.  **A Daily Practice**: Encourages daily engagement.
+The primary goal is to move user progress from being stored solely on the device (`LocalStorage`) to being securely saved in the cloud, associated with a user account. This prevents data loss and is the first step towards future features like premium memberships.
 
-**2. Core Code Refactoring**
-*   **Theme System Removal**: The custom theme system (`AppColors`, `AppTypography`, `AppTheme`, `ThemeConfig`) has been removed in favor of using standard SwiftUI views and modifiers. This simplifies the codebase and reduces maintenance overhead.
-*   **Persistence Layer Removal**: The `PersistenceService` and `UserProgress` model were removed. Simple state persistence is now handled directly where needed (e.g., `@AppStorage` in `OnboardingService`), aligning with a more lightweight architecture for the app's current needs.
+### ✨ What's New?
 
-**3. Networking & Repository Improvements**
-*   **Dependency Injection**: `URLSession` is now injected into `NetworkWisdomGardenRepository`, decoupling it from the global `URLSession.shared` and significantly improving testability.
-*   **Error Handling & Fallback**: The `getWeeklyData` method now gracefully handles network errors. If the API call fails, it returns a hardcoded set of fallback data, ensuring the app remains usable even when offline or during development without a running backend.
-*   **Unit Tests**: New unit tests have been added for `NetworkWisdomGardenRepository` to verify its behavior, including the new fallback logic.
+-   **Firebase & Google Sign-In Integration:**
+    -   Integrated the Firebase Authentication and Google Sign-In SDKs.
+    -   Created a singleton `AuthService` to manage the entire authentication lifecycle (sign-in, sign-out, state changes, and token management).
+    -   Configured the app to initialize Firebase and correctly handle the Google Sign-In URL callback.
 
-### Screenshots
+-   **👤 Revamped Profile UI:**
+    -   A new `ProfileView` has been created, accessible from a new profile icon on the `HomeView` toolbar.
+    -   The view intelligently displays different states:
+        -   **Guest State:** Prompts the user to sign in to sync their progress.
+        -   **Loading State:** Shows an activity indicator during the sign-in process.
+        -   **Authenticated State:** Displays the user's profile picture, display name, and email.
+    -   Includes a "Sign Out" button with a confirmation alert to prevent accidental logouts.
 
-*A GIF or screenshots of the onboarding flow would be ideal here.*
+-   **🔐 Authenticated API Requests:**
+    -   The `NetworkWisdomGardenRepository` has been updated to be auth-aware.
+    -   For authenticated users, it now automatically attaches the Firebase ID token as a `Bearer` token to the `Authorization` header of API requests, ensuring secure communication with the backend.
 
-| Welcome Screen | Authentic Wisdom | Discover Your Path | Daily Practice |
-| :---: | :---: | :---: | :---: |
-| <img src="https://i.imgur.com/example1.png" width="200"> | <img src="https://i.imgur.com/example2.png" width="200"> | <img src="https://i.imgur.com/example3.png" width="200"> | <img src="https://i.imgur.com/example4.png" width="200"> |
+-   **🛠️ Developer & Security Enhancements:**
+    -   Implemented a secrets management system using a gitignored `Secrets.swift` file to avoid committing sensitive API keys to the repository.
+    -   Added a new "Developer Settings" screen to easily switch between API environments (Production, Localhost, Custom), streamlining development and testing.
 
-### How to Test
+### 🎥 Screenshots
 
-1.  **First Launch**:
-    *   Perform a clean install (delete the app if it's already installed).
-    *   Launch the app.
-    *   **Expected**: The onboarding flow should be displayed.
-2.  **Navigate Onboarding**:
-    *   Swipe through the four pages.
-    *   Use the "Next" button to advance.
-    *   Verify that all text and images display correctly.
-3.  **Complete Onboarding**:
-    *   On the final page, tap "Begin Journey".
-    *   **Expected**: The onboarding view should be dismissed, and the main app content should appear.
-4.  **Verify Persistence**:
-    *   Close and relaunch the app.
-    *   **Expected**: The app should open directly to the main content view, skipping the onboarding flow.
-5.  **Test "Skip" Button**:
-    *   Perform a clean install again.
-    *   On any of the first three screens, tap the "Skip" button.
-    *   **Expected**: The onboarding view should be dismissed immediately, and the main app content should appear.
-6.  **Test Network Fallback**:
-    *   Ensure your local backend server is **not** running.
-    *   Complete the onboarding.
-    *   Navigate to the "Wisdom Garden" view.
-    *   **Expected**: The view should load with hardcoded fallback data instead of crashing or showing an error state.
+| Guest View                                                              | Authenticated View                                                      | Sign Out Confirmation                                     |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------- |
+| <img src="https://i.imgur.com/your-guest-view-image.png" width="250">    | <img src="https://i.imgur.com/your-auth-view-image.png" width="250">      | <img src="https://i.imgur.com/your-alert-image.png" width="250"> |
+
+*(Please replace with actual screenshots)*
+
+### ✅ Task Checklist
+
+-   [x] Support Social Login with **Google**.
+-   [ ] Support Social Login with **Apple ID** *(To be addressed in a future PR)*.
+-   [ ] Support **Magic Link** login *(To be addressed in a future PR)*.
+-   [x] Create a Login/Sign-up UI (`ProfileView` for guest users).
+-   [x] Create a Profile page with user info and a Log out button.
+-   [ ] Create data migration logic from `LocalStorage` to the database *(This PR sets the client-side foundation; the sync logic will be a follow-up task)*.
+-   [x] Secure API endpoints with authentication tokens.

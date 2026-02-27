@@ -69,3 +69,8 @@ iOSInjectionProject/
 Secrets.xcconfig
 **/Config/Secrets.swift
 GoogleService-Info.plist
+
+# Luma UI Files
+draft_pr_*.md
+.luma_state.json
+draft_code_review.md
