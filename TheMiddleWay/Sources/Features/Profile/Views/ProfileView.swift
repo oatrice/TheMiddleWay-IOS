@@ -11,7 +11,20 @@ struct ProfileView: View {
         ScrollView {
             VStack(spacing: 24) {
                 // MARK: - User Status Section
-                if let user = authService.currentUser {
+                if authService.isLoading {
+                    // Loading State
+                    VStack(spacing: 16) {
+                        ProgressView()
+                            .scaleEffect(1.5)
+                        Text("Signing in...")
+                            .font(.body)
+                            .foregroundColor(.secondary)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 200)
+                    .padding()
+                    .background(AppColors.surface)
+                    .cornerRadius(16)
+                } else if let user = authService.currentUser {
                     // Logged In State
                     VStack(spacing: 16) {
                         if let photoURL = user.photoURL {
