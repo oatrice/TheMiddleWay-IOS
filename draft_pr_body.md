@@ -1,6 +1,6 @@
 This PR implements the foundational user authentication system using Firebase and Google Sign-In, addressing the core requirements of the user membership and data synchronization feature. It allows users to sign in to their accounts, paving the way for cloud-based progress tracking and cross-device sync.
 
-Closes [https://github.com/owner/repo/issues/14](https://github.com/owner/repo/issues/14)
+Closes https://github.com/mdwmediaworld072/TheMiddleWay/issues/14
 
 ---
 

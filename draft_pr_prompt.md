@@ -6,11 +6,13 @@ TASK: 🔐 [Feature] ระบบสมาชิกและการรัก�
 ISSUE: {
   "title": "\ud83d\udd10 [Feature] \u0e23\u0e30\u0e1a\u0e1a\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e41\u0e25\u0e30\u0e01\u0e32\u0e23\u0e23\u0e31\u0e01\u0e29\u0e32\u0e04\u0e27\u0e32\u0e21\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22 (User Authentication & Sync)",
   "number": 14,
-  "body": "## \ud83d\udccb \u0e2a\u0e23\u0e38\u0e1b\u0e20\u0e32\u0e1e\u0e23\u0e27\u0e21\n\n\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e30\u0e1a\u0e1a\u0e17\u0e35\u0e48\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e43\u0e2b\u0e49\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e2a\u0e21\u0e31\u0e04\u0e23\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e41\u0e25\u0e30\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e04\u0e27\u0e32\u0e21\u0e01\u0e49\u0e32\u0e27\u0e2b\u0e19\u0e49\u0e32\u0e43\u0e19\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21 (Progress) \u0e25\u0e07\u0e1a\u0e19 Cloud \u0e41\u0e17\u0e19\u0e01\u0e32\u0e23\u0e40\u0e01\u0e47\u0e1a\u0e44\u0e27\u0e49\u0e41\u0e04\u0e48\u0e43\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 (LocalStorage) \u0e2d\u0e22\u0e48\u0e32\u0e07\u0e40\u0e14\u0e35\u0e22\u0e27\n\n## \ud83c\udfaf \u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22\n\n\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e44\u0e21\u0e48\u0e2a\u0e39\u0e0d\u0e40\u0e2a\u0e35\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 \u0e2b\u0e23\u0e37\u0e2d\u0e25\u0e49\u0e32\u0e07 Cache \u0e02\u0e2d\u0e07 Browser \u0e41\u0e25\u0e30\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a\u0e1f\u0e35\u0e40\u0e08\u0e2d\u0e23\u0e4c \"\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e1e\u0e23\u0e35\u0e40\u0e21\u0e35\u0e22\u0e21\" \u0e43\u0e19\u0e2d\u0e19\u0e32\u0e04\u0e15\n\n## \u2705 Tasks\n\n### 1. \u0e27\u0e34\u0e18\u0e35\u0e01\u0e32\u0e23\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a (Auth Providers)\n\n- [ ] \u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a Social Login \u0e14\u0e49\u0e27\u0e22 **Google** \u0e41\u0e25\u0e30 **Apple ID**\n- [ ] \u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a **Magic Link** (\u0e2a\u0e48\u0e07 Link \u0e40\u0e02\u0e49\u0e32 Email \u0e40\u0e1e\u0e37\u0e48\u0e2d Login \u0e42\u0e14\u0e22\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e08\u0e33 Password)\n\n### 2. \u0e2a\u0e48\u0e27\u0e19\u0e15\u0e34\u0e14\u0e15\u0e48\u0e2d\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49 (UI Components)\n\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 Login/Sign-up (Minimalist design \u0e43\u0e0a\u0e49\u0e42\u0e17\u0e19\u0e2a\u0e35 Ivory \u0e41\u0e25\u0e30 Sage Green \u0e15\u0e32\u0e21\u0e18\u0e35\u0e21 \"The Warm Sanctuary\")\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 Profile (\u0e41\u0e2a\u0e14\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1e\u0e37\u0e49\u0e19\u0e10\u0e32\u0e19 + \u0e1b\u0e38\u0e48\u0e21 Log out)\n\n### 3. \u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e42\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 (Data Migration)\n\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07 Sync Logic: \u0e40\u0e21\u0e37\u0e48\u0e2d User \u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e04\u0e23\u0e31\u0e49\u0e07\u0e41\u0e23\u0e01 \u0e14\u0e36\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e08\u0e32\u0e01 LocalStorage \u0e02\u0e36\u0e49\u0e19 Database\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07 Database Schema \u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e40\u0e01\u0e47\u0e1a User data \u0e41\u0e25\u0e30 Progress (70 \u0e41\u0e15\u0e49\u0e21)\n\n## \ud83d\udd27 Technical Notes\n\n**Recommended Stack:**\n- **Auth Provider:** NextAuth.js (Auth.js) \u0e2b\u0e23\u0e37\u0e2d Clerk\n- **Database:** Supabase (PostgreSQL) \u0e2b\u0e23\u0e37\u0e2d Vercel Postgres\n- **Auth Methods:** Google OAuth, Apple Sign-in, Magic Link\n\n**UX Consideration:**\n- \u0e2d\u0e22\u0e48\u0e32\u0e1a\u0e31\u0e07\u0e04\u0e31\u0e1a\u0e43\u0e2b\u0e49 User \u0e15\u0e49\u0e2d\u0e07 Login \u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48\u0e2b\u0e19\u0e49\u0e32\u0e41\u0e23\u0e01\n- \u0e43\u0e0a\u0e49 Progressive Profiling: \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e43\u0e2b\u0e49\u0e25\u0e2d\u0e07\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e41\u0e1a\u0e1a Guest \u0e01\u0e48\u0e2d\u0e19\n- Prompt \u0e01\u0e32\u0e23\u0e2a\u0e21\u0e31\u0e04\u0e23\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e40\u0e21\u0e37\u0e48\u0e2d User \u0e40\u0e23\u0e34\u0e48\u0e21\u0e21\u0e35\u0e04\u0e30\u0e41\u0e19\u0e19\u0e2a\u0e30\u0e2a\u0e21\n\n## \u2753 Questions to Resolve\n\n1. \u0e08\u0e30\u0e43\u0e0a\u0e49\u0e23\u0e30\u0e1a\u0e1a Login \u0e02\u0e2d\u0e07 Google Workspace (\u0e2d\u0e07\u0e04\u0e4c\u0e01\u0e23) \u0e2b\u0e23\u0e37\u0e2d\u0e41\u0e1a\u0e1a\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b (Gmail \u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27)?\n2. \u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 Database Schema \u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e15\u0e32\u0e23\u0e32\u0e07 Users \u0e41\u0e25\u0e30 Progress \u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48?\n\n## \ud83d\udcce Related\n\n- \u0e02\u0e36\u0e49\u0e19\u0e2d\u0e22\u0e39\u0e48\u0e01\u0e31\u0e1a: LocalStorage Implementation (MVP)\n- \u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e02\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e1a: Premium Features (Future)"
+  "body": "## \ud83d\udccb \u0e2a\u0e23\u0e38\u0e1b\u0e20\u0e32\u0e1e\u0e23\u0e27\u0e21\n\n\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e30\u0e1a\u0e1a\u0e17\u0e35\u0e48\u0e2d\u0e19\u0e38\u0e0d\u0e32\u0e15\u0e43\u0e2b\u0e49\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e2a\u0e21\u0e31\u0e04\u0e23\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e41\u0e25\u0e30\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e1a\u0e31\u0e19\u0e17\u0e36\u0e01\u0e04\u0e27\u0e32\u0e21\u0e01\u0e49\u0e32\u0e27\u0e2b\u0e19\u0e49\u0e32\u0e43\u0e19\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e18\u0e23\u0e23\u0e21 (Progress) \u0e25\u0e07\u0e1a\u0e19 Cloud \u0e41\u0e17\u0e19\u0e01\u0e32\u0e23\u0e40\u0e01\u0e47\u0e1a\u0e44\u0e27\u0e49\u0e41\u0e04\u0e48\u0e43\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 (LocalStorage) \u0e2d\u0e22\u0e48\u0e32\u0e07\u0e40\u0e14\u0e35\u0e22\u0e27\n\n## \ud83c\udfaf \u0e40\u0e1b\u0e49\u0e32\u0e2b\u0e21\u0e32\u0e22\n\n\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e44\u0e21\u0e48\u0e2a\u0e39\u0e0d\u0e40\u0e2a\u0e35\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07 \u0e2b\u0e23\u0e37\u0e2d\u0e25\u0e49\u0e32\u0e07 Cache \u0e02\u0e2d\u0e07 Browser \u0e41\u0e25\u0e30\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a\u0e1f\u0e35\u0e40\u0e08\u0e2d\u0e23\u0e4c \"\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e1e\u0e23\u0e35\u0e40\u0e21\u0e35\u0e22\u0e21\" \u0e43\u0e19\u0e2d\u0e19\u0e32\u0e04\u0e15\n\n## \u2705 Tasks\n\n### 1. \u0e27\u0e34\u0e18\u0e35\u0e01\u0e32\u0e23\u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a (Auth Providers)\n\n- [ ] \u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a Social Login \u0e14\u0e49\u0e27\u0e22 **Google** \u0e41\u0e25\u0e30 **Apple ID**\n- [ ] \u0e23\u0e2d\u0e07\u0e23\u0e31\u0e1a **Magic Link** (\u0e2a\u0e48\u0e07 Link \u0e40\u0e02\u0e49\u0e32 Email \u0e40\u0e1e\u0e37\u0e48\u0e2d Login \u0e42\u0e14\u0e22\u0e44\u0e21\u0e48\u0e15\u0e49\u0e2d\u0e07\u0e08\u0e33 Password)\n\n### 2. \u0e2a\u0e48\u0e27\u0e19\u0e15\u0e34\u0e14\u0e15\u0e48\u0e2d\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49 (UI Components)\n\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 Login/Sign-up (Minimalist design \u0e43\u0e0a\u0e49\u0e42\u0e17\u0e19\u0e2a\u0e35 Ivory \u0e41\u0e25\u0e30 Sage Green \u0e15\u0e32\u0e21\u0e18\u0e35\u0e21 \"The Warm Sanctuary\")\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32 Profile (\u0e41\u0e2a\u0e14\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e1e\u0e37\u0e49\u0e19\u0e10\u0e32\u0e19 + \u0e1b\u0e38\u0e48\u0e21 Log out)\n\n### 3. \u0e01\u0e32\u0e23\u0e40\u0e0a\u0e37\u0e48\u0e2d\u0e21\u0e42\u0e22\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25 (Data Migration)\n\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07 Sync Logic: \u0e40\u0e21\u0e37\u0e48\u0e2d User \u0e40\u0e02\u0e49\u0e32\u0e2a\u0e39\u0e48\u0e23\u0e30\u0e1a\u0e1a\u0e04\u0e23\u0e31\u0e49\u0e07\u0e41\u0e23\u0e01 \u0e14\u0e36\u0e07\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e08\u0e32\u0e01 LocalStorage \u0e02\u0e36\u0e49\u0e19 Database\n- [ ] \u0e2a\u0e23\u0e49\u0e32\u0e07 Database Schema \u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e40\u0e01\u0e47\u0e1a User data \u0e41\u0e25\u0e30 Progress (70 \u0e41\u0e15\u0e49\u0e21)\n\n## \ud83d\udd27 Technical Notes\n\n**Recommended Stack:**\n- **Auth Provider:** NextAuth.js (Auth.js) \u0e2b\u0e23\u0e37\u0e2d Clerk\n- **Database:** Supabase (PostgreSQL) \u0e2b\u0e23\u0e37\u0e2d Vercel Postgres\n- **Auth Methods:** Google OAuth, Apple Sign-in, Magic Link\n\n**UX Consideration:**\n- \u0e2d\u0e22\u0e48\u0e32\u0e1a\u0e31\u0e07\u0e04\u0e31\u0e1a\u0e43\u0e2b\u0e49 User \u0e15\u0e49\u0e2d\u0e07 Login \u0e15\u0e31\u0e49\u0e07\u0e41\u0e15\u0e48\u0e2b\u0e19\u0e49\u0e32\u0e41\u0e23\u0e01\n- \u0e43\u0e0a\u0e49 Progressive Profiling: \u0e1b\u0e25\u0e48\u0e2d\u0e22\u0e43\u0e2b\u0e49\u0e25\u0e2d\u0e07\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19\u0e41\u0e1a\u0e1a Guest \u0e01\u0e48\u0e2d\u0e19\n- Prompt \u0e01\u0e32\u0e23\u0e2a\u0e21\u0e31\u0e04\u0e23\u0e2a\u0e21\u0e32\u0e0a\u0e34\u0e01\u0e40\u0e21\u0e37\u0e48\u0e2d User \u0e40\u0e23\u0e34\u0e48\u0e21\u0e21\u0e35\u0e04\u0e30\u0e41\u0e19\u0e19\u0e2a\u0e30\u0e2a\u0e21\n\n## \u2753 Questions to Resolve\n\n1. \u0e08\u0e30\u0e43\u0e0a\u0e49\u0e23\u0e30\u0e1a\u0e1a Login \u0e02\u0e2d\u0e07 Google Workspace (\u0e2d\u0e07\u0e04\u0e4c\u0e01\u0e23) \u0e2b\u0e23\u0e37\u0e2d\u0e41\u0e1a\u0e1a\u0e17\u0e31\u0e48\u0e27\u0e44\u0e1b (Gmail \u0e2a\u0e48\u0e27\u0e19\u0e15\u0e31\u0e27)?\n2. \u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23 Database Schema \u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e15\u0e32\u0e23\u0e32\u0e07 Users \u0e41\u0e25\u0e30 Progress \u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48?\n\n## \ud83d\udcce Related\n\n- \u0e02\u0e36\u0e49\u0e19\u0e2d\u0e22\u0e39\u0e48\u0e01\u0e31\u0e1a: LocalStorage Implementation (MVP)\n- \u0e40\u0e01\u0e35\u0e48\u0e22\u0e27\u0e02\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e1a: Premium Features (Future)",
+  "url": "https://github.com/mdwmediaworld072/TheMiddleWay/issues/14"
 }
 
 GIT CONTEXT:
 COMMITS:
+bd741e9 chore: ignore Luma UI files and update draft PR body
 cf287d9 chore(release): prepare v0.7.0 release
 9095e9e feat(wisdom-garden): add error handling for weekly data fetch failures
 13cd804 feat(profile): add confirmation alert before signing out
@@ -27,29 +29,31 @@ ee97c80 feat: add Firestore repository and developer settings UI
 92c9438 feat(auth): add Firebase Auth and Google Sign-In integration
 
 STATS:
-.gitignore                                         |   3 +
- CHANGELOG.md                                       |  17 +++
- README.md                                          |   7 +-
- TheMiddleWay.xcodeproj/project.pbxproj             | 155 ++++++++++++++++++-
- .../xcshareddata/xcschemes/TheMiddleWay.xcscheme   |  78 ++++++++++
- TheMiddleWay/GoogleService-Info.plist              |  36 +++++
- TheMiddleWay/Info.plist                            |  25 +++
- TheMiddleWay/Sources/App/ContentView.swift         |  35 -----
- TheMiddleWay/Sources/App/TheMiddleWayApp.swift     |  27 +++-
- TheMiddleWay/Sources/Config/Secrets-example.swift  |   7 +
- TheMiddleWay/Sources/Core/Auth/AuthService.swift   |  79 ++++++++++
- TheMiddleWay/Sources/Features/Home/HomeView.swift  |  24 ++-
- .../Features/Profile/Views/ProfileView.swift       | 168 +++++++++++++++++++++
- .../Features/Settings/DevSettingsViewModel.swift   |  30 ++++
- .../Features/Settings/Views/DevSettingsView.swift  |  34 +++++
- .../Data/NetworkWisdomGardenRepository.swift       |  88 +++++------
- .../WisdomGarden/Data/WisdomGardenData.swift       |  19 ++-
- .../Data/WisdomGardenRepositoryProtocol.swift      |   6 +
- .../WisdomGarden/Models/WisdomGardenModels.swift   |  26 ++--
- .../ViewModels/WisdomGardenViewModel.swift         |  34 ++++-
- .../WisdomGarden/Views/WisdomGardenView.swift      |  11 ++
- code_review.md                                     |  97 +++++++++++-
- 22 files changed, 871 insertions(+), 135 deletions(-)
+.gitignore                                         |    8 +
+ CHANGELOG.md                                       |   17 +
+ README.md                                          |    7 +-
+ TheMiddleWay.xcodeproj/project.pbxproj             |  155 ++-
+ .../xcshareddata/xcschemes/TheMiddleWay.xcscheme   |   78 ++
+ TheMiddleWay/GoogleService-Info.plist              |   36 +
+ TheMiddleWay/Info.plist                            |   25 +
+ TheMiddleWay/Sources/App/ContentView.swift         |   35 -
+ TheMiddleWay/Sources/App/TheMiddleWayApp.swift     |   27 +-
+ TheMiddleWay/Sources/Config/Secrets-example.swift  |    7 +
+ TheMiddleWay/Sources/Core/Auth/AuthService.swift   |   79 ++
+ TheMiddleWay/Sources/Features/Home/HomeView.swift  |   24 +-
+ .../Features/Profile/Views/ProfileView.swift       |  168 ++++
+ .../Features/Settings/DevSettingsViewModel.swift   |   30 +
+ .../Features/Settings/Views/DevSettingsView.swift  |   34 +
+ .../Data/NetworkWisdomGardenRepository.swift       |   88 +-
+ .../WisdomGarden/Data/WisdomGardenData.swift       |   19 +-
+ .../Data/WisdomGardenRepositoryProtocol.swift      |    6 +
+ .../WisdomGarden/Models/WisdomGardenModels.swift   |   26 +-
+ .../ViewModels/WisdomGardenViewModel.swift         |   34 +-
+ .../WisdomGarden/Views/WisdomGardenView.swift      |   11 +
+ code_review.md                                     |   97 +-
+ draft_pr_body.md                                   |  114 +--
+ draft_pr_prompt.md                                 | 1005 ++++++++++----------
+ 24 files changed, 1426 insertions(+), 704 deletions(-)
 
 KEY FILE DIFFS:
 diff --git a/TheMiddleWay/Sources/App/ContentView.swift b/TheMiddleWay/Sources/App/ContentView.swift
@@ -581,4 +585,4 @@ INSTRUCTIONS:
 3. If no template, use a standard structure: Summary, Changes, Impact.
 4. Focus on 'Why' and 'What'.
 5. Do not include 'Here is the PR description' preamble. Just the body.
-6. IMPORTANT: Always use FULL URLs for links to issues and other PRs (e.g., https://github.com/owner/repo/issues/123), do NOT use short syntax (e.g., #123) to ensuring proper linking across platforms.
+6. IMPORTANT: Always use the exact FULL URL for closing issues. You must write `Closes https://github.com/mdwmediaworld072/TheMiddleWay/issues/14`. Do NOT use short syntax (e.g., #123) and do not invent an owner/repo.

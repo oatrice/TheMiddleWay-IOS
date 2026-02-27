@@ -22,6 +22,16 @@ jobs:
         with:
           xcode-version: 'latest-stable'
 
+      - name: Decode GoogleService-Info.plist
+        env:
+          GOOGLE_SERVICES_PLIST_BASE64: ${{ secrets.GOOGLE_SERVICES_PLIST_BASE64 }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_PLIST_BASE64" ]; then
+            echo "$GOOGLE_SERVICES_PLIST_BASE64" | base64 -D -o TheMiddleWay/GoogleService-Info.plist || echo "$GOOGLE_SERVICES_PLIST_BASE64" | base64 -d > TheMiddleWay/GoogleService-Info.plist
+          else
+            echo "Skipping GoogleService-Info.plist generation (Secret not found)"
+          fi
+
       - name: Build and Archive
         run: |
           xcodebuild archive \
