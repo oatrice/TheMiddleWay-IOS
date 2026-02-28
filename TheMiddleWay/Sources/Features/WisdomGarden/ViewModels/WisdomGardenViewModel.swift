@@ -1,11 +1,12 @@
-
 import Foundation
 import SwiftUI
+import Combine
 
 class WisdomGardenViewModel: ObservableObject {
     // MARK: - Published State
     @Published var selectedWeek: Int = 1
     @Published var weeklyDataMap: [Int: WeeklyData] = [:] // Map for easy access/updates
+    @Published var errorMessage: String?
     
     // MARK: - Computed Properties
     var currentWeekData: WeeklyData? {
@@ -20,15 +21,33 @@ class WisdomGardenViewModel: ObservableObject {
         currentWeekData?.maxScore ?? 1
     }
     
-    private let repository: WisdomGardenRepository
+    private var repository: WisdomGardenRepository
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: - Initialization
-    init(repository: WisdomGardenRepository = NetworkWisdomGardenRepository()) {
-        self.repository = repository
+    init() {
+        self.repository = NetworkWisdomGardenRepository()
         
+        // Subscribe to setting changes
+        DevSettingsViewModel.shared.objectWillChange
+            .sink { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.updateRepository()
+                }
+            }
+            .store(in: &cancellables)
+            
         // Load initial data
         Task {
             await loadWeeklyData(for: selectedWeek)
+        }
+    }
+    
+    private func updateRepository() {
+        print("🔄 [VM] Env changed. Base URL: \(DevSettingsViewModel.shared.getBaseUrl())")
+        // Just reload data, repository already reads dynamic url
+        Task {
+            await loadWeeklyData(for: selectedWeek, forceRefresh: true)
         }
     }
     
@@ -39,11 +58,14 @@ class WisdomGardenViewModel: ObservableObject {
             return
         }
 
+        errorMessage = nil
+
         do {
             let data = try await repository.getWeeklyData(week: week)
             weeklyDataMap[week] = data
         } catch {
             print("❌ [VM] Error fetching data for week \(week): \(error)")
+            errorMessage = "Failed to load practices. Please check your connection and try again."
         }
     }
     
@@ -68,10 +90,6 @@ class WisdomGardenViewModel: ObservableObject {
                 var item = currentData.categories[catIndex].items[itemIndex]
                 item.isCompleted.toggle()
                 currentData.categories[catIndex].items[itemIndex] = item
-                
-                // Recalculate score locally for UI
-                let newScore = currentData.categories.flatMap { $0.items }.filter { $0.isCompleted }.reduce(0) { $0 + $1.points }
-                currentData.currentScore = newScore
                 
                 // Update the source of truth locally
                 weeklyDataMap[selectedWeek] = currentData

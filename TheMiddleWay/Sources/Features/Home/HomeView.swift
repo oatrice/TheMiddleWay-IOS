@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeView: View {
     @AppStorage(ThemeConfig.storageKey) private var isDarkMode = false
+    @State private var showProfile = false
 
     var body: some View {
         ScrollView {
@@ -21,12 +22,25 @@ struct HomeView: View {
         .background(AppColors.background)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    isDarkMode.toggle()
-                } label: {
-                    Image(systemName: ThemeConfig.toggleIconName(isDarkMode: isDarkMode))
+                HStack {
+                    Button {
+                        showProfile.toggle()
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                    }
+                    .sheet(isPresented: $showProfile) {
+                        NavigationStack {
+                            ProfileView()
+                        }
+                    }
+
+                    Button {
+                        isDarkMode.toggle()
+                    } label: {
+                        Image(systemName: ThemeConfig.toggleIconName(isDarkMode: isDarkMode))
+                    }
+                    .accessibilityLabel(ThemeConfig.toggleLabel(isDarkMode: isDarkMode))
                 }
-                .accessibilityLabel(ThemeConfig.toggleLabel(isDarkMode: isDarkMode))
             }
         }
     }

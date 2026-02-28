@@ -22,6 +22,27 @@ jobs:
         with:
           xcode-version: 'latest-stable'
 
+      - name: Decode GoogleService-Info.plist
+        env:
+          GOOGLE_SERVICES_PLIST_BASE64: ${{ secrets.GOOGLE_SERVICES_PLIST_BASE64 }}
+        run: |
+          if [ -n "$GOOGLE_SERVICES_PLIST_BASE64" ]; then
+            echo "$GOOGLE_SERVICES_PLIST_BASE64" | base64 -D -o TheMiddleWay/GoogleService-Info.plist || echo "$GOOGLE_SERVICES_PLIST_BASE64" | base64 -d > TheMiddleWay/GoogleService-Info.plist
+          else
+            echo "Skipping GoogleService-Info.plist generation (Secret not found)"
+          fi
+
+      - name: Decode Secrets.swift
+        env:
+          SECRETS_SWIFT_BASE64: ${{ secrets.SECRETS_SWIFT_BASE64 }}
+        run: |
+          if [ -n "$SECRETS_SWIFT_BASE64" ]; then
+            mkdir -p TheMiddleWay/Sources/Config
+            echo "$SECRETS_SWIFT_BASE64" | base64 -D -o TheMiddleWay/Sources/Config/Secrets.swift || echo "$SECRETS_SWIFT_BASE64" | base64 -d > TheMiddleWay/Sources/Config/Secrets.swift
+          else
+            echo "Skipping Secrets.swift generation (Secret not found)"
+          fi
+
       - name: Build and Archive
         run: |
           xcodebuild archive \
@@ -43,6 +64,13 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
+
+      - name: Upload iOS Archive Artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-xcarchive
+          path: TheMiddleWay.xcarchive
 
       - name: Export IPA (Requires Key)
         env:

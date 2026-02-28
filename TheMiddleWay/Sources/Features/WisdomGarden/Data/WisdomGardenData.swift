@@ -9,15 +9,14 @@ func LocalizedTitle(_ en: String, _ th: String) -> String {
 
 struct WisdomGardenData {
     static var weeklyData: [WeeklyData] = [
-        // Week 1: Generosity (Dana)
-        WeeklyData(weekNumber: 1, categories: [
+                    WeeklyData(weekNumber: 1, categories: [
             PracticeCategory(id: "cat_giving", title: "Giving (Dana)", items: [
                 PracticeItem(id: "w1_i1", title: "Shared food or resources", points: 10, isCompleted: false),
                 PracticeItem(id: "w1_i2", title: "Offered help to someone", points: 10, isCompleted: false),
                 PracticeItem(id: "w1_i3", title: "Spoke kind words", points: 10, isCompleted: false),
                 PracticeItem(id: "w1_i4", title: "Practiced forgiveness", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 2: Morality (Sila)
         WeeklyData(weekNumber: 2, categories: [
             PracticeCategory(id: "cat_sila", title: "Morality (Sila)", items: [
@@ -26,7 +25,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w2_i3", title: "Refrained from sexual misconduct", points: 10, isCompleted: false),
                 PracticeItem(id: "w2_i4", title: "Refrained from false speech", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 3: Renunciation (Nekkhamma)
         WeeklyData(weekNumber: 3, categories: [
             PracticeCategory(id: "cat_nekk", title: "Renunciation", items: [
@@ -35,7 +34,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w3_i3", title: "Reduced unnecessary consumption", points: 10, isCompleted: false),
                 PracticeItem(id: "w3_i4", title: "Spent time in quiet reflection", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 4: Wisdom (Panna)
         WeeklyData(weekNumber: 4, categories: [
             PracticeCategory(id: "cat_panna", title: "Wisdom", items: [
@@ -44,7 +43,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w4_i3", title: "Observed cause and effect in daily life", points: 10, isCompleted: false),
                 PracticeItem(id: "w4_i4", title: "Discussed Dhamma with others", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 5: Energy (Viriya)
         WeeklyData(weekNumber: 5, categories: [
             PracticeCategory(id: "cat_viriya", title: "Energy", items: [
@@ -53,7 +52,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w5_i3", title: "Developed wholesome states", points: 10, isCompleted: false),
                 PracticeItem(id: "w5_i4", title: "Maintained wholesome states", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 6: Patience (Khanti)
         WeeklyData(weekNumber: 6, categories: [
             PracticeCategory(id: "cat_khanti", title: "Patience", items: [
@@ -62,7 +61,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w6_i3", title: "Waited calmly when delayed", points: 10, isCompleted: false),
                 PracticeItem(id: "w6_i4", title: "Forgave myself for shortcomings", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 7: Truthfulness (Sacca)
         WeeklyData(weekNumber: 7, categories: [
             PracticeCategory(id: "cat_sacca", title: "Truthfulness", items: [
@@ -71,7 +70,7 @@ struct WisdomGardenData {
                 PracticeItem(id: "w7_i3", title: "Was honest about my feelings and intentions", points: 10, isCompleted: false),
                 PracticeItem(id: "w7_i4", title: "Admitted mistakes openly", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0),
+        ]),
         // Week 8: Determination (Adhitthana)
         WeeklyData(weekNumber: 8, categories: [
             PracticeCategory(id: "cat_adhit", title: "Determination", items: [
@@ -80,6 +79,6 @@ struct WisdomGardenData {
                 PracticeItem(id: "w8_i3", title: "Reniewed commitment to the path", points: 10, isCompleted: false),
                 PracticeItem(id: "w8_i4", title: "Overcame an obstacle with resolve", points: 10, isCompleted: false)
             ])
-        ], maxScore: 40, currentScore: 0)
+        ])
     ]
 }
