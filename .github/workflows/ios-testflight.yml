@@ -65,6 +65,13 @@ jobs:
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
 
+      - name: Upload iOS Archive Artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-xcarchive
+          path: TheMiddleWay.xcarchive
+
       - name: Export IPA (Requires Key)
         env:
           EXPORT_PLIST: ${{ secrets.EXPORT_PLIST_BASE64 }}
